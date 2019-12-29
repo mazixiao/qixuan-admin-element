@@ -4,7 +4,7 @@
 </style>
 
 
-
+ 
 <template>
   <div class="hello">
   {{msg}}
@@ -20,12 +20,68 @@
     <el-button type="primary">主要按钮</el-button>
     <el-button type="text">文字按钮</el-button>
 
+    <header>
+      <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
+        <!-- 一级 -->
+        <template v-for="item in menu" >
+          <el-submenu :index="item.value" v-if="item.children && item.children.length" :key="item.label">
+            <template slot="title">{{item.label}}</template>
+            <!-- 二级 -->
+            <template v-for="list in item.children">
+              <el-submenu :index="list.value" v-if="list.children && list.children.length" :key="list.label"> 
+                <template slot="title">{{list.label}}</template>
+                <!-- 三级 -->
+                <el-menu-item v-for="list3 in list.children" :index="list3.value" :key="list3.label">{{list3.label}}</el-menu-item>
+              </el-submenu>
+              <!-- 二级无下拉 -->
+              <el-menu-item v-else :index="list.value" :key="list.label">{{list.label}}</el-menu-item>  
+            </template>
+          </el-submenu>
+          <!-- 一级无下拉 -->
+          <el-menu-item v-else :index="item.value" :key="item.label">
+            {{item.label}}
+          </el-menu-item>
+        </template>
+      </el-menu>
+    </header>
+
+
+     <el-menu
+      default-active="1"
+      background-color="#545c64"
+      text-color="#fff"
+      active-text-color="#ffd04b">
+      
+      <template v-for="item in list">
+        <el-submenu v-if="item.children && item.children.length" :index="item.path" :key="item.path">
+          <template slot="title"><i :class="item.icon"></i><span>{{item.name}}</span></template>
+          
+          <template v-for="itemChild in item.children">
+            <el-submenu v-if="itemChild.children && itemChild.children.length" :index="itemChild.path" :key="itemChild.path">
+                <template slot="title"><i :class="itemChild.icon"></i><span>{{itemChild.name}}</span></template>
+                
+                <el-menu-item v-for="itemChild_Child in itemChild.children" :index="itemChild_Child .path" :key="itemChild_Child.path">
+                <i :class="itemChild_Child.icon"></i><span slot="title">{{itemChild_Child.name}}</span></el-menu-item>
+            </el-submenu>
+            
+            <el-menu-item v-else :index="itemChild.path" :key="itemChild.path"><i :class="itemChild.icon"></i><span slot="title">{{itemChild.name}}</span></el-menu-item>
+          </template>
+        </el-submenu>
+        
+        <el-menu-item v-else :index="item.path" :key="item.path"><i :class="item.icon"></i><span slot="title">{{item.name}}</span></el-menu-item>
+      </template>
+
+    </el-menu>
+
+
 
   </div>
 </template>
 
 
 <script src='../assets/js/index.js'></script>
+
+
 
 
 
