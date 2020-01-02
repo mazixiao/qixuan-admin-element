@@ -21,9 +21,45 @@
     <el-button type="text">文字按钮</el-button>
 
     <header>
-      <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
+      <el-scrollbar style="height: 100%;overflow-x:hidden">
+        <el-menu 
+          :default-active="activeIndex"
+          class="el-menu-demo"
+          mode="vertical"
+          :default-openeds="openeds">
+          <!-- 一级 -->
+          <template v-for="item in menu" :select="item.label">
+            <el-submenu :index="item.value" v-if="item.children && item.children.length" :key="item.label">
+              <template slot="title">{{item.label}}</template>
+              <!-- 二级 -->
+              <template v-for="list in item.children">
+                <el-submenu :index="list.value" v-if="list.children && list.children.length" :key="list.label"> 
+                  <template slot="title">{{list.label}}</template>
+                  <!-- 三级 -->
+                  <el-menu-item v-for="list3 in list.children" :index="list3.value" :key="list3.label">{{list3.label}}</el-menu-item>
+                </el-submenu>
+                <!-- 二级无下拉 -->
+                <el-menu-item v-else :index="list.value" :key="list.label">{{list.label}}</el-menu-item>  
+              </template>
+            </el-submenu>
+            <!-- 一级无下拉 -->
+            <el-menu-item v-else :index="item.value" :key="item.label">
+              {{item.label}}
+            </el-menu-item>
+          </template>
+        </el-menu>
+      </el-scrollbar>
+
+
+    </header>
+
+
+
+      <el-menu 
+        :default-active="activeIndex"
+        class="el-menu-demo" mode="horizontal">
         <!-- 一级 -->
-        <template v-for="item in menu" >
+        <template v-for="item in menu" :select="item.label">
           <el-submenu :index="item.value" v-if="item.children && item.children.length" :key="item.label">
             <template slot="title">{{item.label}}</template>
             <!-- 二级 -->
@@ -43,7 +79,23 @@
           </el-menu-item>
         </template>
       </el-menu>
-    </header>
+
+
+    <!-- Dropdown 下拉菜单 -->
+    <el-dropdown @command="changeCity">
+      <span class="el-dropdown-link">
+        切换城市<i class="el-icon-arrow-down el-icon--right"></i>
+      </span>
+      <el-dropdown-menu slot="dropdown">
+        <el-dropdown-item
+          v-for="item in options"
+          :key="item.value"
+          :label="item.label"
+          :command="item.label"
+        >{{item.label}}</el-dropdown-item>
+      </el-dropdown-menu>
+    </el-dropdown>
+
 
 
      <el-menu
@@ -72,6 +124,8 @@
       </template>
 
     </el-menu>
+
+
 
 
 

@@ -3,9 +3,9 @@ export default {
   data () {
     return {
       msg: 'Welcome to Your Vue.js App',
-      activeIndex: '1',
-      activeIndex2: '1',
-
+      activeIndex: '2',
+	//   第二个默认展开
+      openeds: ['2', '2-3'],
       menu: [
       	{
       		value: "1",
@@ -51,8 +51,62 @@ export default {
       	{
       		value: "4",
       		label: "订单管理"
-      	}
-      ],
+		},
+		{
+			value: "5",
+			label: "我的工作台5",
+			children: [
+				{
+					value: "5-1",
+					label: "选项1"
+				},
+				{
+					value: "5-2",
+					label: "选项2"
+				},
+				{
+					value: "5-3",
+					label: "选项3",
+					children: [
+						{
+							value: "5-1-1",
+							label: "三级选项1"
+						},
+						{
+							value: "5-2-2",
+							label: "三级选项2"
+						},
+						{
+							value: "5-3-3",
+							label: "三级选项3"
+						}
+					]
+
+				}
+			]
+		},  
+
+
+	  ],
+	  
+        // 城市选择
+        options: [
+			{
+			  value: '1',
+			  label: '宣汉'
+			},
+			{
+			  value: '2',
+			  label: '眉山'
+			},
+			{
+			  value: '3',
+			  label: '重庆'
+			},
+		  ],
+
+
+
 		list: [
 			{
 			  path: "/1",
@@ -102,7 +156,20 @@ export default {
   },
   methods: {
     handleSelect(key, keyPath) {
-      console.log(key, keyPath);
-    }
-  }
+	
+	},
+	changeCity(v) {
+        console.log(v);
+    },
+
+	handleOpen(key, keyPath) {
+        console.log(key, keyPath);
+      },
+      handleClose(key, keyPath) {
+        console.log(key, keyPath);
+      }
+
+
+  },
+
 }
