@@ -3,8 +3,9 @@ export default {
   data () {
     return {
       msg: 'Welcome to Your Vue.js App',
-      activeIndex: '2',
-	//   第二个默认展开
+      // 导航默认高亮
+      activeIndex: '3-1',
+	//   导航第二个默认展开
       openeds: ['2', '2-3'],
       menu: [
       	{

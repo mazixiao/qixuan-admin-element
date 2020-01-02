@@ -26,6 +26,7 @@
           :default-active="activeIndex"
           class="el-menu-demo"
           mode="vertical"
+          :unique-opened="true"
           :default-openeds="openeds">
           <!-- 一级 -->
           <template v-for="item in menu" :select="item.label">
