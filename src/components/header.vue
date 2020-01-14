@@ -75,10 +75,10 @@ export default {
   data() {
     return {
       // 导航默认高亮
-      activeIndex: "1-2",
+      activeIndex: "2-1-1",
       //   导航第二个默认展开
       // openeds: ["2", "2-2"],
-      openeds: ["1", "1-2"],
+      openeds: ["2", "2-1", "2-1-1"],
       menu: [
         {
           value: "1",
