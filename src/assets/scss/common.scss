@@ -1,0 +1,22 @@
+@charset "UTF-8";
+@import 'public';
+
+
+
+* {
+	font-family: 'pingfang', 'microsoft yahei', '黑体';
+}
+
+body, html {
+  overflow-x: hidden;
+}
+
+img {
+  max-width: 100%;
+}
+
+a, a:focus, a:active, a:visited, a:focus-within {
+  border: none;
+  outline: none;
+  // color: transparent;
+}

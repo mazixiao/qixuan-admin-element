@@ -1,24 +1,54 @@
 
 <template>
-  <div class="didi">
-    
+  <div class="content">
+    <commonHeader></commonHeader>
     生码规则测试
+
+
+    <el-select v-model="value" placeholder="请选择">
+      <el-option
+        v-for="item in options"
+        :key="item.value"
+        :label="item.label"
+        :value="item.value">
+      </el-option>
+    </el-select>
+
+
+
   </div>
 </template>
 
 
 <script>
-
-
+import commonHeader from '../../../components/header'
 
 
 
 export default {
   name: "printingRawCodeRule",
+  components: {
+      commonHeader
+  },
   data() {
     return {
-      // 导航默认高亮
-      activeIndex: "2-1-1",
+      options: [{
+        value: '选项1',
+        label: '黄金糕'
+      }, {
+        value: '选项2',
+        label: '双皮奶'
+      }, {
+        value: '选项3',
+        label: '蚵仔煎'
+      }, {
+        value: '选项4',
+        label: '龙须面'
+      }, {
+        value: '选项5',
+        label: '北京烤鸭'
+      }],
+      value: ''
 
     };
   },

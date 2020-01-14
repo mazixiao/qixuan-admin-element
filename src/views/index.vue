@@ -4,8 +4,13 @@
 <template>
 
 
-  <div class="index">
+  <div class="content">
   	<commonHeader></commonHeader>
+    
+    
+    <div>
+      首页内容
+    </div>
 
   </div>
 

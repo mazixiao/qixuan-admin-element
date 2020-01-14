@@ -1,3 +1,6 @@
+<style lang="sass">
+  @import '../assets/scss/common.scss';
+</style>
 
 <template>
   <div class="header">
@@ -6,8 +9,11 @@
       <img class="logo" src="../assets/img/logo.png" alt="">
       <span>码+服务云平台</span>
     </a>
+    <!-- :default-active="activeIndex" -->
       <el-menu
-        :default-active="activeIndex"
+        router
+        
+        :default-active="$route.path"
         class="el-menu-demo"
         mode="vertical"
         :unique-opened="true"
@@ -24,7 +30,7 @@
                 <div class="img-wrap">
                   <img :src="item.icon" alt="">
                 </div>
-                {{item.label}}
+                {{item.label}}11
               </template>
             <!-- 二级 -->
             <template v-for="list in item.children">
@@ -33,20 +39,27 @@
                 v-if="list.children && list.children.length"
                 :key="list.label"
               >
-                <template slot="title">{{list.label}}</template>
+                <template slot="title">{{list.label}}22</template>
                 <!-- 三级 -->
                 <el-menu-item
                   v-for="list3 in list.children"
-                  :index="list3.value"
+                  :index="list3.path"
                   :key="list3.label"
-                >{{list3.label}}</el-menu-item>
+                >
+                  {{list3.label}}33
+                </el-menu-item>
               </el-submenu>
               <!-- 二级无下拉 -->
-              <el-menu-item v-else :index="list.value" :key="list.label">{{list.label}}</el-menu-item>
+              <el-menu-item v-else :index="list.path" :key="list.label">{{list.label}}22</el-menu-item>
             </template>
           </el-submenu>
           <!-- 一级无下拉 -->
-          <el-menu-item v-else :index="item.value" :key="item.label">{{item.label}}</el-menu-item>
+          <el-menu-item v-else :index="item.path" :key="item.label">
+            <div class="img-wrap">
+              <img :src="item.icon" alt="">
+            </div>
+            {{item.label}}11
+          </el-menu-item>
         </template>
       </el-menu>
 
@@ -74,12 +87,26 @@ export default {
   name: "commonHeader",
   data() {
     return {
+      // // 导航默认高亮
+      // activeIndex: "2-1-1",
+      // //   导航第二个默认展开
+      // openeds: ["2", "2-1", "2-1-1"],
+
+
       // 导航默认高亮
-      activeIndex: "2-1-1",
+      activeIndex: "0",
       //   导航第二个默认展开
-      // openeds: ["2", "2-2"],
-      openeds: ["2", "2-1", "2-1-1"],
+      openeds: ["0"],
+
+
       menu: [
+        {
+          value: "0",
+          label: "首页",
+          icon: icon1,
+          path: '/',
+        },
+
         {
           value: "1",
           label: "概览",
@@ -87,15 +114,18 @@ export default {
           children: [
             {
               value: "1-1",
-              label: "订单数据分析"
+              label: "订单数据分析",
+              path: '/overview/orderForm',
             },
             {
               value: "1-2",
-              label: "防伪数据分析"
+              label: "防伪数据分析",
+              path: '/overview/user',
             },
             {
               value: "1-3",
-              label: "营销数据分析"
+              label: "营销数据分析",
+              path: '/overview/marketing',
             }
           ]
         },
@@ -110,11 +140,13 @@ export default {
               children: [
                 {
                   value: "2-1-1",
-                  label: "生码规则"
+                  label: "生码规则",
+                  path: '/printing/rawCode/rule',
                 },
                 {
                   value: "2-1-2",
-                  label: "生码订单"
+                  label: "生码订单",
+                  path: '/printing/rawCode/orde',
                 },
               ]
             },
@@ -339,11 +371,7 @@ export default {
 
 
 <style lang="scss">
-a, a:focus, a:active, a:visited, a:focus-within {
-  border: none;
-  outline: none;
-  color: transparent;
-}
+
 
 .header {
   z-index: 10;

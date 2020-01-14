@@ -1,0 +1,24 @@
+
+$rs-1920: "max-width:1920px";
+$rs-1600: "max-width:1600px";
+$rs-1440: "max-width:1440px";
+$rs-1366: "max-width:1366px";
+$rs-1280: "max-width:1280px";
+$rs-1024: "max-width:1024px";
+$rs-991: "max-width:991px";
+$rs-850: "max-width:850px";
+$rs-768: "max-width:768px";
+$rs-767: "max-width:767px";
+$rs-640: "max-width:640px";
+$rs-414: "max-width:414px";
+$rs-412: "max-width:412px";
+$rs-375: "max-width:375px";
+$rs-360: "max-width:360px";
+$rs-320: "max-width:320px";
+
+ @mixin responsive($media){
+  @media only all and ($media){
+    @content;
+  }
+} 
+
