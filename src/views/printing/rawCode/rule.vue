@@ -2,17 +2,118 @@
 <template>
   <div class="content">
     <commonHeader></commonHeader>
-    生码规则测试
 
 
-    <el-select v-model="value" placeholder="请选择">
-      <el-option
-        v-for="item in options"
-        :key="item.value"
-        :label="item.label"
-        :value="item.value">
-      </el-option>
-    </el-select>
+    <el-tabs v-model="activeName" @tab-click="handleClick" class="common-tab">
+      <el-tab-pane label="生码规则" name="first">
+        <el-row type="flex" justify="space-between" align="bottom" class="layui-form1">
+          <el-col :span="8">
+            <label class="small-tit">生码规则内容</label>
+            <el-select class="w100" v-model="value" placeholder="请选择">
+              <el-option
+                v-for="item in options"
+                :key="item.value"
+                :label="item.label"
+                :value="item.value">
+              </el-option>
+            </el-select>
+              </el-col>
+              <div class="btns">
+                <el-button type="primary">查询</el-button>
+                <el-button type="success">导出</el-button>
+              </div>
+          </el-row>
+
+          <el-button class="added">
+              <i class="el-icon-plus"></i>
+              新增客户生码规则
+          </el-button>
+
+          <el-table 
+            stripe
+            border
+            style="width: 100%"
+            max-height="none"
+            :header-cell-style="{background:'#eef1f6',color:'#606266'}"
+         
+            :default-sort = "{prop: 'date', order: 'descending'}"
+            :data = "tableData.slice((currentPage - 1) * pagesize, currentPage * pagesize)"
+            >
+            <el-table-column
+              prop="data1"
+              label="企业代码"
+              width="111">
+            </el-table-column>
+            <el-table-column
+              prop="data2"
+              label="企业简称"
+              width="181">
+            </el-table-column>
+            <el-table-column
+              prop="data3"
+              label="企业名称"
+              width="333">
+            </el-table-column>
+            <el-table-column
+              prop="data4"
+              label="规则编号"
+              width="180">
+            </el-table-column>
+            <el-table-column
+              prop="data5"
+              label="类别"
+              width="170">
+            </el-table-column>
+            <el-table-column
+              prop="data6"
+              label="规则名称"
+              width="200">
+            </el-table-column>
+            <el-table-column
+              prop="data7"
+              label="包装级别"
+              width="110">
+            </el-table-column>
+            <el-table-column
+              prop="data8"
+              label="包装数量"
+              width="180">
+            </el-table-column>
+            <el-table-column
+              fixed="right"
+              label="操作"
+              width="88">
+              <template slot-scope="scope">
+                <el-button
+                  @click.native.prevent="deleteRow(scope.$index, tableData)"
+                  type="primary"
+                  size="small">
+                  <i class="el-icon-edit-outline"></i>
+                  编辑
+                </el-button>
+              </template>
+            </el-table-column>
+          </el-table>
+
+          <el-pagination
+            background
+            layout="prev, pager, next"
+            @current-change="current_change"
+            :total="total"
+            >
+          </el-pagination>
+
+
+
+
+
+        </el-tab-pane>
+      <el-tab-pane label="配置管理" name="second">配置管理</el-tab-pane>
+      <el-tab-pane label="角色管理" name="third">角色管理</el-tab-pane>
+      <el-tab-pane label="定时任务补偿" name="fourth">定时任务补偿</el-tab-pane>
+    </el-tabs>
+
+
 
 
 
@@ -32,42 +133,248 @@ export default {
   },
   data() {
     return {
+      // tab标题默认高亮
+      activeName: 'first',
+
       options: [{
         value: '选项1',
-        label: '黄金糕'
+        label: '5001-上海南极人服装有限公司'
       }, {
         value: '选项2',
-        label: '双皮奶'
-      }, {
-        value: '选项3',
-        label: '蚵仔煎'
-      }, {
-        value: '选项4',
-        label: '龙须面'
-      }, {
-        value: '选项5',
-        label: '北京烤鸭'
+        label: '5001-上海南极人服装有限公司2'
       }],
-      value: ''
+      value: '选项1',
+
+      //默认数据总数
+      total: 100,  
+      //每页的数据条数
+      pagesize: 4,
+      //默认开始页面
+      currentPage: 1,
+      istag: true,
+
+
+      tableData: [{
+          "data1": "E01", 
+          "data2": "上海南极人", 
+          "data3": "上海南极人服装有限公司", 
+          "data4": "E01CG00001", 
+          "data5": "套码", 
+          "data6": "男士服装套码", 
+          "data7": "3", 
+          "data8": "1箱/6盒/24件"
+      }, {
+          "data1": "E02", 
+          "data2": "上海南极人", 
+          "data3": "上海南极人服装有限公司", 
+          "data4": "E01CG00001", 
+          "data5": "套码", 
+          "data6": "男士服装套码", 
+          "data7": "3", 
+          "data8": "1箱/6盒/24件"
+      }, {
+          "data1": "E03", 
+          "data2": "上海南极人", 
+          "data3": "上海南极人服装有限公司", 
+          "data4": "E01CG00001", 
+          "data5": "套码", 
+          "data6": "男士服装套码", 
+          "data7": "3", 
+          "data8": "1箱/6盒/24件"
+      }, {
+          "data1": "E04", 
+          "data2": "上海南极人", 
+          "data3": "上海南极人服装有限公司", 
+          "data4": "E01CG00001", 
+          "data5": "套码", 
+          "data6": "男士服装套码", 
+          "data7": "3", 
+          "data8": "1箱/6盒/24件"
+      }, {
+          "data1": "E05", 
+          "data2": "上海南极人", 
+          "data3": "上海南极人服装有限公司", 
+          "data4": "E01CG00001", 
+          "data5": "套码", 
+          "data6": "男士服装套码", 
+          "data7": "3", 
+          "data8": "1箱/6盒/24件"
+      }, {
+          "data1": "E06", 
+          "data2": "上海南极人", 
+          "data3": "上海南极人服装有限公司", 
+          "data4": "E01CG00001", 
+          "data5": "套码", 
+          "data6": "男士服装套码", 
+          "data7": "3", 
+          "data8": "1箱/6盒/24件"
+      }, {
+          "data1": "E07", 
+          "data2": "上海南极人", 
+          "data3": "上海南极人服装有限公司", 
+          "data4": "E01CG00001", 
+          "data5": "套码", 
+          "data6": "男士服装套码", 
+          "data7": "3", 
+          "data8": "1箱/6盒/24件"
+      }, {
+          "data1": "E08", 
+          "data2": "上海南极人", 
+          "data3": "上海南极人服装有限公司", 
+          "data4": "E01CG00001", 
+          "data5": "套码", 
+          "data6": "男士服装套码", 
+          "data7": "3", 
+          "data8": "1箱/6盒/24件"
+      }, {
+          "data1": "E09", 
+          "data2": "上海南极人", 
+          "data3": "上海南极人服装有限公司", 
+          "data4": "E01CG00001", 
+          "data5": "套码", 
+          "data6": "男士服装套码", 
+          "data7": "3", 
+          "data8": "1箱/6盒/24件"
+      }, {
+          "data1": "E010", 
+          "data2": "上海南极人", 
+          "data3": "上海南极人服装有限公司", 
+          "data4": "E01CG00001", 
+          "data5": "套码", 
+          "data6": "男士服装套码", 
+          "data7": "3", 
+          "data8": "1箱/6盒/24件"
+      }, {
+          "data1": "E11", 
+          "data2": "上海南极人", 
+          "data3": "上海南极人服装有限公司", 
+          "data4": "E01CG00001", 
+          "data5": "套码", 
+          "data6": "男士服装套码", 
+          "data7": "3", 
+          "data8": "1箱/6盒/24件"
+      }, {
+          "data1": "E12", 
+          "data2": "上海南极人", 
+          "data3": "上海南极人服装有限公司", 
+          "data4": "E01CG00001", 
+          "data5": "套码", 
+          "data6": "男士服装套码", 
+          "data7": "3", 
+          "data8": "1箱/6盒/24件"
+      }, {
+          "data1": "E13", 
+          "data2": "上海南极人", 
+          "data3": "上海南极人服装有限公司", 
+          "data4": "E01CG00001", 
+          "data5": "套码", 
+          "data6": "男士服装套码", 
+          "data7": "3", 
+          "data8": "1箱/6盒/24件"
+      }]
+
+
+
 
     };
   },
+
+  created:function(){
+    this.total = this.tableData.length;
+  },
+
   methods: {
+
+    deleteRow(index, rows) {
+      // rows.splice(index, 1);
+    },
 
     handleOpen(key, keyPath) {
       console.log(key, keyPath);
-    }
+    },
+    handleClick(tab, event) {
+      console.log(tab, 'tab');
+      console.log(event, 'event');
+    },
+
+      tableRowClassName({row, rowIndex}) {
+        if (rowIndex === 0) {
+          return 'th';
+        }
+        return '';
+      },
+      switchChange(){
+          this.istag = !this.istag ;
+          
+      },
+
+     current_change:function(currentPage){
+        this.currentPage = currentPage;
+      }
+
+
+
   }
 };
 </script>
 
 
 <style lang="scss">
-a, a:focus, a:active, a:visited, a:focus-within {
-  border: none;
-  outline: none;
-  color: transparent;
-}
+  .layui-form1 {
+    border: 2px solid #ccc;
+    padding-left: 44px;
+    padding-right: 44px;
+    padding-top: 20px;
+    padding-bottom: 30px;
+    margin-bottom: 40px;
+    // display: flex;
+    // justify-content: space-between;
+    // align-items: flex-end;
+  }
+
+  .btn-wrap {
+    border: 1px solid red;
+  }
+
+  .added {
+    width: 100%;
+    text-align: left;
+    background-color: #e5effb; 
+    position: relative;
+    padding: 30px;
+    margin-bottom: 30px;
+    border: none;
+    font-size: 16px;
+    position: relative;
+    z-index: 1;
+    color: #fff;
+    &::before {
+      position: absolute;
+      content: "";
+      width: 200px;
+      height: 100%;
+      background-color: #0064dc;
+      left: 0;
+      top: 0;
+      z-index: -1;
+    }
+    &::after {
+      position: absolute;
+      content: "";
+      width: 0;
+      height: 0;
+      left: 200px;
+      top: 0;
+      border-bottom: 77px solid #0064dc;
+      border-right: 40px solid transparent;
+       z-index: -1;
+    }
+    &:hover {
+      color: #fff;
+      background-color: #e5effb;
+    }
+
+  }
 
 
 </style>

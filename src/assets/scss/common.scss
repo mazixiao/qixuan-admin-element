@@ -4,7 +4,8 @@
 
 
 * {
-	font-family: 'pingfang', 'microsoft yahei', '黑体';
+	margin: 0;
+	padding: 0;
 }
 
 body, html {
@@ -19,4 +20,55 @@ a, a:focus, a:active, a:visited, a:focus-within {
   border: none;
   outline: none;
   // color: transparent;
+}
+
+.content {
+	padding-top: 40px;
+	padding-bottom: 100px;	
+}
+
+.common-tab {
+  // padding-left: 60px;
+  // padding-right: 60px;
+  .el-tabs__nav {
+    padding-left: 60px;
+    padding-right: 60px;
+  }
+  .el-tabs__active-bar {
+    left: 60px;
+  }
+  .el-tabs__item {
+    font-size: 20px;
+    padding-bottom: 10px;
+    height: auto;
+  }
+
+  .el-tabs__content {
+    padding-left: 60px;
+    padding-right: 60px;
+    padding-top: 40px;
+  }
+
+
+}
+
+
+.w100 {
+  width: 100%;
+}
+.small-tit {
+  font-size: 14px;
+  padding-bottom: 10px;
+  display: inline-block;
+}
+
+
+
+.el-table td, .el-table th {
+  text-align: center;
+}
+
+.el-pagination {
+  padding: 20px 0;
+  border-bottom: 2px solid #0064dc;
 }
