@@ -68,6 +68,24 @@
           layout="total, sizes, prev, pager, next, jumper"
           :total="totalItems"
         ></el-pagination>
+
+
+      <!-- 线上请求数据测试 -->
+      <br>
+      <br>
+      <br>
+      <el-button class="added">
+        <i class="el-icon-plus"></i>
+        线上请求数据测试
+      </el-button>
+
+      <p>
+        {{aa.url}}  <br>
+        {{aa.address}} <br> 
+        {{aa.cache}}
+      </p>
+
+
       </el-tab-pane>
       <el-tab-pane label="配置管理" name="second">配置管理</el-tab-pane>
       <el-tab-pane label="角色管理" name="third">角色管理</el-tab-pane>
@@ -79,7 +97,6 @@
 
 <script>
 import commonHeader from "../../../components/header";
-
 export default {
   name: "printingRawCodeRule",
   components: {
@@ -112,7 +129,9 @@ export default {
       filterTableDataEnd: [],
       flag: false,
 
-      tableDataBegin: [
+      aa: {},
+
+      tableDataBegin0: [
         {
           data1: "E01",
           data2: "上海南极人",
@@ -243,7 +262,8 @@ export default {
           data7: "3",
           data8: "1箱/6盒/24件"
         }
-      ]
+      ],
+      tableDataBegin: [],
     };
   },
 
@@ -255,7 +275,47 @@ export default {
       }
     } else {
       this.tableDataEnd = this.tableDataBegin;
-    }
+    };
+
+
+
+
+          
+      // var pageToken = 1;
+      // // 这里就是刚才的config/index.js中的/api
+      // var urlItem  = '/api/news/qihoo?kw=%E7%99%BD&pageToken=' + pageToken + '&site=qq.com&apikey=WyPef4FMI79FqgPyB6zbdhhDxNyLTnn2MX4d1cJUHRi3G0UpefWIfwb5fqfDBQfw'; 
+      // this.$axios.get(urlItem)
+      // .then((response) => { //使用箭头函数防止this为undefined
+      //   console.log(response.data.data);
+      // })
+      // .catch((error) => {
+      //   // console.log(error);
+      //   // alert(error);
+      // });
+
+
+
+      // 这里就是刚才的config/index.js中的/api
+      var urlItem  = 'http://yapi.demo.qunar.com/mock/78086/qixuan-admin-element-test'; 
+      this.$axios.get(urlItem)
+      .then((response) => { //使用箭头函数防止this为undefined
+       
+        // this.tableDataBegin = JSON.parse(response.data);
+        //  console.log(this.tableDataBegin);
+         console.log(response);
+      })
+      .catch((error) => {
+        // console.log(error);
+        // alert(error);
+      });
+ 
+
+
+
+
+
+
+    
   },
 
   methods: {

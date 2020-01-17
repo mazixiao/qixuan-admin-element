@@ -9,6 +9,20 @@ import router from './router'
 
 Vue.use(ElementUI)
 
+
+// ajax
+import axios from 'axios'
+import VueAxios from 'vue-axios'
+
+Vue.prototype.$axios = axios;   // 2、在vue中使用axios
+
+// Vue.config.productionTip = false
+
+Vue.use(VueAxios,axios);
+
+
+
+
 Vue.config.productionTip = false
 
 router.beforeEach((to, from, next) => {
