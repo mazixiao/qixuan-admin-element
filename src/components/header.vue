@@ -143,6 +143,12 @@ export default {
                   label: "生码规则",
                   path: '/printing/rawCode/rule',
                 },
+                // {
+                //   value: "2-1-3",
+                //   label: "新增客户生码规则",
+                //   path: '/printing/rawCode/ruleAdd',
+                // },
+
                 {
                   value: "2-1-2",
                   label: "生码订单",

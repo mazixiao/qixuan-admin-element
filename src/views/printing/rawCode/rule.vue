@@ -23,10 +23,16 @@
           </div>
         </el-row>
 
-        <el-button class="added">
+        <!-- <el-button class="added">
           <i class="el-icon-plus"></i>
           新增客户生码规则
-        </el-button>
+        </el-button> -->
+
+
+        <router-link to="/printing/rawCode/ruleAdd" class="added">
+          <i class="el-icon-plus"></i>
+          新增客户生码规则
+        </router-link>
 
         <el-table
           stripe
@@ -70,28 +76,16 @@
         ></el-pagination>
 
 
-      <!-- 线上请求数据测试 -->
-      <br>
-      <br>
-      <br>
-      <el-button class="added">
-        <i class="el-icon-plus"></i>
-        线上请求数据测试
-      </el-button>
-
-      <p>
-        {{aa.url}}  <br>
-        {{aa.address}} <br> 
-        {{aa.cache}}
-      </p>
-
-
       </el-tab-pane>
       <el-tab-pane label="配置管理" name="second">配置管理</el-tab-pane>
       <el-tab-pane label="角色管理" name="third">角色管理</el-tab-pane>
       <el-tab-pane label="定时任务补偿" name="fourth">定时任务补偿</el-tab-pane>
     </el-tabs>
+<!-- <router-view></router-view> -->
+
   </div>
+
+
 </template>
 
 
@@ -262,60 +256,64 @@ export default {
           data7: "3",
           data8: "1箱/6盒/24件"
         }
-      ],
-      tableDataBegin: [],
+      ]
     };
   },
 
   created() {
-    this.totalItems = this.tableDataBegin.length;
-    if (this.totalItems > this.pageSize) {
-      for (let index = 0; index < this.pageSize; index++) {
-        this.tableDataEnd.push(this.tableDataBegin[index]);
-      }
-    } else {
-      this.tableDataEnd = this.tableDataBegin;
-    };
+    // 这里就是刚才的config/index.js中的/api
+    var urlItem =
+      "http://yapi.demo.qunar.com/mock/78086/qixuan-admin-element-test";
+    this.$axios
+      .get(urlItem)
+      .then(response => {
+        //使用箭头函数防止this为undefined
 
-
-
-
-          
-      // var pageToken = 1;
-      // // 这里就是刚才的config/index.js中的/api
-      // var urlItem  = '/api/news/qihoo?kw=%E7%99%BD&pageToken=' + pageToken + '&site=qq.com&apikey=WyPef4FMI79FqgPyB6zbdhhDxNyLTnn2MX4d1cJUHRi3G0UpefWIfwb5fqfDBQfw'; 
-      // this.$axios.get(urlItem)
-      // .then((response) => { //使用箭头函数防止this为undefined
-      //   console.log(response.data.data);
-      // })
-      // .catch((error) => {
-      //   // console.log(error);
-      //   // alert(error);
-      // });
-
-
-
-      // 这里就是刚才的config/index.js中的/api
-      var urlItem  = 'http://yapi.demo.qunar.com/mock/78086/qixuan-admin-element-test'; 
-      this.$axios.get(urlItem)
-      .then((response) => { //使用箭头函数防止this为undefined
-       
-        // this.tableDataBegin = JSON.parse(response.data);
         //  console.log(this.tableDataBegin);
-         console.log(response);
+
+        this.tableDataBegin = response.data.tableDataBegin1;
+
+        console.log(this.tableDataBegin);
+
+        this.totalItems = this.tableDataBegin.length;
+        if (this.totalItems > this.pageSize) {
+          for (let index = 0; index < this.pageSize; index++) {
+            this.tableDataEnd.push(this.tableDataBegin[index]);
+          }
+        } else {
+          this.tableDataEnd = this.tableDataBegin;
+        }
       })
-      .catch((error) => {
+      .catch(error => {
         // console.log(error);
         // alert(error);
       });
- 
 
+    // var pageToken = 1;
+    // // 这里就是刚才的config/index.js中的/api
+    // var urlItem  = '/api/news/qihoo?kw=%E7%99%BD&pageToken=' + pageToken + '&site=qq.com&apikey=WyPef4FMI79FqgPyB6zbdhhDxNyLTnn2MX4d1cJUHRi3G0UpefWIfwb5fqfDBQfw';
+    // this.$axios.get(urlItem)
+    // .then((response) => { //使用箭头函数防止this为undefined
+    //   console.log(response.data.data);
+    // })
+    // .catch((error) => {
+    //   // console.log(error);
+    //   // alert(error);
+    // });
 
+    // // 这里就是刚才的config/index.js中的/api
+    // var urlItem  = 'http://yapi.demo.qunar.com/mock/78086/qixuan-admin-element-test';
+    // this.$axios.get(urlItem)
+    // .then((response) => { //使用箭头函数防止this为undefined
 
-
-
-
-    
+    //   // this.tableDataBegin = JSON.parse(response.data);
+    //   //  console.log(this.tableDataBegin);
+    //    console.log(response);
+    // })
+    // .catch((error) => {
+    //   // console.log(error);
+    //   // alert(error);
+    // });
   },
 
   methods: {
@@ -365,7 +363,7 @@ export default {
 </script>
 
 
-<style lang="scss">
+<style scoped lang="scss">
 .layui-form1 {
   border: 2px solid #ccc;
   padding-left: 44px;
@@ -380,13 +378,14 @@ export default {
   text-align: left;
   background-color: #e5effb;
   position: relative;
-  padding: 30px;
+  padding: 28px;
   margin-bottom: 30px;
   border: none;
   font-size: 16px;
   position: relative;
   z-index: 1;
   color: #fff;
+  display: block;
   &::before {
     position: absolute;
     content: "";

@@ -18,6 +18,7 @@ import overviewMarketing from '@/views/overview/marketing'
 
 // 生码规则
 import printingRawCodeRule from '@/views/printing/rawCode/rule'
+import printingRawCodeRuleAdd from '@/views/printing/rawCode/ruleAdd'
 // 生码订单
 import printingRawCodeOrde from '@/views/printing/rawCode/order'
 
@@ -64,8 +65,27 @@ export default new Router({
 			component: printingRawCodeRule,
 			meta: {
 				title: '生码规则'
+			}
+			// children: [
+			// 	{
+			// 		path: 'printing/rawCode/ruleAdd',
+			// 		name: 'printingRawCodeRuleAdd',
+			// 		component: printingRawCodeRuleAdd,
+			// 		meta: {
+			// 			title: '新增客户生码规则'
+			// 		},	
+			// 	}
+			// ]
+		},
+		{
+			path: '/printing/rawCode/ruleAdd',
+			name: 'printingRawCodeRuleAdd',
+			component: printingRawCodeRuleAdd,
+			meta: {
+				title: '新增客户生码规则'
 			},
 		},
+
 		{
 			path: '/printing/rawCode/orde',
 			name: 'printingRawCodeOrde',
