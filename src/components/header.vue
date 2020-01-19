@@ -86,11 +86,13 @@ import icon8 from '../assets/img/nav-icon8.png';
 export default {
   name: "commonHeader",
   data() {
+
     return {
       // // 导航默认高亮
       activeIndex: "2-1-1",
       // //   导航第二个默认展开
       openeds: ["2", "2-1", "2-1-1"],
+          num: 0,
 
 
       // 导航默认高亮
@@ -141,7 +143,8 @@ export default {
                 {
                   value: "2-1-1",
                   label: "生码规则",
-                  path: '/printing/rawCode/rule',
+                  path: '/printing/rawCode/rule/2-1-1',
+                  //  path: `/printing/rawCode/rule/:${this.activeIndex}`,
                 },
                 // {
                 //   value: "2-1-3",
@@ -359,11 +362,16 @@ export default {
       ]
     };
   },
+  mounted() {
+    this.num = this.$rote.params.num,
+    console.log(this.num)
+  },
   methods: {
     handleSelect(key, keyPath) {},
     changeCity(v) {
       console.log(v);
     },
+  
 
     handleOpen(key, keyPath) {
       console.log(key, keyPath);

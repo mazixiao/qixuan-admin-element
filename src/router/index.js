@@ -60,9 +60,11 @@ export default new Router({
 			},
 		},
 		{
-			path: '/printing/rawCode/rule',
+			path: '/printing/rawCode/rule/:num',
 			name: 'printingRawCodeRule',
 			component: printingRawCodeRule,
+			props:true,
+			value: "100",
 			meta: {
 				title: '生码规则'
 			}
