@@ -29,7 +29,7 @@
         </el-button> -->
 
 
-        <router-link to="/printing/rawCode/ruleAdd" class="added">
+        <router-link to="/printing/rawCode/ruleAdd/123" class="added-page">
           <i class="el-icon-plus"></i>
           新增客户生码规则
         </router-link>
@@ -74,12 +74,14 @@
           layout="total, sizes, prev, pager, next, jumper"
           :total="totalItems"
         ></el-pagination>
-
-
       </el-tab-pane>
-      <el-tab-pane label="配置管理" name="second">配置管理</el-tab-pane>
+
+
+      <!-- <el-tab-pane label="配置管理" name="second">配置管理</el-tab-pane>
       <el-tab-pane label="角色管理" name="third">角色管理</el-tab-pane>
-      <el-tab-pane label="定时任务补偿" name="fourth">定时任务补偿</el-tab-pane>
+      <el-tab-pane label="定时任务补偿" name="fourth">定时任务补偿</el-tab-pane> -->
+
+
     </el-tabs>
 <!-- <router-view></router-view> -->
 
@@ -273,7 +275,7 @@ export default {
 
         this.tableDataBegin = response.data.tableDataBegin1;
 
-        console.log(this.tableDataBegin);
+        // console.log(this.tableDataBegin);
 
         this.totalItems = this.tableDataBegin.length;
         if (this.totalItems > this.pageSize) {
@@ -315,6 +317,8 @@ export default {
     //   // alert(error);
     // });
   },
+
+
 
   methods: {
     deleteRow(index, rows) {
@@ -373,45 +377,10 @@ export default {
   margin-bottom: 40px;
 }
 
-.added {
-  width: 100%;
-  text-align: left;
-  background-color: #e5effb;
-  position: relative;
-  padding: 28px;
-  margin-bottom: 30px;
-  border: none;
-  font-size: 16px;
-  position: relative;
-  z-index: 1;
-  color: #fff;
-  display: block;
-  &::before {
-    position: absolute;
-    content: "";
-    width: 200px;
-    height: 100%;
-    background-color: #0064dc;
-    left: 0;
-    top: 0;
-    z-index: -1;
-  }
-  &::after {
-    position: absolute;
-    content: "";
-    width: 0;
-    height: 0;
-    left: 200px;
-    top: 0;
-    border-bottom: 77px solid #0064dc;
-    border-right: 40px solid transparent;
-    z-index: -1;
-  }
-  &:hover {
-    color: #fff;
-    background-color: #e5effb;
-  }
-}
+
+
+
+
 </style>
 
 

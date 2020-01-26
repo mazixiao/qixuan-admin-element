@@ -1,7 +1,15 @@
 @charset "UTF-8";
 @import 'public';
 
-
+.clearfix:before,.clearfix:after {  /*清除浮动*/
+  content:"";
+  display:table;
+  /*clear:both;*/
+}
+.clearfix:after{clear:both;}
+.clearfix{
+  *zoom:1;/*IE/7/6*/
+}
 
 * {
 	margin: 0;
@@ -71,4 +79,50 @@ a, a:focus, a:active, a:visited, a:focus-within {
 .el-pagination {
   padding: 20px 0;
   border-bottom: 2px solid #0064dc;
+}
+
+
+.added-page {
+  height: 80px;
+  line-height: 80px;
+  width: 100%;
+  text-align: left;
+  background-color: #e5effb;
+  position: relative;
+  // padding: 30px;
+  padding-left: 30px;
+  margin-bottom: 30px;
+  border: none;
+  font-size: 16px;
+  position: relative;
+  z-index: 1;
+  color: #fff !important;
+  display: block;
+  cursor: pointer;
+  // box-sizing: border-box;
+  &::before {
+    position: absolute;
+    content: "";
+    width: 200px;
+    height: 100%;
+    background-color: #0064dc;
+    left: 0;
+    top: 0;
+    z-index: -1;
+  }
+  &::after {
+    position: absolute;
+    content: "";
+    width: 0;
+    height: 0;
+    left: 200px;
+    top: 0;
+    border-bottom: 80px solid #0064dc;
+    border-right: 40px solid transparent;
+    z-index: -1;
+  }
+  &:hover {
+    color: #fff;
+    background-color: #e5effb;
+  }
 }

@@ -21,6 +21,7 @@ import printingRawCodeRule from '@/views/printing/rawCode/rule'
 import printingRawCodeRuleAdd from '@/views/printing/rawCode/ruleAdd'
 // 生码订单
 import printingRawCodeOrde from '@/views/printing/rawCode/order'
+import printingRawCodeOrdeAdd from '@/views/printing/rawCode/orderAdd'
 
 
 Vue.use(Router)
@@ -60,7 +61,7 @@ export default new Router({
 			},
 		},
 		{
-			path: '/printing/rawCode/rule/:num',
+			path: '/printing/rawCode/rule',
 			name: 'printingRawCodeRule',
 			component: printingRawCodeRule,
 			props:true,
@@ -80,7 +81,7 @@ export default new Router({
 			// ]
 		},
 		{
-			path: '/printing/rawCode/ruleAdd',
+			path: '/printing/rawCode/ruleAdd/:num',
 			name: 'printingRawCodeRuleAdd',
 			component: printingRawCodeRuleAdd,
 			meta: {
@@ -96,6 +97,15 @@ export default new Router({
 				title: '生码订单'
 			},
 		},
+		{
+			path: '/printing/rawCode/orderAdd/:num',
+			name: 'printingRawCodeOrdeAdd',
+			component: printingRawCodeOrdeAdd,
+			meta: {
+				title: '新增生码订单'
+			},
+		},
+
 
 	],
 	mode: "history"

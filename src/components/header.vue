@@ -143,7 +143,7 @@ export default {
                 {
                   value: "2-1-1",
                   label: "生码规则",
-                  path: '/printing/rawCode/rule/2-1-1',
+                  path: '/printing/rawCode/rule',
                   //  path: `/printing/rawCode/rule/:${this.activeIndex}`,
                 },
                 // {
@@ -363,8 +363,8 @@ export default {
     };
   },
   mounted() {
-    this.num = this.$rote.params.num,
-    console.log(this.num)
+    // this.num = this.$rote.params.num,
+    // console.log(this.num)
   },
   methods: {
     handleSelect(key, keyPath) {},
