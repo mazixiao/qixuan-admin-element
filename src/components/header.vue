@@ -159,38 +159,35 @@ export default {
                 },
               ]
             },
-            {
-              value: "2-2",
-              label: "标签管理"
-            },
           ]
         },
         {
           value: "3",
           label: "生产管理",
           icon: icon3,
-          children: [
-            {
-              value: "3-1",
-              label: "生产工单管理",
-              children: [
-                {
-                  value: "3-1-1",
-                  label: "生产工单",
-                },
-              ]
-            },
-            {
-              value: "3-2",
-              label: "生产条码管理",
-              children: [
-                {
-                  value: "3-2-1",
-                  label: "生产条码明细",
-                },
-              ]
-            },
-          ]
+          path: '/product/product',
+          // children: [
+          //   {
+          //     value: "3-1",
+          //     label: "生产工单管理",
+          //     children: [
+          //       {
+          //         value: "3-1-1",
+          //         label: "生产工单",
+          //       },
+          //     ]
+          //   },
+          //   {
+          //     value: "3-2",
+          //     label: "生产条码管理",
+          //     children: [
+          //       {
+          //         value: "3-2-1",
+          //         label: "生产条码明细",
+          //       },
+          //     ]
+          //   },
+          // ]
         },
         {
           value: "4",

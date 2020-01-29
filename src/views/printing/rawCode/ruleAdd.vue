@@ -130,7 +130,6 @@
                     <td><el-input v-model="formArr[0].item2.input4" placeholder="12"></el-input></td>
                     <td><el-input v-model="formArr[0].item2.input5" placeholder="内包装码"></el-input></td>
                   </tr>
-
                   <tr>
                     <td>3</td>
                     <td><el-input v-model="formArr[0].item3.input1" placeholder="瓶"></el-input></td>
@@ -159,10 +158,7 @@
                 </tbody>
               </table>
             </div>
-
-
           </div>
-
           <div class="item">
             <el-row class="item-tit" type="flex" justify="space-between">
               <h4>生码规则2</h4>
@@ -171,7 +167,6 @@
                 删除
               </el-button>
             </el-row>
-
             <el-form :gutter="20" :inline="true" :model="formArr[1].top" class="inputs clearfix">
               <el-col :span="7">
                 <el-form-item label="规则编号">

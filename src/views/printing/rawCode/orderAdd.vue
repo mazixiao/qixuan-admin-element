@@ -2,25 +2,174 @@
 <template>
   <div class="content">
     <commonHeader></commonHeader>
-生码订单测试
-    <el-input v-model="tableDataName" placeholder="请输入姓名" style="width:240px"></el-input>
-    <el-button type="primary" @click="doFilter">搜索</el-button>
-    <el-button type="primary" @click="openData">展示数据</el-button>
-    <el-table :data="tableDataEnd" border style="width: 100%">
-      <el-table-column prop="id" label="ID" width="180"></el-table-column>
-      <el-table-column prop="date" label="日期" width="180"></el-table-column>
-      <el-table-column prop="name" label="姓名" width="180"></el-table-column>
-      <el-table-column prop="address" label="地址"></el-table-column>
-    </el-table>
-    <el-pagination
-      @size-change="handleSizeChange"
-      @current-change="handleCurrentChange"
-      :current-page="currentPage"
-      :page-sizes="[5, 10, 15, 20]"
-      :page-size="pageSize"
-      layout="total, sizes, prev, pager, next, jumper"
-      :total="totalItems"
-    ></el-pagination>
+    <el-tabs v-model="activeName" class="common-tab">
+      <el-tab-pane label="新增生码订单" name="first">
+        <el-form class="layui-form1 clearfix" :gutter="20" :model="formArr">
+          <el-col :span="6">
+            <el-form-item label="*生码企业">
+              <el-select class="w100" v-model="formArr.select1" placeholder="*生码企业">
+                <el-option label="5001-上海南极人服装有限公司" value="5001-上海南极人服装有限公司"></el-option>
+                <el-option label="5001-上海南极人服装有限公司2" value="5001-上海南极人服装有限公司2"></el-option>
+                <el-option label="release" value="release" disabled></el-option>
+              </el-select>
+            </el-form-item>
+          </el-col>
+          <el-col :span="6">
+            <el-form-item label="*客户订单号">
+              <el-input v-model="formArr.input1" placeholder="*客户订单号"></el-input>
+            </el-form-item>
+          </el-col>
+          <el-col :span="6">
+            <el-form-item label="*客户订单日期">
+              <el-date-picker
+                type="date"
+                placeholder="选择日期"
+                v-model="formArr.date1"
+                style="width: 100%;"
+              ></el-date-picker>
+            </el-form-item>
+          </el-col>
+          <el-col :span="6">
+            <el-form-item label="产品型号">
+              <el-input v-model="formArr.input2" placeholder="产品编号"></el-input>
+            </el-form-item>
+          </el-col>
+          <el-col :span="6">
+            <el-form-item label="生产日期">
+              <el-date-picker
+                type="date"
+                placeholder="选择日期"
+                v-model="formArr.date2"
+                style="width: 100%;"
+              ></el-date-picker>
+            </el-form-item>
+          </el-col>
+          <el-col :span="6" class="have-date">
+            <el-form-item label="*生码订单号">
+              <el-input v-model="formArr.input3" placeholder="产品编号"></el-input>
+            </el-form-item>
+          </el-col>
+          <el-col :span="6">
+            <el-form-item label="*生码订单日期">
+              <el-date-picker
+                type="date"
+                placeholder="选择日期"
+                v-model="formArr.date3"
+                style="width: 100%;"
+              ></el-date-picker>
+            </el-form-item>
+          </el-col>
+          <el-col :span="6">
+            <el-form-item label="批次号">
+              <el-input v-model="formArr.input4" placeholder="产品编号"></el-input>
+            </el-form-item>
+          </el-col>
+        </el-form>
+
+        <el-form class="ask-for clearfix" :gutter="20" :model="formArr2">
+          <h4>生码订单要求及码组成</h4>
+          <el-col :span="10">
+            <el-form-item label="生码类型">
+              <el-select class="w70" v-model="formArr2.select1" placeholder="*生码企业">
+                <el-option label="套码" value="套码"></el-option>
+                <el-option label="套码2" value="套码2"></el-option>
+              </el-select>
+            </el-form-item>
+          </el-col>
+          <el-col :span="10">
+            <el-form-item label="选择套码规则">
+              <el-select class="w70" v-model="formArr2.select2" placeholder="*生码企业">
+                <el-option label="男士服装套码" value="男士服装套码"></el-option>
+                <el-option label="男士服装套码2" value="男士服装套码2"></el-option>
+              </el-select>
+            </el-form-item>
+          </el-col>
+        </el-form>
+
+        <div class="table1-parent static-table-parent">
+          <div class="table1-tit">说明： 创建生码订单前需先确认选择相应的生码规则，根据规则进行生码。</div>
+          <el-form :model="inServForm" ref="inServForm.infiledList" size="small">
+            <template>
+              <el-table
+                show-summary
+                border
+                :data="inServForm.infiledList"
+                :summary-method="getSummaries"
+                style="width: 100%"
+                @selection-change="handleSelectionChange"
+              >
+                <!-- <el-form-item> -->
+                  <el-table-column type="selection"></el-table-column>
+                <!-- </el-form-item> -->
+                <!-- <el-form-item> -->
+                  <el-table-column label="行号" width="70px" type="index" :index="indexMethod"></el-table-column>
+                <!-- </el-form-item> -->
+
+                <!-- <el-form-item> -->
+                  <el-table-column prop="input1" label="包装单位">
+                    <template slot-scope="scope">
+                      <el-input size="mini" v-model="scope.row.input1"></el-input>
+                    </template>
+                  </el-table-column>
+                <!-- </el-form-item> -->
+
+                <!-- <el-form-item> -->
+                  <el-table-column prop="input2" label="计划数量">
+                    <template slot-scope="scope">
+                      <el-input size="mini" v-model="scope.row.input2"></el-input>
+                    </template>
+                  </el-table-column>
+                <!-- </el-form-item> -->
+
+                <!-- <el-form-item> -->
+                  <el-table-column prop="input3" label="生产数量">
+                    <template slot-scope="scope">
+                      <el-input size="mini" v-model="scope.row.input3"></el-input>
+                    </template>
+                  </el-table-column>
+                <!-- </el-form-item> -->
+
+                <!-- <el-form-item> -->
+                  <el-table-column prop="select1" label="物料型号">
+                    <template slot-scope="scope">
+                      <el-select v-model="scope.row.select1" clearable>
+                        <el-option
+                          v-for="item in select1s"
+                          :key="item.value"
+                          :label="item.text"
+                          :value="item.value"
+                        ></el-option>
+                      </el-select>
+                    </template>
+                  </el-table-column>
+                <!-- </el-form-item> -->
+
+                <!-- <el-form-item> -->
+                  <el-table-column fixed="right" label="操作">
+                    <template slot-scope="scope">
+                      <el-button
+                        @click.native.prevent="deleteRow(scope.$index, inServForm.infiledList)"
+                        type="success"
+                      >删除</el-button>
+                    </template>
+                  </el-table-column>
+                </el-form-item>
+              </el-table>
+            </template>
+          </el-form>
+
+          <el-button
+            @click="addRow(inServForm.infiledList)"
+            type="primary"
+            style="margin-top:10px;margin-bottom:10px;"
+          >新增一行</el-button>
+        </div>
+        <div class="btns">
+          <el-button type="primary">保存</el-button>
+          <el-button type="success" @click="resetForm('inServForm.infiledList')">重置</el-button>
+        </div>
+      </el-tab-pane>
+    </el-tabs>
   </div>
 </template>
 
@@ -35,145 +184,230 @@ export default {
   },
   data() {
     return {
-      tableDataBegin: [
-        {
-          id: "1",
-          date: "2016-05-01",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1518 弄"
-        },
-        {
-          id: "2",
-          date: "2016-05-02",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1517 弄"
-        },
-        {
-          id: "3",
-          date: "2016-05-03",
-          name: "王二虎",
-          address: "上海市普陀区金沙江路 1519 弄"
-        },
-        {
-          id: "4",
-          date: "2016-05-04",
-          name: "王二虎",
-          address: "上海市普陀区金沙江路 1516 弄"
-        },
-        {
-          id: "5",
-          date: "2016-05-05",
-          name: "王三虎",
-          address: "上海市普陀区金沙江路 1518 弄"
-        },
-        {
-          id: "6",
-          date: "2016-05-06",
-          name: "王三虎",
-          address: "上海市普陀区金沙江路 1517 弄"
-        },
-        {
-          id: "7",
-          date: "2016-05-07",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1519 弄"
-        },
-        {
-          id: "8",
-          date: "2016-05-08",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1516 弄"
-        }
+      inServForm: {
+        infiledList: [
+          {
+            select1: "型号1",
+            input1: "瓶",
+            input2: "100",
+            input3: "100"
+          },
+          {
+            select1: "型号1",
+            input1: "瓶",
+            input2: "100",
+            input3: "100"
+          },
+          {
+            select1: "型号1",
+            input1: "瓶",
+            input2: "100",
+            input3: "100"
+          }
+        ]
+      },
+      // tab标题默认高亮
+      activeName: "first",
+      select: "5001-上海南极人服装有限公司",
+      formArr: {
+        select1: "5001-上海南极人服装有限公司",
+        input1: "",
+        input2: "",
+        input3: "",
+        input4: "",
+        date1: "",
+        date2: "",
+        date3: ""
+      },
+      formArr2: {
+        select1: "",
+        select2: ""
+      },
+      select1s: [
+        { text: "型号1", value: "型号1" },
+        { text: "型号2", value: "型号2" }
       ],
-      tableDataName: "",
-      tableDataEnd: [],
-      currentPage: 1,
-      pageSize: 5,
-      totalItems: 0,
-      filterTableDataEnd: [],
-      flag: false
+      // 表格已选择框
+      multipleSelection: []
     };
   },
-  created() {
-    this.totalItems = this.tableDataBegin.length;
-    if (this.totalItems > this.pageSize) {
-      for (let index = 0; index < this.pageSize; index++) {
-        this.tableDataEnd.push(this.tableDataBegin[index]);
-      }
-    } else {
-      this.tableDataEnd = this.tableDataBegin;
-    }
-  },
+  created() {},
+
   methods: {
-    //前端搜索功能需要区分是否检索,因为对应的字段的索引不同
-    //用两个变量接收currentChangePage函数的参数
-    doFilter() {
-      if (this.tableDataName == "") {
-        this.$message.warning("查询条件不能为空！");
-        return;
+    // 选择框逻辑
+    handleSelectionChange(val) {
+      this.multipleSelection = val;
+    },
+
+    // 表格序号
+    indexMethod(index) {
+      index = this.numAdd0(index + 1);
+      return index;
+    },
+
+    numAdd0(value) {
+      if (parseInt(value) < 10) {
+        value = "0" + value;
+      } else {
+        value = value;
       }
-      this.tableDataEnd = [];
-      //每次手动将数据置空,因为会出现多次点击搜索情况
-      this.filterTableDataEnd = [];
-      this.tableDataBegin.forEach((value, index) => {
-        if (value.name) {
-          if (value.name.indexOf(this.tableDataName) >= 0) {
-            this.filterTableDataEnd.push(value);
-          }
+      return value;
+    },
+    // 删除一行
+    deleteRow(index, rows) {
+      rows.splice(index, 1);
+    },
+    // 新增一行
+    addRow(tableData, event) {
+      tableData.push({
+        select1: "型号1",
+        input1: "瓶",
+        input2: "100",
+        input3: "100"
+      });
+    },
+    // 合计
+    getSummaries(param) {
+      let { columns, data } = param;
+      // 数据等于已选择框里的值
+      data = this.multipleSelection;
+      const sums = [];
+      columns.forEach((column, index) => {
+        if (index === 1) {
+          sums[index] = "总价";
+          return;
+        }
+        if (index === 2) {
+          sums[index] = "";
+          return;
+        }
+        const values = data.map(item => {
+          return Number(item[column.property]);
+        });
+
+        if (!values.every(value => isNaN(value))) {
+          sums[index] = values.reduce((prev, curr) => {
+            const value = Number(curr);
+            if (!isNaN(value)) {
+              return prev + curr;
+            } else {
+              return prev;
+            }
+          }, 0);
+          sums[index] += " 个";
+        } else {
+          sums[index] = "";
         }
       });
-      //页面数据改变重新统计数据数量和当前页
-      this.currentPage = 1;
-      this.totalItems = this.filterTableDataEnd.length;
-      //渲染表格,根据值
-      this.currentChangePage(this.filterTableDataEnd);
-      //页面初始化数据需要判断是否检索过
-      this.flag = true;
-    },
-    openData() {},
-    handleSizeChange(val) {
-      console.log(`每页 ${val} 条`);
-      this.pageSize = val;
-      this.handleCurrentChange(1);
+
+      return sums;
     },
 
-    handleCurrentChange(val) {
-      console.log(`当前页: ${val}`);
-      this.currentPage = val;
-      //需要判断是否检索
-      if (!this.flag) {
-        this.currentChangePage(this.tableDataBegin);
-        console.log(this.tableDataEnd);
-      } else {
-        this.currentChangePage(this.filterTableDataEnd);
-        console.log(this.tableDataEnd);
-      }
-    }, //组件自带监控当前页码
-
-    currentChangePage(list) {
-      let from = (this.currentPage - 1) * this.pageSize;
-      let to = this.currentPage * this.pageSize;
-      this.tableDataEnd = [];
-      for (; from < to; from++) {
-        if (list[from]) {
-          this.tableDataEnd.push(list[from]);
-        }
-      }
+    resetForm(formName) {
+      this.$refs[formName].resetFields();
     }
   }
 };
 </script>
 
 
-<style lang="scss">
-a,
-a:focus,
-a:active,
-a:visited,
-a:focus-within {
-  border: none;
-  outline: none;
-  color: transparent;
+<style scoped lang="scss">
+.layui-form1 {
+  border: 2px solid #ccc;
+  padding: 15px;
+  padding-right: 0;
+  // padding-bottom: 0;
+  margin: 0 !important;
+}
+
+.btns {
+  display: block;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.added-page {
+  margin-top: 30px;
+}
+
+.layui-form1 {
+  /deep/ .el-form-item {
+    width: 100%;
+    margin-right: 0;
+    padding-right: 20px;
+    box-sizing: border-box;
+    margin-bottom: 20px;
+    label {
+      display: block;
+      text-align: left;
+      line-height: 30px !important;
+      float: none;
+    }
+    div {
+      width: 100%;
+    }
+  }
+}
+
+.table1-parent {
+  margin-top: 10px;
+  .table1-tit {
+    text-align: right;
+    font-size: 14px;
+    line-height: 24px;
+    color: #666;
+    margin-bottom: 10px;
+  }
+}
+
+.static-table-parent {
+  overflow-x: auto;
+  /deep/ {
+    .el-input--mini .el-input__inner {
+      height: 35px;
+      line-height: 35px;
+    }
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    // border-width: 1px;
+    // border-style: solid;
+    // border-color: #e6e6e6;
+    text-align: center;
+    tr {
+      /deep/ {
+        th {
+          background: rgb(238, 241, 246);
+          color: rgb(96, 98, 102);
+          padding: 12px 0;
+          font-size: 14px;
+          border: 1px solid #ebeef5;
+        }
+        td {
+          // background: rgb(238, 241, 246);
+          // color: rgb(96, 98, 102);
+          padding: 15px 5px;
+          font-size: 14px;
+          border: 1px solid #ebeef5;
+        }
+
+        .el-input__icon {
+          line-height: 35px;
+        }
+      }
+    }
+  }
+}
+
+.ask-for {
+  margin-top: 20px;
+  h4 {
+    margin-bottom: 15px;
+    font-size: 14px;
+    font-weight: normal;
+  }
 }
 </style>
 
