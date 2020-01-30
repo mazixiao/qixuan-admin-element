@@ -97,63 +97,49 @@
                 :summary-method="getSummaries"
                 style="width: 100%"
                 @selection-change="handleSelectionChange"
+                ref="multipleTable"
               >
-                <!-- <el-form-item> -->
-                  <el-table-column type="selection"></el-table-column>
-                <!-- </el-form-item> -->
-                <!-- <el-form-item> -->
-                  <el-table-column label="行号" width="70px" type="index" :index="indexMethod"></el-table-column>
-                <!-- </el-form-item> -->
+                <el-table-column type="selection"></el-table-column>
 
-                <!-- <el-form-item> -->
-                  <el-table-column prop="input1" label="包装单位">
-                    <template slot-scope="scope">
-                      <el-input size="mini" v-model="scope.row.input1"></el-input>
-                    </template>
-                  </el-table-column>
-                <!-- </el-form-item> -->
+                <el-table-column label="行号" width="70px" type="index" :index="indexMethod"></el-table-column>
 
-                <!-- <el-form-item> -->
-                  <el-table-column prop="input2" label="计划数量">
-                    <template slot-scope="scope">
-                      <el-input size="mini" v-model="scope.row.input2"></el-input>
-                    </template>
-                  </el-table-column>
-                <!-- </el-form-item> -->
+                <el-table-column prop="input1" label="包装单位">
+                  <template slot-scope="scope">
+                    <el-input size="mini" v-model="scope.row.input1"></el-input>
+                  </template>
+                </el-table-column>
+                <el-table-column prop="input2" label="计划数量">
+                  <template slot-scope="scope">
+                    <el-input size="mini" v-model="scope.row.input2"></el-input>
+                  </template>
+                </el-table-column>
+                <el-table-column prop="input3" label="生产数量">
+                  <template slot-scope="scope">
+                    <el-input size="mini" v-model="scope.row.input3"></el-input>
+                  </template>
+                </el-table-column>
 
-                <!-- <el-form-item> -->
-                  <el-table-column prop="input3" label="生产数量">
-                    <template slot-scope="scope">
-                      <el-input size="mini" v-model="scope.row.input3"></el-input>
-                    </template>
-                  </el-table-column>
-                <!-- </el-form-item> -->
+                <el-table-column prop="select1" label="物料型号">
+                  <template slot-scope="scope">
+                    <el-select v-model="scope.row.select1" clearable>
+                      <el-option
+                        v-for="item in select1s"
+                        :key="item.value"
+                        :label="item.text"
+                        :value="item.value"
+                      ></el-option>
+                    </el-select>
+                  </template>
+                </el-table-column>
 
-                <!-- <el-form-item> -->
-                  <el-table-column prop="select1" label="物料型号">
-                    <template slot-scope="scope">
-                      <el-select v-model="scope.row.select1" clearable>
-                        <el-option
-                          v-for="item in select1s"
-                          :key="item.value"
-                          :label="item.text"
-                          :value="item.value"
-                        ></el-option>
-                      </el-select>
-                    </template>
-                  </el-table-column>
-                <!-- </el-form-item> -->
-
-                <!-- <el-form-item> -->
-                  <el-table-column fixed="right" label="操作">
-                    <template slot-scope="scope">
-                      <el-button
-                        @click.native.prevent="deleteRow(scope.$index, inServForm.infiledList)"
-                        type="success"
-                      >删除</el-button>
-                    </template>
-                  </el-table-column>
-                </el-form-item>
+                <el-table-column fixed="right" label="操作">
+                  <template slot-scope="scope">
+                    <el-button
+                      @click.native.prevent="deleteRow(scope.$index, inServForm.infiledList)"
+                      type="success"
+                    >删除</el-button>
+                  </template>
+                </el-table-column>
               </el-table>
             </template>
           </el-form>
@@ -166,7 +152,7 @@
         </div>
         <div class="btns">
           <el-button type="primary">保存</el-button>
-          <el-button type="success" @click="resetForm('inServForm.infiledList')">重置</el-button>
+          <el-button type="success" @click="resetForm()">重置</el-button>
         </div>
       </el-tab-pane>
     </el-tabs>
@@ -303,8 +289,26 @@ export default {
       return sums;
     },
 
-    resetForm(formName) {
-      this.$refs[formName].resetFields();
+    // 官网取消全选CheckBox逻辑
+    toggleSelection(rows) {
+      if (rows) {
+        rows.forEach(row => {
+          this.$refs.multipleTable.toggleRowSelection(row);
+        });
+      } else {
+        this.$refs.multipleTable.clearSelection();
+      }
+    },
+
+    // 重置
+    resetForm(rows) {
+      this.inServForm.infiledList.map((v, i) => {
+        v.select1 = "型号1";
+        v.input1 = "瓶";
+        v.input2 = "100";
+        v.input3 = "100";
+      });
+      this.toggleSelection();
     }
   }
 };
