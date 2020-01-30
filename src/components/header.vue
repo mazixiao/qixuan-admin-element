@@ -5,15 +5,14 @@
 <template>
   <div class="header">
     <el-scrollbar style="height: 100%;overflow-x:hidden">
-    <a class="logo-wrap" href="/">
-      <img class="logo" src="../assets/img/logo.png" alt="">
-      <span>码+服务云平台</span>
-    </a>
-    <!-- :default-active="activeIndex" -->
+      <a class="logo-wrap" href="/">
+        <img class="logo" src="../assets/img/logo.png" alt />
+        <span>码+服务云平台</span>
+      </a>
+      <!-- :default-active="$route.path" -->
       <el-menu
         router
-        
-        :default-active="$route.path"
+        :default-active="checkPath()"
         class="el-menu-demo"
         mode="vertical"
         :unique-opened="true"
@@ -27,11 +26,11 @@
             :key="item.label"
           >
             <template slot="title">
-                <div class="img-wrap">
-                  <img :src="item.icon" alt="">
-                </div>
-                {{item.label}}11
-              </template>
+              <div class="img-wrap">
+                <img :src="item.icon" alt />
+              </div>
+              {{item.label}}11
+            </template>
             <!-- 二级 -->
             <template v-for="list in item.children">
               <el-submenu
@@ -45,9 +44,8 @@
                   v-for="list3 in list.children"
                   :index="list3.path"
                   :key="list3.label"
-                >
-                  {{list3.label}}33
-                </el-menu-item>
+                  v-if="list3.hide==undefined"
+                >{{list3.label}}33</el-menu-item>
               </el-submenu>
               <!-- 二级无下拉 -->
               <el-menu-item v-else :index="list.path" :key="list.label">{{list.label}}22</el-menu-item>
@@ -56,7 +54,7 @@
           <!-- 一级无下拉 -->
           <el-menu-item v-else :index="item.path" :key="item.label">
             <div class="img-wrap">
-              <img :src="item.icon" alt="">
+              <img :src="item.icon" alt />
             </div>
             {{item.label}}11
           </el-menu-item>
@@ -67,46 +65,42 @@
         <span class="copyRight-text">Copyright◎2019-2025</span>
         <a class="copyRight-link" href="javascript:;">上海齐炫信息科技有限公司</a>
       </div>
-
     </el-scrollbar>
   </div>
 </template>
 
 
 <script>
-import icon1 from '../assets/img/nav-icon1.png';
-import icon2 from '../assets/img/nav-icon2.png';
-import icon3 from '../assets/img/nav-icon3.png';
-import icon4 from '../assets/img/nav-icon4.png';
-import icon5 from '../assets/img/nav-icon5.png';
-import icon6 from '../assets/img/nav-icon6.png';
-import icon7 from '../assets/img/nav-icon7.png';
-import icon8 from '../assets/img/nav-icon8.png';
+import icon1 from "../assets/img/nav-icon1.png";
+import icon2 from "../assets/img/nav-icon2.png";
+import icon3 from "../assets/img/nav-icon3.png";
+import icon4 from "../assets/img/nav-icon4.png";
+import icon5 from "../assets/img/nav-icon5.png";
+import icon6 from "../assets/img/nav-icon6.png";
+import icon7 from "../assets/img/nav-icon7.png";
+import icon8 from "../assets/img/nav-icon8.png";
 
 export default {
   name: "commonHeader",
   data() {
-
     return {
       // // 导航默认高亮
       activeIndex: "2-1-1",
       // //   导航第二个默认展开
       openeds: ["2", "2-1", "2-1-1"],
-          num: 0,
-
+      num: 0,
 
       // 导航默认高亮
       // activeIndex: "0",
       //   导航第二个默认展开
       // openeds: ["0"],
 
-
       menu: [
         {
           value: "0",
           label: "首页",
           icon: icon1,
-          path: '/',
+          path: "/"
         },
 
         {
@@ -117,17 +111,17 @@ export default {
             {
               value: "1-1",
               label: "订单数据分析",
-              path: '/overview/orderForm',
+              path: "/overview/orderForm"
             },
             {
               value: "1-2",
               label: "防伪数据分析",
-              path: '/overview/user',
+              path: "/overview/user"
             },
             {
               value: "1-3",
               label: "营销数据分析",
-              path: '/overview/marketing',
+              path: "/overview/marketing"
             }
           ]
         },
@@ -143,29 +137,31 @@ export default {
                 {
                   value: "2-1-1",
                   label: "生码规则",
-                  path: '/printing/rawCode/rule',
+                  path: "/printing/rawCode/rule"
+
                   //  path: `/printing/rawCode/rule/:${this.activeIndex}`,
                 },
-                // {
-                //   value: "2-1-3",
-                //   label: "新增客户生码规则",
-                //   path: '/printing/rawCode/ruleAdd',
-                // },
+                {
+                  value: "2-1-3",
+                  label: "新增客户生码规则",
+                  path: "/printing/rawCode/ruleAdd",
+                  hide: true
+                },
 
                 {
                   value: "2-1-2",
                   label: "生码订单",
-                  path: '/printing/rawCode/orde',
-                },
+                  path: "/printing/rawCode/orde"
+                }
               ]
-            },
+            }
           ]
         },
         {
           value: "3",
           label: "生产管理",
           icon: icon3,
-          path: '/product/product',
+          path: "/product/product"
           // children: [
           //   {
           //     value: "3-1",
@@ -196,25 +192,25 @@ export default {
           children: [
             {
               value: "4-1-1",
-              label: "防伪页面管理",
+              label: "防伪页面管理"
             },
             {
               value: "4-1-2",
-              label: "追溯页面管理",
+              label: "追溯页面管理"
             },
             {
               value: "4-1-3",
-              label: "红包页面管理",
+              label: "红包页面管理"
             },
             {
               value: "4-1-4",
-              label: "积分商城页面设置",
+              label: "积分商城页面设置"
             },
             {
               value: "4-1-5",
-              label: "其他页面管理",
-            },
-          ],
+              label: "其他页面管理"
+            }
+          ]
         },
         {
           value: "5",
@@ -223,42 +219,42 @@ export default {
           children: [
             {
               value: "5-1-1",
-              label: "企业管理",
+              label: "企业管理"
             },
             {
               value: "5-1-2",
-              label: "工厂管理",
+              label: "工厂管理"
             },
             {
               value: "5-1-3",
-              label: "仓库站点管理",
+              label: "仓库站点管理"
             },
             {
               value: "5-1-4",
-              label: "供应商管理",
+              label: "供应商管理"
             },
             {
               value: "5-1-5",
-              label: "物料清单",
+              label: "物料清单"
             },
             {
               value: "5-1-6",
-              label: "客户管理",
+              label: "客户管理"
             },
             {
               value: "5-1-7",
-              label: "产品BOM清单",
-            },
+              label: "产品BOM清单"
+            }
           ]
         },
         {
           value: "6",
           label: "智能营销",
-          icon: icon6, 
+          icon: icon6,
           children: [
             {
               value: "6-1",
-              label: "促销活动",
+              label: "促销活动"
             },
             {
               value: "6-2",
@@ -266,22 +262,22 @@ export default {
               children: [
                 {
                   value: "6-1-1",
-                  label: "商品发布管理",
+                  label: "商品发布管理"
                 },
                 {
                   value: "6-1-2",
-                  label: "商品交易管理",
+                  label: "商品交易管理"
                 },
                 {
                   value: "6-1-3",
-                  label: "商品发货管理",
+                  label: "商品发货管理"
                 },
                 {
                   value: "6-1-4",
-                  label: "仓库里的宝贝",
-                },
+                  label: "仓库里的宝贝"
+                }
               ]
-            },
+            }
           ]
         },
         {
@@ -291,7 +287,7 @@ export default {
           children: [
             {
               value: "7-1",
-              label: "订单管理",
+              label: "订单管理"
             },
             {
               value: "7-2",
@@ -299,20 +295,20 @@ export default {
               children: [
                 {
                   value: "7-2-1",
-                  label: "收货计划管理",
+                  label: "收货计划管理"
                 },
                 {
                   value: "7-2-2",
-                  label: "新建收货计划",
+                  label: "新建收货计划"
                 },
                 {
                   value: "7-2-3",
-                  label: "收货产品明细查询",
+                  label: "收货产品明细查询"
                 },
                 {
                   value: "7-2-4",
-                  label: "收货条码明细查询",
-                },
+                  label: "收货条码明细查询"
+                }
               ]
             },
             {
@@ -321,18 +317,18 @@ export default {
               children: [
                 {
                   value: "7-3-1",
-                  label: "产品库存查询",
+                  label: "产品库存查询"
                 },
                 {
                   value: "7-3-2",
-                  label: "条码库存查询",
+                  label: "条码库存查询"
                 },
                 {
                   value: "7-3-3",
-                  label: "库存盘点",
-                },
+                  label: "库存盘点"
+                }
               ]
-            }             
+            }
           ]
         },
         {
@@ -346,16 +342,12 @@ export default {
               children: [
                 {
                   value: "8-1-1",
-                  label: "防伪查询明细",
+                  label: "防伪查询明细"
                 }
               ]
-            },
+            }
           ]
-        },
-
-
-
-
+        }
       ]
     };
   },
@@ -365,10 +357,18 @@ export default {
   },
   methods: {
     handleSelect(key, keyPath) {},
+
     changeCity(v) {
       console.log(v);
     },
-  
+    checkPath() {
+      if (this.$route.path == "/printing/rawCode/ruleAdd/123") {
+        return "/printing/rawCode/rule";
+      } else if (this.$route.path == "/printing/rawCode/orderAdd/123") {
+        return "/printing/rawCode/orde";
+      }
+      return this.$route.path;
+    },
 
     handleOpen(key, keyPath) {
       console.log(key, keyPath);
@@ -382,8 +382,6 @@ export default {
 
 
 <style lang="scss">
-
-
 .header {
   z-index: 10;
   position: fixed;
@@ -410,7 +408,6 @@ export default {
       width: 100%;
     }
   }
-
 
   .logo-wrap {
     text-align: center;
@@ -455,29 +452,25 @@ export default {
     }
   }
 
-.copyRight {
-	padding-left: 29px;
-	padding-right: 10px;
-	padding-top: 50px;
-  padding-bottom: 20px;
-  text-align: left;
-  .copyRight-text {
-    display: inline-block;
-    font-size: 12px;
-    line-height: 24px;
-    color: #fff;	
+  .copyRight {
+    padding-left: 29px;
+    padding-right: 10px;
+    padding-top: 50px;
+    padding-bottom: 20px;
+    text-align: left;
+    .copyRight-text {
+      display: inline-block;
+      font-size: 12px;
+      line-height: 24px;
+      color: #fff;
+    }
+    .copyRight-link {
+      display: inline-block;
+      font-size: 12px;
+      line-height: 24px;
+      color: #fff;
+    }
   }
-  .copyRight-link {
-    display: inline-block;
-    font-size: 12px;
-    line-height: 24px;
-    color: #fff;
-  }
-}
-
-
-
-
 }
 </style>
 

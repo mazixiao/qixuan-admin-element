@@ -7,6 +7,9 @@ import 'element-ui/lib/theme-chalk/index.css'
 import App from './App'
 import router from './router'
 
+//引入store(vuex)
+import store from './vuex'
+
 Vue.use(ElementUI)
 
 
@@ -37,7 +40,7 @@ router.beforeEach((to, from, next) => {
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
-
+  store,
   router,
   components: { App },
   template: '<App/>'
