@@ -44,7 +44,6 @@
                   v-for="list3 in list.children"
                   :index="list3.path"
                   :key="list3.label"
-                  v-if="list3.hide==undefined"
                 >{{list3.label}}33</el-menu-item>
               </el-submenu>
               <!-- 二级无下拉 -->

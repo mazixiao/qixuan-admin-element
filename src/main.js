@@ -8,7 +8,7 @@ import App from './App'
 import router from './router'
 
 //引入store(vuex)
-import store from './vuex'
+import store from './store'
 
 Vue.use(ElementUI)
 

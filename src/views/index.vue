@@ -25,7 +25,14 @@
         name: "index",
         components: {
             commonHeader
-        }
+        },
+
+
+  created() {
+    console.log(this.$store.state, "this.$store.state.");
+
+  },
+
     }
 </script>
 

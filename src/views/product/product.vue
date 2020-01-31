@@ -4,11 +4,33 @@
     <commonHeader></commonHeader>
     <el-tabs v-model="activeName" class="common-tab">
       <el-tab-pane label="生产管理" name="first">
-        <p>{{ count }}</p>
-        <p>
-          <button @click="increment">+</button>
-          <button @click="decrement">-</button>
-        </p>
+        <div>
+          <p>mutations 操作:</p>
+          <p>直接获取的值: {{this.$store.state.count}}</p>
+          <p>从getters获取计算后的值: {{this.$store.getters.getStateCount}}</p>
+          <p>从computed获取的值: {{count}}</p>
+
+          <p>
+            <button @click="add">+</button>
+            <button @click="reduce">-</button>
+          </p>
+        </div>
+
+        <br />
+        <br />
+        <br />
+
+        <div>
+          <p>Action 操作:</p>
+          <p>直接获取的值: {{this.$store.state.count1}}</p>
+          <p>从getters获取计算后的值: {{this.$store.getters.getStateCount1}}</p>
+          <p>从computed获取的值: {{count1}}</p>
+
+          <p>
+            <button @click="add1">+</button>
+            <button @click="reduce1">-</button>
+          </p>
+        </div>
       </el-tab-pane>
     </el-tabs>
   </div>
@@ -29,22 +51,39 @@ export default {
       activeName: "first"
     };
   },
-
   computed: {
     count() {
-      return store.state.count;
+      return this.$store.state.count;
+    },
+    count1() {
+      return this.$store.state.count1;
     }
+
+
   },
 
   created() {},
 
   methods: {
-    increment() {
-      store.commit("increment");
+    add() {
+      this.$store.commit("add", {
+        num: 10
+      });
     },
-    decrement() {
-      store.commit("decrement");
-    }
+    reduce() {
+      this.$store.commit("reduce");
+    },
+
+    add1() {
+      // dispatch  派遣
+      this.$store.dispatch("add1");
+    },
+    reduce1() {
+      this.$store.dispatch("reduce1");
+    },
+
+
+
   }
 };
 </script>
