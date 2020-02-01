@@ -31,6 +31,12 @@
             <button @click="reduce1">-</button>
           </p>
         </div>
+        <br />
+        <br />
+        <br />
+        <div>
+          <!-- {{count2}} -->
+        </div>
       </el-tab-pane>
     </el-tabs>
   </div>
@@ -39,6 +45,7 @@
 
 <script>
 import commonHeader from "../../components/header";
+import { mapState, mapActions, mapGetters } from "vuex";
 
 export default {
   name: "product",
@@ -52,14 +59,20 @@ export default {
     };
   },
   computed: {
-    count() {
-      return this.$store.state.count;
-    },
-    count1() {
-      return this.$store.state.count1;
-    }
+    // count() {
+    //   return this.$store.state.count;
+    // },
+    // count1() {
+    //   return this.$store.state.count1;
+    // },
 
+    // ...mapState({
+    //   count: state => state.count,
+    //   count1: state => state.count1
+    // }),
 
+    // 上面注释的简写(2种方式)
+    ...mapState(["count", "count1"])
   },
 
   created() {},
@@ -74,16 +87,19 @@ export default {
       this.$store.commit("reduce");
     },
 
-    add1() {
-      // dispatch  派遣
-      this.$store.dispatch("add1");
-    },
-    reduce1() {
-      this.$store.dispatch("reduce1");
-    },
+    // add1() {
+    //   // dispatch  派遣
+    //   this.$store.dispatch("add1");
+    // },
+    // reduce1() {
+    //   this.$store.dispatch("reduce1");
+    // },
 
-
-
+    // 上面注释的简写
+    ...mapActions({
+      add1: "add1",
+      reduce1: "reduce1"
+    })
   }
 };
 </script>

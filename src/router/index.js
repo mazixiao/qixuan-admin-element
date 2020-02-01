@@ -26,6 +26,9 @@ import printingRawCodeOrdeAdd from '@/views/printing/rawCode/orderAdd'
 // 生产管理(测试用)
 import product from '@/views/product/product'
 
+// 手机页面设置
+import mobileAntiFake from '@/views/mobile/antiFake'
+
 Vue.use(Router)
 
 export default new Router({
@@ -66,7 +69,7 @@ export default new Router({
 			path: '/printing/rawCode/rule',
 			name: 'printingRawCodeRule',
 			component: printingRawCodeRule,
-			props:true,
+			props: true,
 			value: "100",
 			meta: {
 				title: '生码规则'
@@ -106,8 +109,14 @@ export default new Router({
 			},
 		},
 
-		
-
+		{
+			path: '/mobile/antiFake',
+			name: 'mobileAntiFake',
+			component: mobileAntiFake,
+			meta: {
+				title: '防伪页面管理'
+			},
+		}
 
 
 	],

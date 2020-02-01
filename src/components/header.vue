@@ -140,12 +140,12 @@ export default {
 
                   //  path: `/printing/rawCode/rule/:${this.activeIndex}`,
                 },
-                {
-                  value: "2-1-3",
-                  label: "新增客户生码规则",
-                  path: "/printing/rawCode/ruleAdd",
-                  hide: true
-                },
+                // {
+                //   value: "2-1-3",
+                //   label: "新增客户生码规则",
+                //   path: "/printing/rawCode/ruleAdd",
+                //   hide: true
+                // },
 
                 {
                   value: "2-1-2",
@@ -191,7 +191,9 @@ export default {
           children: [
             {
               value: "4-1-1",
-              label: "防伪页面管理"
+              label: "防伪页面管理",
+              path: "/mobile/antiFake"
+              
             },
             {
               value: "4-1-2",

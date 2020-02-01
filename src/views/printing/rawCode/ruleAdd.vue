@@ -336,7 +336,7 @@ export default {
             input3: "http://120.27.163.70/",
             input4: "12",
             input5: "内包装码",
-            checked1: true,
+            checked1: false,
             select1: "明码 + 无验证码",
             select2: "明码 + 验证码",
           },

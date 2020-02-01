@@ -4,6 +4,9 @@
     <commonHeader></commonHeader>
     <el-tabs v-model="activeName" class="common-tab">
       <el-tab-pane label="新增生码订单" name="first">
+
+<!-- el-row -->
+
         <el-form class="layui-form1 clearfix" :gutter="20" :model="formArr">
           <el-col :span="6">
             <el-form-item label="*生码企业">
@@ -308,6 +311,7 @@ export default {
         v.input2 = "100";
         v.input3 = "100";
       });
+      // 取消全选CheckBox
       this.toggleSelection();
     }
   }
