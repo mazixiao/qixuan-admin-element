@@ -29,6 +29,13 @@ import product from '@/views/product/product'
 // 手机页面设置
 import mobileAntiFake from '@/views/mobile/antiFake'
 
+
+// 基础设置
+//企业管理
+import basicsFirmManage from '@/views/basics/firmManage'
+//客户管理
+import basicsClient from '@/views/basics/client'
+
 Vue.use(Router)
 
 export default new Router({
@@ -116,7 +123,29 @@ export default new Router({
 			meta: {
 				title: '防伪页面管理'
 			},
-		}
+		},
+
+		{
+			path: '/basics/firmManage',
+			name: 'basicsFirmManage',
+			component: basicsFirmManage,
+			meta: {
+				title: '企业管理'
+			},
+		},
+
+		{
+			path: '/basics/client',
+			name: 'basicsClient',
+			component: basicsClient,
+			meta: {
+				title: '客户管理'
+			},
+		},
+
+
+		// import basicsClient from '@/views/basics/client'
+
 
 
 	],

@@ -31,13 +31,15 @@
           :file-list="fileList"
           list-type="picture"
           :limit="1"
-          :on-success="unloadSuccess"
-          :on-error="unloadError"
+          :on-success="uploadSuccess"
+          :on-error="uploadError"
+          :on-progress="uploadProgress"
+          :before-upload="beforeAvatarUpload"
         >
           <el-button size="small" type="primary">点击上传</el-button>
           <label class="size">尺寸750*860</label>
         </el-upload>
-        <img class="unload-bg" v-show="uploadBg" src="../../assets/img/unload-bg.png" alt />
+        <img class="upload-bg" v-show="uploadBg" src="../../assets/img/upload-bg.png" alt />
 
         <hr style="margin-top:20px;margin-bottom:20px" />
         <h4>防伪向导</h4>
@@ -133,16 +135,17 @@
                     :file-list="fileList"
                     list-type="picture"
                     :limit="1"
-                    :on-success="(res,file)=>{return unloadSuccess1(res,file, index)}"
-                    :on-error="unloadError"
+                    :on-success="(res,file)=>{return uploadSuccess1(res,file, index)}"
+                    :on-error="uploadError"
+                    :on-progress="uploadProgress"
                   >
                     <el-button size="small" type="primary">点击上传</el-button>
                     <label class="size">尺寸750*860</label>
                   </el-upload>
                   <img
-                    class="unload-bg"
+                    class="upload-bg"
                     v-show="item.uploadBg"
-                    src="../../assets/img/unload-bg.png"
+                    src="../../assets/img/upload-bg.png"
                     alt
                   />
                 </el-col>
@@ -182,7 +185,7 @@ export default {
   data() {
     return {
       // tab标题默认高亮
-      activeName: "three",
+      activeName: "one",
       // 编辑器
       content0: `<p>请编辑内容00</p>`,
       content1: `<p>请编辑内容11</p>`,
@@ -249,6 +252,26 @@ export default {
       console.log(index, "index");
       this.uploadBg = !this.uploadBg;
     },
+
+      beforeAvatarUpload(file) {
+        const isJPG = file.type === 'image/jpeg';
+        const isLt2M = file.size / 1024 / 1024 < 0.5;
+        console.log(file.size, "isLt2MisLt2M");
+
+        if (!isJPG) {
+          this.$message.error('上传头像图片只能是 JPG 格式!');
+          this.uploadBg = !this.uploadBg;
+        }
+        if (!isLt2M) {
+          this.$message.error('上传头像图片大小不能超过 0.5MB!');
+          this.uploadBg = !this.uploadBg;
+        }
+        return isJPG && isLt2M;
+      },
+
+
+
+
     handleRemove1(res, file, index) {
       console.log(res, "res");
       console.log(file, "file");
@@ -259,7 +282,7 @@ export default {
     handlePreview(file) {
       console.log(file, "file");
     },
-    unloadSuccess(res, file, index) {
+    uploadSuccess(res, file, index) {
       this.uploadBg = !this.uploadBg;
       this.$message.success("上传成功");
       console.log(res, "res");
@@ -267,7 +290,7 @@ export default {
       console.log(index, "index");
     },
 
-    unloadSuccess1(res, file, index) {
+    uploadSuccess1(res, file, index) {
       this.uploadArr[index].uploadBg = !this.uploadArr[index].uploadBg;
       this.$message.success("上传成功");
       console.log(res, "res");
@@ -275,9 +298,26 @@ export default {
       console.log(index, "index");
     },
 
-    unloadError(response, file, fileList) {
+    uploadError(response, file, fileList) {
+  
       this.$message.error("上传失败");
+      console.log(response);
     },
+    uploadProgress(event, file, fileList) {
+        const loading = this.$loading({
+          lock: true,
+          text: 'Loading',
+          spinner: 'el-icon-loading',
+          background: 'rgba(0, 0, 0, 0.1)'
+        });
+        setTimeout(() => {
+          loading.close();
+        }, 2000);
+    },
+
+    
+
+
     // 新增input(产品详情内容编辑)
     addInput() {
       this.formArr.add.push({
@@ -341,7 +381,7 @@ export default {
     }
   }
 }
-.unload-bg {
+.upload-bg {
   margin-top: 10px;
 }
 

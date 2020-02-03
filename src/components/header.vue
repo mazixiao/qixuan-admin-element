@@ -195,22 +195,22 @@ export default {
               path: "/mobile/antiFake"
               
             },
-            {
-              value: "4-1-2",
-              label: "追溯页面管理"
-            },
-            {
-              value: "4-1-3",
-              label: "红包页面管理"
-            },
-            {
-              value: "4-1-4",
-              label: "积分商城页面设置"
-            },
-            {
-              value: "4-1-5",
-              label: "其他页面管理"
-            }
+            // {
+            //   value: "4-1-2",
+            //   label: "追溯页面管理"
+            // },
+            // {
+            //   value: "4-1-3",
+            //   label: "红包页面管理"
+            // },
+            // {
+            //   value: "4-1-4",
+            //   label: "积分商城页面设置"
+            // },
+            // {
+            //   value: "4-1-5",
+            //   label: "其他页面管理"
+            // }
           ]
         },
         {
@@ -220,7 +220,9 @@ export default {
           children: [
             {
               value: "5-1-1",
-              label: "企业管理"
+              label: "企业管理",
+              path: "/basics/firmManage"
+              
             },
             {
               value: "5-1-2",
@@ -240,7 +242,8 @@ export default {
             },
             {
               value: "5-1-6",
-              label: "客户管理"
+              label: "客户管理",
+              path: '/basics/client',
             },
             {
               value: "5-1-7",
