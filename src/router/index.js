@@ -33,6 +33,8 @@ import mobileAntiFake from '@/views/mobile/antiFake'
 // 基础设置
 //企业管理
 import basicsFirmManage from '@/views/basics/firmManage'
+//工厂管理
+import basicsFactoryManage from '@/views/basics/factoryManage'
 //客户管理
 import basicsClient from '@/views/basics/client'
 
@@ -133,7 +135,14 @@ export default new Router({
 				title: '企业管理'
 			},
 		},
-
+		{
+			path: '/basics/factoryManage',
+			name: 'basicsFactoryManage',
+			component: basicsFactoryManage,
+			meta: {
+				title: '工厂管理'
+			},
+		},
 		{
 			path: '/basics/client',
 			name: 'basicsClient',
@@ -144,7 +153,7 @@ export default new Router({
 		},
 
 
-		// import basicsClient from '@/views/basics/client'
+
 
 
 

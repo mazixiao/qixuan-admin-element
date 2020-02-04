@@ -4,198 +4,134 @@
     <commonHeader></commonHeader>
 
     <el-tabs v-model="activeName" @tab-click="handleClick" class="common-tab">
-      <el-tab-pane label="新增企业客户" name="one">
+      <el-tab-pane label="新增送货地" name="one">
         <el-form class="layui-form1 clearfix" :gutter="20" :model="formArr">
-          <el-col :span="6">
-            <el-form-item label="企业名称" required>
-              <el-input v-model="formArr.input1" placeholder="企业名称"></el-input>
-            </el-form-item>
-          </el-col>
-          <el-col :span="6">
-            <el-form-item label="企业编号" required>
-              <el-input v-model="formArr.input2" placeholder="企业编号"></el-input>
-            </el-form-item>
-          </el-col>
-          <el-col :span="6">
-            <el-form-item label="企业简称" required>
-              <el-input v-model="formArr.input3" placeholder="企业简称"></el-input>
-            </el-form-item>
-          </el-col>
-          <el-col :span="6">
-            <el-form-item label="行业" required>
-              <el-select class="w100" v-model="formArr.select1" placeholder="请选择">
-                <el-option label="润滑油" value="润滑油"></el-option>
-                <el-option label="润滑油2" value="润滑油2"></el-option>
-                <el-option label="release" value="release" disabled></el-option>
-              </el-select>
-            </el-form-item>
-          </el-col>
-
-
-          <el-col :span="24">
-            <el-form-item label="企业地址" required>
-              <el-col :span="3">
-                <el-form-item>
-                  <el-select class="w100" v-model="formArr.provinces[0].country" placeholder="请选择">
-                    <el-option label="中国大陆" value="中国大陆"></el-option>
-                    <el-option label="其他" value="其他"></el-option>
-                  </el-select>
+          <el-form-item class="item" v-for="(item, index) in formArr.formCon" :key="index">
+            <el-col :span="20" class="btns">
+              <el-button type="primary">送货地 {{index + 1}}</el-button>
+              <el-button type="success" size="small" class="fr" @click="removeSite(index)">
+                <i class="el-icon-delete"></i>
+                删除
+              </el-button>
+            </el-col>
+            <el-form-item class="item-con">
+              <el-col :span="6">
+                <el-form-item label="企业名称" required>
+                  <el-input v-model="formArr.formCon[index].input1" placeholder="企业名称"></el-input>
                 </el-form-item>
               </el-col>
-
-              <el-col :span="4">
-                <el-form-item>
+              <el-col :span="6">
+                <el-form-item label="企业编号" required>
+                  <el-input v-model="formArr.formCon[index].input2" placeholder="企业编号"></el-input>
+                </el-form-item>
+              </el-col>
+              <el-col :span="6">
+                <el-form-item label="企业简称" required>
+                  <el-input v-model="formArr.formCon[index].input3" placeholder="企业简称"></el-input>
+                </el-form-item>
+              </el-col>
+              <el-col :span="6">
+                <el-form-item label="行业" required>
                   <el-select
-                    v-model="formArr.provinces[0].selectProvince"
-                    filterable
-                    @change="selectProvinceFun($event, 0)"
-                    placeholder="请选择省份"
+                    class="w100"
+                    v-model="formArr.formCon[index].select1"
+                    placeholder="请选择"
                   >
-                    <el-option value label="请选择省份"></el-option>
-                    <el-option
-                      :value="item"
-                      :label="item.label"
-                      v-for="(item, index) in formArr.provinces[0].city"
-                      :key="index"
-                    ></el-option>
+                    <el-option label="润滑油" value="润滑油"></el-option>
+                    <el-option label="润滑油2" value="润滑油2"></el-option>
+                    <el-option label="release" value="release" disabled></el-option>
                   </el-select>
                 </el-form-item>
               </el-col>
 
-              <el-col :span="4">
-                <el-form-item>
-                  <el-select
-                    v-model="formArr.provinces[0].selectCity"
-                    filterable
-                    @change="selectCityFun($event, 0)"
-                    placeholder="请选择城市"
-                  >
-                    <el-option value label="请选择城市"></el-option>
-                    <el-option
-                      :value="item"
-                      :label="item.label"
-                      v-for="(item, index) in formArr.provinces[0].cityList"
-                      :key="index"
-                    ></el-option>
-                  </el-select>
-                </el-form-item>
-              </el-col>
+              <el-col :span="24">
+                <el-form-item label="企业地址" required>
+                  <el-col :span="3">
+                    <el-form-item>
+                      <el-select
+                        class="w100"
+                        v-model="formArr.formCon[index].country"
+                        placeholder="请选择"
+                      >
+                        <el-option label="中国大陆" value="中国大陆"></el-option>
+                        <el-option label="其他" value="其他"></el-option>
+                      </el-select>
+                    </el-form-item>
+                  </el-col>
 
-              <el-col :span="4">
-                <el-form-item>
-                  <el-select
-                    v-model="formArr.provinces[0].selectArea"
-                    filterable
-                    @change="selectAreaFun($event, 0)"
-                    placeholder="请选择区县"
-                  >
-                    <el-option value label="请选择区县"></el-option>
-                    <el-option
-                      :value="item"
-                      :label="item.label"
-                      v-for="(item, index) in formArr.provinces[0].areaList"
-                      :key="index"
-                    ></el-option>
-                  </el-select>
-                </el-form-item>
-              </el-col>
+                  <el-col :span="4">
+                    <el-form-item>
+                      <el-select
+                        v-model="formArr.formCon[index].selectProvince"
+                        filterable
+                        @change="selectProvinceFun($event, index)"
+                        placeholder="请选择省份"
+                      >
+                        <el-option value label="请选择省份"></el-option>
+                        <el-option
+                          :value="item"
+                          :label="item.label"
+                          v-for="(item, index) in formArr.formCon[index].city"
+                          :key="index"
+                        ></el-option>
+                      </el-select>
+                    </el-form-item>
+                  </el-col>
 
-              <el-col :span="9">
-                <el-form-item label>
-                  <el-input v-model="formArr.provinces[0].detail" placeholder="具体地址"></el-input>
-                </el-form-item>
-              </el-col>
-            </el-form-item>
-          </el-col>
+                  <el-col :span="4">
+                    <el-form-item>
+                      <el-select
+                        v-model="formArr.formCon[index].selectCity"
+                        filterable
+                        @change="selectCityFun($event, index)"
+                        placeholder="请选择城市"
+                      >
+                        <el-option value label="请选择城市"></el-option>
+                        <el-option
+                          :value="item"
+                          :label="item.label"
+                          v-for="(item, index) in formArr.formCon[index].cityList"
+                          :key="index"
+                        ></el-option>
+                      </el-select>
+                    </el-form-item>
+                  </el-col>
 
-<!--------------------------------------- -->
-          <el-col :span="24">
-            <el-form-item label="企业地址" required>
-              <el-col :span="3">
-                <el-form-item>
-                  <el-select class="w100" v-model="formArr.provinces[1].country" placeholder="请选择">
-                    <el-option label="中国大陆" value="中国大陆"></el-option>
-                    <el-option label="其他" value="其他"></el-option>
-                  </el-select>
-                </el-form-item>
-              </el-col>
+                  <el-col :span="4">
+                    <el-form-item>
+                      <el-select
+                        v-model="formArr.formCon[index].selectArea"
+                        filterable
+                        @change="selectAreaFun($event, index)"
+                        placeholder="请选择区县"
+                      >
+                        <el-option value label="请选择区县"></el-option>
+                        <el-option
+                          :value="item"
+                          :label="item.label"
+                          v-for="(item, index) in formArr.formCon[index].areaList"
+                          :key="index"
+                        ></el-option>
+                      </el-select>
+                    </el-form-item>
+                  </el-col>
 
-              <el-col :span="4">
-                <el-form-item>
-                  <el-select
-                    v-model="formArr.provinces[1].selectProvince"
-                    filterable
-                    @change="selectProvinceFun($event, 1)"
-                    placeholder="请选择省份"
-                  >
-                    <el-option value label="请选择省份"></el-option>
-                    <el-option
-                      :value="item"
-                      :label="item.label"
-                      v-for="(item, index) in formArr.provinces[1].city"
-                      :key="index"
-                    ></el-option>
-                  </el-select>
-                </el-form-item>
-              </el-col>
-
-              <el-col :span="4">
-                <el-form-item>
-                  <el-select
-                    v-model="formArr.provinces[1].selectCity"
-                    filterable
-                    @change="selectCityFun($event, 1)"
-                    placeholder="请选择城市"
-                  >
-                    <el-option value label="请选择城市"></el-option>
-                    <el-option
-                      :value="item"
-                      :label="item.label"
-                      v-for="(item, index) in formArr.provinces[1].cityList"
-                      :key="index"
-                    ></el-option>
-                  </el-select>
-                </el-form-item>
-              </el-col>
-
-              <el-col :span="4">
-                <el-form-item>
-                  <el-select
-                    v-model="formArr.provinces[1].selectArea"
-                    filterable
-                    @change="selectAreaFun($event, 1)"
-                    placeholder="请选择区县"
-                  >
-                    <el-option value label="请选择区县"></el-option>
-                    <el-option
-                      :value="item"
-                      :label="item.label"
-                      v-for="(item, index) in formArr.provinces[1].areaList"
-                      :key="index"
-                    ></el-option>
-                  </el-select>
-                </el-form-item>
-              </el-col>
-
-              <el-col :span="9">
-                <el-form-item label>
-                  <el-input v-model="formArr.provinces[1].detail" placeholder="具体地址"></el-input>
+                  <el-col :span="9">
+                    <el-form-item label>
+                      <el-input v-model="formArr.formCon[index].detail" placeholder="具体地址"></el-input>
+                    </el-form-item>
+                  </el-col>
                 </el-form-item>
               </el-col>
             </el-form-item>
-          </el-col>
-
-
-          <el-col :span="20" class="btns">
-            <el-button @click="derive" type="success">获取选中数据</el-button>
-          </el-col>
+          </el-form-item>
         </el-form>
-
-        <el-tabs v-model="activeName1">
-          <el-tab-pane label="基础信息" name="first">基础信息内容</el-tab-pane>
-          <el-tab-pane label=" 模块配置" name="second">模块配置内容</el-tab-pane>
-          <el-tab-pane label="系统参数" name="third">系统参数内容</el-tab-pane>
-        </el-tabs>
+        <el-col :span="20" class="btns">
+          <el-button type="success" @click="addSite">
+            <i class="el-icon-plus"></i>
+            新增送货地址
+          </el-button>
+        </el-col>
       </el-tab-pane>
     </el-tabs>
   </div>
@@ -215,40 +151,14 @@ export default {
     return {
       // tab标题默认高亮
       activeName: "one",
-      activeName1: "first",
-      // 编辑器
-      content0: `<p>请编辑内容00</p>`,
-      content1: `<p>请编辑内容11</p>`,
-      content2: `<p>请编辑内容22</p>`,
-      editorOption: {
-        theme: "snow"
-      },
-      // 上传
-      dialogImageUrl: "",
-      dialogVisible: false,
-      fileList: [],
-      uploadBg: true,
 
       formArr: {
-        input1: "",
-        input2: "",
-        input3: "",
-        select1: "",
-        provinces: [
+        formCon: [
           {
-            country: "",
-            // 整个省市县数据
-            city: city,
-            // 被选中的市数据
-            cityList: [],
-            // 被选中的县数据
-            areaList: [],
-            selectProvince: {},
-            selectCity: {},
-            selectArea: {},
-            detail: ""
-          },
-          {
+            input1: "",
+            input2: "",
+            input3: "",
+            select1: "",
             country: "",
             // 整个省市县数据
             city: city,
@@ -266,11 +176,7 @@ export default {
     };
   },
 
-  computed: {
-    editor() {
-      return this.$refs.myQuillEditor.quill;
-    }
-  },
+  computed: {},
 
   created() {},
 
@@ -284,53 +190,47 @@ export default {
     selectProvinceFun(event, index) {
       console.log(event.label);
       if (event) {
-        this.formArr.provinces[index].cityList = event.children;
-        this.formArr.provinces[index].selectArea = {};
+        this.formArr.formCon[index].cityList = event.children;
+        this.formArr.formCon[index].selectArea = {};
       } else {
-        this.formArr.provinces[index].cityList = [];
+        this.formArr.formCon[index].cityList = [];
       }
-      this.formArr.provinces[index].areaList = [];
+      this.formArr.formCon[index].areaList = [];
     },
     selectCityFun(event, index) {
       console.log(event.label);
       if (event) {
-        this.formArr.provinces[index].areaList = event.children;
-        this.formArr.provinces[index].selectArea = {};
+        this.formArr.formCon[index].areaList = event.children;
+        this.formArr.formCon[index].selectArea = {};
       } else {
-        this.formArr.provinces[index].areaList = [];
+        this.formArr.formCon[index].areaList = [];
       }
     },
     selectAreaFun(event, index) {
       console.log(event.label);
     },
 
-    derive() {
-      console.log(this.formArr);
-      var date = [
-        this.formArr.input1,
-        this.formArr.input2,
-        this.formArr.input3,
-        this.formArr.select1,
-        this.formArr.provinces[0].selectProvince.label,
-        this.formArr.provinces[0].selectCity.label,
-        this.formArr.provinces[0].selectArea.label,
-        this.formArr.provinces[0].detail,
-        this.formArr.provinces[1].selectProvince.label,
-        this.formArr.provinces[1].selectCity.label,
-        this.formArr.provinces[1].selectArea.label,
-        this.formArr.provinces[1].detail,
-      ];
-      // console.log(this.formArr);
-      this.$alert(date, "导出数据", {
-        confirmButtonText: "确定",
-        closeOnClickModal: "true",
-        callback: action => {
-          this.$message({
-            type: "success",
-            message: "关闭成功"
-          });
-        }
+    addSite() {
+      this.formArr.formCon.push({
+        input1: "",
+        input2: "",
+        input3: "",
+        select1: "",
+        country: "",
+        // 整个省市县数据
+        city: city,
+        // 被选中的市数据
+        cityList: [],
+        // 被选中的县数据
+        areaList: [],
+        selectProvince: {},
+        selectCity: {},
+        selectArea: {},
+        detail: ""
       });
+    },
+    removeSite(index) {
+      this.formArr.formCon.splice(index, 1);
     }
   }
 };
@@ -339,13 +239,20 @@ export default {
   
 <style scoped lang="scss">
 .layui-form1 {
-  border: 2px solid #ccc;
-  padding-left: 44px;
-  padding-right: 44px;
-  padding-top: 20px;
-  padding-bottom: 30px;
-  margin-bottom: 40px;
-  position: relative;
+  .item {
+    position: relative;
+    padding-right: 0;
+    .item-con {
+      border: 2px solid #ccc;
+      padding-left: 44px;
+      padding-right: 44px;
+      padding-top: 20px;
+      padding-bottom: 0;
+      margin-bottom: 0;
+      position: relative;
+      // padding-right: 0;
+    }
+  }
 }
 
 /deep/ {

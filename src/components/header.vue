@@ -226,29 +226,30 @@ export default {
             },
             {
               value: "5-1-2",
-              label: "工厂管理"
+              label: "工厂管理",
+              path: "/basics/factoryManage"
             },
-            {
-              value: "5-1-3",
-              label: "仓库站点管理"
-            },
-            {
-              value: "5-1-4",
-              label: "供应商管理"
-            },
-            {
-              value: "5-1-5",
-              label: "物料清单"
-            },
+            // {
+            //   value: "5-1-3",
+            //   label: "仓库站点管理"
+            // },
+            // {
+            //   value: "5-1-4",
+            //   label: "供应商管理"
+            // },
+            // {
+            //   value: "5-1-5",
+            //   label: "物料清单"
+            // },
             {
               value: "5-1-6",
               label: "客户管理",
               path: '/basics/client',
             },
-            {
-              value: "5-1-7",
-              label: "产品BOM清单"
-            }
+            // {
+            //   value: "5-1-7",
+            //   label: "产品BOM清单"
+            // }
           ]
         },
         {

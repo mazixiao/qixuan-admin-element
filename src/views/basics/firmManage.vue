@@ -116,6 +116,12 @@
             <el-tab-pane label=" 模块配置" name="second">模块配置内容</el-tab-pane>
             <el-tab-pane label="系统参数" name="third">系统参数内容</el-tab-pane>
         </el-tabs>
+
+        <el-col :span="24" class="btns">
+          <el-button type="primary">保存</el-button>
+          <el-button type="success">取消</el-button>
+        </el-col>
+
       </el-tab-pane>
     </el-tabs>
   </div>
