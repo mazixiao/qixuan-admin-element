@@ -26,24 +26,24 @@
         </el-row>
 
         <div class="form-parent">
-          <div class="item">
+          <div class="item" v-for="(item, index) in formArr" :key="index">
             <el-row class="item-tit" type="flex" justify="space-between">
-              <h4>生码规则1</h4>
-              <el-button size="mini" type="primary">
+              <h4>生码规则{{index + 1}}</h4>
+              <el-button size="mini" type="primary" @click="removeForm(index)">
                 <i class="el-icon-delete"></i>
                 删除
               </el-button>
             </el-row>
 
-            <el-form :gutter="20" :inline="true" :model="formArr[0].top" class="inputs clearfix">
+            <el-form :gutter="20" :inline="true" :model="item.top" class="inputs clearfix">
               <el-col :span="7">
                 <el-form-item label="规则编号">
-                  <el-input v-model="formArr[0].top.input1" placeholder="规则编号"></el-input>
+                  <el-input v-model="item.top.input1" placeholder="规则编号"></el-input>
                 </el-form-item>
               </el-col>
               <el-col :span="7">
                 <el-form-item label="类别">
-                  <el-select v-model="formArr[0].top.select1" placeholder="类别">
+                  <el-select v-model="item.top.select1" placeholder="类别">
                     <el-option label="5001-上海南极人服装有限公司" value="5001-上海南极人服装有限公司"></el-option>
                     <el-option label="5001-上海南极人服装有限公司2" value="5001-上海南极人服装有限公司2"></el-option>
                   </el-select>
@@ -51,153 +51,20 @@
               </el-col>
               <el-col :span="3">
                 <el-form-item label="包装级别">
-                  <el-select v-model="formArr[0].top.select2" placeholder="包装级别">
+                  <el-select v-model="item.top.select2" placeholder="包装级别" @change="changeValue1">
                     <el-option label="1级" value="1级"></el-option>
                     <el-option label="2级" value="2级"></el-option>
                     <el-option label="3级" value="3级"></el-option>
                   </el-select>
+                  {{item.top.select2}}
                 </el-form-item>
               </el-col>
               <el-col :span="7">
                 <el-form-item label="套码规则名称">
-                  <el-input v-model="formArr[0].top.input2" placeholder="系统自动生成"></el-input>
+                  <el-input v-model="item.top.input2" placeholder="系统自动生成"></el-input>
                 </el-form-item>
               </el-col>
             </el-form>
-            <div class="table1-parent static-table-parent">
-              <table>
-                <thead>
-                  <tr>
-                    <th width="110">行号</th>
-                    <th width="110">包装单位</th>
-                    <th width="75">物流码</th>
-                    <th width="200">防伪码</th>
-                    <th width="200">有无红包</th>
-                    <th width="300">防伪网址</th>
-                    <th width="300">营销网址</th>
-                    <th width="108">包装数</th>
-                    <th width="150">备注说明</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>1</td>
-                    <td><el-input v-model="formArr[0].item1.input1" placeholder="瓶"></el-input></td>
-                    <td><el-checkbox v-model="formArr[0].item1.checked1"></el-checkbox></td>
-                    <td>  
-                      <el-select v-model="formArr[0].item1.select1" placeholder="请选择">
-                        <el-option label="明码 + 无验证码" value="明码 + 无验证码"></el-option>
-                        <el-option label="明码 + 验证码" value="明码 + 验证码"></el-option>
-                        <el-option label="暗码 + 无验证码" value="暗码 + 无验证码"></el-option>
-                        <el-option label="无防伪" value="无防伪"></el-option>
-                      </el-select>
-                    </td>
-                    <td>
-                      <el-select v-model="formArr[0].item1.select2" placeholder="请选择">
-                        <el-option label="明码 + 无验证码" value="明码 + 无验证码"></el-option>
-                        <el-option label="明码 + 验证码" value="明码 + 验证码"></el-option>
-                        <el-option label="暗码 + 无验证码" value="暗码 + 无验证码"></el-option>
-                        <el-option label="无防伪" value="无防伪"></el-option>
-                      </el-select>
-                    </td>
-                    <td><el-input v-model="formArr[0].item1.input2" placeholder="http://120.27.163.70/"></el-input></td>
-                    <td><el-input v-model="formArr[0].item1.input3" placeholder="http://120.27.163.70/"></el-input></td>
-                    <td><el-input v-model="formArr[0].item1.input4" placeholder="12"></el-input></td>
-                    <td><el-input v-model="formArr[0].item1.input5" placeholder="内包装码"></el-input></td>
-                  </tr>
-                  <tr>
-                    <td>2</td>
-                    <td><el-input v-model="formArr[0].item2.input1" placeholder="瓶"></el-input></td>
-                    <td><el-checkbox v-model="formArr[0].item2.checked1"></el-checkbox></td>
-                    <td>  
-                      <el-select v-model="formArr[0].item2.select1" placeholder="请选择">
-                        <el-option label="明码 + 无验证码" value="明码 + 无验证码"></el-option>
-                        <el-option label="明码 + 验证码" value="明码 + 验证码"></el-option>
-                        <el-option label="暗码 + 无验证码" value="暗码 + 无验证码"></el-option>
-                        <el-option label="无防伪" value="无防伪"></el-option>
-                      </el-select>
-                    </td>
-                    <td>
-                      <el-select v-model="formArr[0].item2.select2" placeholder="请选择">
-                        <el-option label="明码 + 无验证码" value="明码 + 无验证码"></el-option>
-                        <el-option label="明码 + 验证码" value="明码 + 验证码"></el-option>
-                        <el-option label="暗码 + 无验证码" value="暗码 + 无验证码"></el-option>
-                        <el-option label="无防伪" value="无防伪"></el-option>
-                      </el-select>
-                    </td>
-                    <td><el-input v-model="formArr[0].item2.input2" placeholder="http://120.27.163.70/"></el-input></td>
-                    <td><el-input v-model="formArr[0].item2.input3" placeholder="http://120.27.163.70/"></el-input></td>
-                    <td><el-input v-model="formArr[0].item2.input4" placeholder="12"></el-input></td>
-                    <td><el-input v-model="formArr[0].item2.input5" placeholder="内包装码"></el-input></td>
-                  </tr>
-                  <tr>
-                    <td>3</td>
-                    <td><el-input v-model="formArr[0].item3.input1" placeholder="瓶"></el-input></td>
-                    <td><el-checkbox v-model="formArr[0].item3.checked1"></el-checkbox></td>
-                    <td>  
-                      <el-select v-model="formArr[0].item3.select1" placeholder="请选择">
-                        <el-option label="明码 + 无验证码" value="明码 + 无验证码"></el-option>
-                        <el-option label="明码 + 验证码" value="明码 + 验证码"></el-option>
-                        <el-option label="暗码 + 无验证码" value="暗码 + 无验证码"></el-option>
-                        <el-option label="无防伪" value="无防伪"></el-option>
-                      </el-select>
-                    </td>
-                    <td>
-                      <el-select v-model="formArr[0].item3.select2" placeholder="请选择">
-                        <el-option label="明码 + 无验证码" value="明码 + 无验证码"></el-option>
-                        <el-option label="明码 + 验证码" value="明码 + 验证码"></el-option>
-                        <el-option label="暗码 + 无验证码" value="暗码 + 无验证码"></el-option>
-                        <el-option label="无防伪" value="无防伪"></el-option>
-                      </el-select>
-                    </td>
-                    <td><el-input v-model="formArr[0].item3.input2" placeholder="http://120.27.163.70/"></el-input></td>
-                    <td><el-input v-model="formArr[0].item3.input3" placeholder="http://120.27.163.70/"></el-input></td>
-                    <td><el-input v-model="formArr[0].item3.input4" placeholder="12"></el-input></td>
-                    <td><el-input v-model="formArr[0].item3.input5" placeholder="内包装码"></el-input></td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-          <div class="item">
-            <el-row class="item-tit" type="flex" justify="space-between">
-              <h4>生码规则2</h4>
-              <el-button size="mini" type="primary">
-                <i class="el-icon-delete"></i>
-                删除
-              </el-button>
-            </el-row>
-            <el-form :gutter="20" :inline="true" :model="formArr[1].top" class="inputs clearfix">
-              <el-col :span="7">
-                <el-form-item label="规则编号">
-                  <el-input v-model="formArr[1].top.input1" placeholder="规则编号"></el-input>
-                </el-form-item>
-              </el-col>
-              <el-col :span="7">
-                <el-form-item label="类别">
-                  <el-select v-model="formArr[1].top.select1" placeholder="类别">
-                    <el-option label="5001-上海南极人服装有限公司" value="5001-上海南极人服装有限公司"></el-option>
-                    <el-option label="5001-上海南极人服装有限公司2" value="5001-上海南极人服装有限公司2"></el-option>
-                  </el-select>
-                </el-form-item>
-              </el-col>
-              <el-col :span="3">
-                <el-form-item label="包装级别">
-                  <el-select v-model="formArr[1].top.select2" placeholder="包装级别">
-                    <el-option label="1级" value="1级"></el-option>
-                    <el-option label="2级" value="2级"></el-option>
-                    <el-option label="3级" value="3级"></el-option>
-                  </el-select>
-                </el-form-item>
-              </el-col>
-              <el-col :span="7">
-                <el-form-item label="套码规则名称">
-                  <el-input v-model="formArr[1].top.input2" placeholder="系统自动生成"></el-input>
-                </el-form-item>
-              </el-col>
-            </el-form>
-
-
 
             <div class="table1-parent static-table-parent">
               <table>
@@ -215,63 +82,32 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td>1</td>
-                    <td><el-input v-model="formArr[1].item1.input1" placeholder="瓶"></el-input></td>
-                    <td><el-checkbox v-model="formArr[1].item1.checked1"></el-checkbox></td>
-                    <td>  
-                      <el-select v-model="formArr[1].item1.select1" placeholder="请选择">
-                        <el-option label="明码 + 无验证码" value="明码 + 无验证码"></el-option>
-                        <el-option label="明码 + 验证码" value="明码 + 验证码"></el-option>
-                        <el-option label="暗码 + 无验证码" value="暗码 + 无验证码"></el-option>
-                        <el-option label="无防伪" value="无防伪"></el-option>
-                      </el-select>
-                    </td>
-                    <td>
-                      <el-select v-model="formArr[1].item1.select2" placeholder="请选择">
-                        <el-option label="明码 + 无验证码" value="明码 + 无验证码"></el-option>
-                        <el-option label="明码 + 验证码" value="明码 + 验证码"></el-option>
-                        <el-option label="暗码 + 无验证码" value="暗码 + 无验证码"></el-option>
-                        <el-option label="无防伪" value="无防伪"></el-option>
-                      </el-select>
-                    </td>
-                    <td><el-input v-model="formArr[1].item1.input2" placeholder="http://120.27.163.70/"></el-input></td>
-                    <td><el-input v-model="formArr[1].item1.input3" placeholder="http://120.27.163.70/"></el-input></td>
-                    <td><el-input v-model="formArr[1].item1.input4" placeholder="12"></el-input></td>
-                    <td><el-input v-model="formArr[1].item1.input5" placeholder="内包装码"></el-input></td>
-                  </tr>
-                  <tr>
-                    <td>2</td>
-                    <td><el-input v-model="formArr[1].item2.input1" placeholder="瓶"></el-input></td>
-                    <td><el-checkbox v-model="formArr[1].item2.checked1"></el-checkbox></td>
-                    <td>  
-                      <el-select v-model="formArr[1].item2.select1" placeholder="请选择">
-                        <el-option label="明码 + 无验证码" value="明码 + 无验证码"></el-option>
-                        <el-option label="明码 + 验证码" value="明码 + 验证码"></el-option>
-                        <el-option label="暗码 + 无验证码" value="暗码 + 无验证码"></el-option>
-                        <el-option label="无防伪" value="无防伪"></el-option>
-                      </el-select>
-                    </td>
-                    <td>
-                      <el-select v-model="formArr[1].item2.select2" placeholder="请选择">
-                        <el-option label="明码 + 无验证码" value="明码 + 无验证码"></el-option>
-                        <el-option label="明码 + 验证码" value="明码 + 验证码"></el-option>
-                        <el-option label="暗码 + 无验证码" value="暗码 + 无验证码"></el-option>
-                        <el-option label="无防伪" value="无防伪"></el-option>
-                      </el-select>
-                    </td>
-                    <td><el-input v-model="formArr[1].item2.input2" placeholder="http://120.27.163.70/"></el-input></td>
-                    <td><el-input v-model="formArr[1].item2.input3" placeholder="http://120.27.163.70/"></el-input></td>
-                    <td><el-input v-model="formArr[1].item2.input4" placeholder="12"></el-input></td>
-                    <td><el-input v-model="formArr[1].item2.input5" placeholder="内包装码"></el-input></td>
-                  </tr>
+                  <tr
+                    v-for="(list, index2) in item.table"
+                    :key="index2"
 
-                  <tr>
-                    <td>3</td>
-                    <td><el-input v-model="formArr[1].item3.input1" placeholder="瓶"></el-input></td>
-                    <td><el-checkbox v-model="formArr[1].item3.checked1"></el-checkbox></td>
-                    <td>  
-                      <el-select v-model="formArr[1].item3.select1" placeholder="请选择">
+                  >
+
+                  <!-- {{item.table[index2]}} -->
+
+                  <!-- <tr
+                    v-for="(list, index2) in item.table"
+                    :key="index2"
+                    v-show="aa(item.top.select2)"
+                  > -->
+
+
+
+
+                    <td>{{index2 + 1}}</td>
+                    <td>
+                      <el-input v-model="list.input1" placeholder="瓶"></el-input>
+                    </td>
+                    <td>
+                      <el-checkbox v-model="list.checked1"></el-checkbox>
+                    </td>
+                    <td>
+                      <el-select v-model="list.select1" placeholder="请选择">
                         <el-option label="明码 + 无验证码" value="明码 + 无验证码"></el-option>
                         <el-option label="明码 + 验证码" value="明码 + 验证码"></el-option>
                         <el-option label="暗码 + 无验证码" value="暗码 + 无验证码"></el-option>
@@ -279,24 +115,31 @@
                       </el-select>
                     </td>
                     <td>
-                      <el-select v-model="formArr[1].item3.select2" placeholder="请选择">
-                        <el-option label="明码 + 无验证码" value="明码 + 无验证码"></el-option>
-                        <el-option label="明码 + 验证码" value="明码 + 验证码"></el-option>
-                        <el-option label="暗码 + 无验证码" value="暗码 + 无验证码"></el-option>
-                        <el-option label="无防伪" value="无防伪"></el-option>
+                      <el-select v-model="list.select2" placeholder="请选择">
+                        <el-option label="防伪码红包" value="防伪码红包"></el-option>
+                        <el-option label="红包码" value="红包码"></el-option>
+                        <el-option label="无红包" value="无红包"></el-option>
                       </el-select>
                     </td>
-                    <td><el-input v-model="formArr[1].item3.input2" placeholder="http://120.27.163.70/"></el-input></td>
-                    <td><el-input v-model="formArr[1].item3.input3" placeholder="http://120.27.163.70/"></el-input></td>
-                    <td><el-input v-model="formArr[1].item3.input4" placeholder="12"></el-input></td>
-                    <td><el-input v-model="formArr[1].item3.input5" placeholder="内包装码"></el-input></td>
+                    <td>
+                      <el-input v-model="list.input2" placeholder="http://120.27.163.70/"></el-input>
+                    </td>
+                    <td>
+                      <el-input v-model="list.input3" placeholder="http://120.27.163.70/"></el-input>
+                    </td>
+                    <td>
+                      <el-input v-model="list.input4" placeholder="12"></el-input>
+                    </td>
+                    <td>
+                      <el-input v-model="list.input5" placeholder="内包装码"></el-input>
+                    </td>
                   </tr>
                 </tbody>
               </table>
             </div>
           </div>
         </div>
-        <button class="added-page">
+        <button class="added-page" @click="addForm">
           <i class="el-icon-plus"></i>
           新增客户套码规则
         </button>
@@ -328,167 +171,157 @@ export default {
             input1: "",
             input2: "系统自动生成",
             select1: "5001-上海南极人服装有限公司",
-            select2: "1级",
+            select2: "1级"
           },
-          item1: {
-            input1: "瓶",
-            input2: "http://120.27.163.70/",
-            input3: "http://120.27.163.70/",
-            input4: "12",
-            input5: "内包装码",
-            checked1: false,
-            select1: "明码 + 无验证码",
-            select2: "明码 + 验证码",
-          },
-          item2: {
-            input1: "瓶",
-            input2: "http://120.27.163.70/",
-            input3: "http://120.27.163.70/",
-            input4: "12",
-            input5: "内包装码",
-            checked1: false,
-            select1: "明码 + 无验证码",
-            select2: "明码 + 验证码",
-          },
-          item3: {
-            input1: "瓶",
-            input2: "http://120.27.163.70/",
-            input3: "http://120.27.163.70/",
-            input4: "12",
-            input5: "内包装码",
-            checked1: false,
-            select1: "明码 + 无验证码",
-            select2: "明码 + 验证码",
-          }
+          table: [
+            {
+              input1: "瓶",
+              input2: "http://120.27.163.70/",
+              input3: "http://120.27.163.70/",
+              input4: "12",
+              input5: "内包装码",
+              checked1: false,
+              select1: "明码 + 无验证码",
+              select2: "明码 + 验证码"
+            },
+            {
+              input1: "瓶",
+              input2: "http://120.27.163.70/",
+              input3: "http://120.27.163.70/",
+              input4: "12",
+              input5: "内包装码",
+              checked1: false,
+              select1: "明码 + 无验证码",
+              select2: "明码 + 验证码"
+            },
+            {
+              input1: "瓶",
+              input2: "http://120.27.163.70/",
+              input3: "http://120.27.163.70/",
+              input4: "12",
+              input5: "内包装码",
+              checked1: false,
+              select1: "明码 + 无验证码",
+              select2: "明码 + 验证码"
+            }
+          ]
         },
         {
           top: {
             input1: "",
             input2: "系统自动生成",
             select1: "5001-上海南极人服装有限公司",
-            select2: "1级",
-          }, 
-          item1: {
-            input1: "瓶",
-            input2: "http://120.27.163.70/",
-            input3: "http://120.27.163.70/",
-            input4: "12",
-            input5: "内包装码",
-            checked1: false,
-            select1: "明码 + 无验证码",
-            select2: "明码 + 验证码",
+            select2: "1级"
           },
-          item2: {
-            input1: "瓶",
-            input2: "http://120.27.163.70/",
-            input3: "http://120.27.163.70/",
-            input4: "12",
-            input5: "内包装码",
-            checked1: false,
-            select1: "明码 + 无验证码",
-            select2: "明码 + 验证码",
-          },
-          item3: {
-            input1: "瓶",
-            input2: "http://120.27.163.70/",
-            input3: "http://120.27.163.70/",
-            input4: "12",
-            input5: "内包装码",
-            checked1: false,
-            select1: "明码 + 无验证码",
-            select2: "明码 + 验证码",
-          }
-        },
-        {
-          top: {
-            input1: "",
-            input2: "系统自动生成",
-            select1: "5001-上海南极人服装有限公司",
-            select2: "1级",
-          },
-          item1: {
-            input1: "瓶",
-            input2: "http://120.27.163.70/",
-            input3: "http://120.27.163.70/",
-            input4: "12",
-            input5: "内包装码",
-            checked1: true,
-            select1: "明码 + 无验证码",
-            select2: "明码 + 验证码",
-          },
-          item2: {
-            input1: "瓶",
-            input2: "http://120.27.163.70/",
-            input3: "http://120.27.163.70/",
-            input4: "12",
-            input5: "内包装码",
-            checked1: false,
-            select1: "明码 + 无验证码",
-            select2: "明码 + 验证码",
-          },
-          item3: {
-            input1: "瓶",
-            input2: "http://120.27.163.70/",
-            input3: "http://120.27.163.70/",
-            input4: "12",
-            input5: "内包装码",
-            checked1: false,
-            select1: "明码 + 无验证码",
-            select2: "明码 + 验证码",
-          }
-        },
-        {
-          item1: {
-            input1: "瓶",
-            input2: "http://120.27.163.70/",
-            input3: "http://120.27.163.70/",
-            input4: "12",
-            input5: "内包装码",
-            checked1: false,
-            select1: "明码 + 无验证码",
-            select2: "明码 + 验证码",
-          },
-          item2: {
-            input1: "瓶",
-            input2: "http://120.27.163.70/",
-            input3: "http://120.27.163.70/",
-            input4: "12",
-            input5: "内包装码",
-            checked1: false,
-            select1: "明码 + 无验证码",
-            select2: "明码 + 验证码",
-          },
-          item3: {
-            input1: "瓶",
-            input2: "http://120.27.163.70/",
-            input3: "http://120.27.163.70/",
-            input4: "12",
-            input5: "内包装码",
-            checked1: false,
-            select1: "明码 + 无验证码",
-            select2: "明码 + 验证码",
-          }
+          table: [
+            {
+              input1: "瓶",
+              input2: "http://120.27.163.70/",
+              input3: "http://120.27.163.70/",
+              input4: "12",
+              input5: "内包装码",
+              checked1: false,
+              select1: "明码 + 无验证码",
+              select2: "明码 + 验证码"
+            },
+            {
+              input1: "瓶",
+              input2: "http://120.27.163.70/",
+              input3: "http://120.27.163.70/",
+              input4: "12",
+              input5: "内包装码",
+              checked1: false,
+              select1: "明码 + 无验证码",
+              select2: "明码 + 验证码"
+            },
+            {
+              input1: "瓶",
+              input2: "http://120.27.163.70/",
+              input3: "http://120.27.163.70/",
+              input4: "12",
+              input5: "内包装码",
+              checked1: false,
+              select1: "明码 + 无验证码",
+              select2: "明码 + 验证码"
+            }
+          ]
         }
-
-      ],
-
-
-
-
-
+      ]
     };
   },
 
   created() {},
+  computed: {
+
+  },
 
   methods: {
     //方法
     changeValue(val) {
       // console.log(val, "val");
+    },
+    addForm() {
+      this.formArr.push({
+        top: {
+          input1: "",
+          input2: "系统自动生成",
+          select1: "5001-上海南极人服装有限公司",
+          select2: "1级"
+        },
+        table: [
+          {
+            input1: "瓶",
+            input2: "http://120.27.163.70/",
+            input3: "http://120.27.163.70/",
+            input4: "12",
+            input5: "内包装码",
+            checked1: false,
+            select1: "明码 + 无验证码",
+            select2: "明码 + 验证码"
+          },
+          {
+            input1: "瓶",
+            input2: "http://120.27.163.70/",
+            input3: "http://120.27.163.70/",
+            input4: "12",
+            input5: "内包装码",
+            checked1: false,
+            select1: "明码 + 无验证码",
+            select2: "明码 + 验证码"
+          },
+          {
+            input1: "瓶",
+            input2: "http://120.27.163.70/",
+            input3: "http://120.27.163.70/",
+            input4: "12",
+            input5: "内包装码",
+            checked1: false,
+            select1: "明码 + 无验证码",
+            select2: "明码 + 验证码"
+          }
+        ]
+      });
+    },
+    removeForm(index) {
+      this.formArr.splice(index, 1);
+      // console.log(this.formArr);
+    },
+    changeValue1(val) {
+      console.log(val, "val");
+    },
+
+        aa(index) {
+          console.log(index, "index");
+          if(index == "1级") {
+            
+          }
+      return false
     }
+
   },
   mounted() {
-    this.num = this.$route.params.num;
+    this.num = this.$route.params.num,
+    this.aa();
     // console.log(this.num)
   }
 };
@@ -565,26 +398,26 @@ export default {
   overflow-x: auto;
   table {
     width: 1561px;
-    border-collapse:collapse;
+    border-collapse: collapse;
     // border-width: 1px;
     // border-style: solid;
     // border-color: #e6e6e6;
     text-align: center;
     tr {
-        /deep/ {
+      /deep/ {
         th {
           background: rgb(238, 241, 246);
           color: rgb(96, 98, 102);
           padding: 12px 0;
           font-size: 14px;
-          border: 1px solid #EBEEF5;
+          border: 1px solid #ebeef5;
         }
         td {
           // background: rgb(238, 241, 246);
           // color: rgb(96, 98, 102);
           padding: 5px;
           font-size: 14px;
-          border: 1px solid #EBEEF5;
+          border: 1px solid #ebeef5;
         }
         input {
           height: 35px;

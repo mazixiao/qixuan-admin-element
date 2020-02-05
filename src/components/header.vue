@@ -252,107 +252,107 @@ export default {
             // }
           ]
         },
-        {
-          value: "6",
-          label: "智能营销",
-          icon: icon6,
-          children: [
-            {
-              value: "6-1",
-              label: "促销活动"
-            },
-            {
-              value: "6-2",
-              label: "积分商城",
-              children: [
-                {
-                  value: "6-1-1",
-                  label: "商品发布管理"
-                },
-                {
-                  value: "6-1-2",
-                  label: "商品交易管理"
-                },
-                {
-                  value: "6-1-3",
-                  label: "商品发货管理"
-                },
-                {
-                  value: "6-1-4",
-                  label: "仓库里的宝贝"
-                }
-              ]
-            }
-          ]
-        },
-        {
-          value: "7",
-          label: "物流追溯",
-          icon: icon7,
-          children: [
-            {
-              value: "7-1",
-              label: "订单管理"
-            },
-            {
-              value: "7-2",
-              label: "收货管理",
-              children: [
-                {
-                  value: "7-2-1",
-                  label: "收货计划管理"
-                },
-                {
-                  value: "7-2-2",
-                  label: "新建收货计划"
-                },
-                {
-                  value: "7-2-3",
-                  label: "收货产品明细查询"
-                },
-                {
-                  value: "7-2-4",
-                  label: "收货条码明细查询"
-                }
-              ]
-            },
-            {
-              value: "7-3",
-              label: "库存管理",
-              children: [
-                {
-                  value: "7-3-1",
-                  label: "产品库存查询"
-                },
-                {
-                  value: "7-3-2",
-                  label: "条码库存查询"
-                },
-                {
-                  value: "7-3-3",
-                  label: "库存盘点"
-                }
-              ]
-            }
-          ]
-        },
-        {
-          value: "8",
-          label: "产品追溯",
-          icon: icon8,
-          children: [
-            {
-              value: "8-1",
-              label: "防伪验证",
-              children: [
-                {
-                  value: "8-1-1",
-                  label: "防伪查询明细"
-                }
-              ]
-            }
-          ]
-        }
+        // {
+        //   value: "6",
+        //   label: "智能营销",
+        //   icon: icon6,
+        //   children: [
+        //     {
+        //       value: "6-1",
+        //       label: "促销活动"
+        //     },
+        //     {
+        //       value: "6-2",
+        //       label: "积分商城",
+        //       children: [
+        //         {
+        //           value: "6-1-1",
+        //           label: "商品发布管理"
+        //         },
+        //         {
+        //           value: "6-1-2",
+        //           label: "商品交易管理"
+        //         },
+        //         {
+        //           value: "6-1-3",
+        //           label: "商品发货管理"
+        //         },
+        //         {
+        //           value: "6-1-4",
+        //           label: "仓库里的宝贝"
+        //         }
+        //       ]
+        //     }
+        //   ]
+        // },
+        // {
+        //   value: "7",
+        //   label: "物流追溯",
+        //   icon: icon7,
+        //   children: [
+        //     {
+        //       value: "7-1",
+        //       label: "订单管理"
+        //     },
+        //     {
+        //       value: "7-2",
+        //       label: "收货管理",
+        //       children: [
+        //         {
+        //           value: "7-2-1",
+        //           label: "收货计划管理"
+        //         },
+        //         {
+        //           value: "7-2-2",
+        //           label: "新建收货计划"
+        //         },
+        //         {
+        //           value: "7-2-3",
+        //           label: "收货产品明细查询"
+        //         },
+        //         {
+        //           value: "7-2-4",
+        //           label: "收货条码明细查询"
+        //         }
+        //       ]
+        //     },
+        //     {
+        //       value: "7-3",
+        //       label: "库存管理",
+        //       children: [
+        //         {
+        //           value: "7-3-1",
+        //           label: "产品库存查询"
+        //         },
+        //         {
+        //           value: "7-3-2",
+        //           label: "条码库存查询"
+        //         },
+        //         {
+        //           value: "7-3-3",
+        //           label: "库存盘点"
+        //         }
+        //       ]
+        //     }
+        //   ]
+        // },
+        // {
+        //   value: "8",
+        //   label: "产品追溯",
+        //   icon: icon8,
+        //   children: [
+        //     {
+        //       value: "8-1",
+        //       label: "防伪验证",
+        //       children: [
+        //         {
+        //           value: "8-1-1",
+        //           label: "防伪查询明细"
+        //         }
+        //       ]
+        //     }
+        //   ]
+        // }
       ]
     };
   },
