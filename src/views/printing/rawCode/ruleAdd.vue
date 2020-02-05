@@ -52,11 +52,10 @@
               <el-col :span="3">
                 <el-form-item label="包装级别">
                   <el-select v-model="item.top.select2" placeholder="包装级别" @change="changeValue1">
-                    <el-option label="1级" value="1级"></el-option>
-                    <el-option label="2级" value="2级"></el-option>
-                    <el-option label="3级" value="3级"></el-option>
+                    <el-option label="1级" value="1"></el-option>
+                    <el-option label="2级" value="2"></el-option>
+                    <el-option label="3级" value="3"></el-option>
                   </el-select>
-                  {{item.top.select2}}
                 </el-form-item>
               </el-col>
               <el-col :span="7">
@@ -82,23 +81,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr
-                    v-for="(list, index2) in item.table"
-                    :key="index2"
-
-                  >
-
-                  <!-- {{item.table[index2]}} -->
-
-                  <!-- <tr
-                    v-for="(list, index2) in item.table"
-                    :key="index2"
-                    v-show="aa(item.top.select2)"
-                  > -->
-
-
-
-
+                  <tr v-for="(list, index2) in item.table.slice(0, item.top.select2)" :key="index2">
                     <td>{{index2 + 1}}</td>
                     <td>
                       <el-input v-model="list.input1" placeholder="瓶"></el-input>
@@ -115,8 +98,10 @@
                       </el-select>
                     </td>
                     <td>
+
+                      <!-- <el-select v-model="(list.select1 == '无防伪') ? '红包码': list.select2" placeholder="请选择"> -->
                       <el-select v-model="list.select2" placeholder="请选择">
-                        <el-option label="防伪码红包" value="防伪码红包"></el-option>
+                        <el-option label="防伪码红包" value="防伪码红包" v-show="list.select1 !== '无防伪'" ></el-option>
                         <el-option label="红包码" value="红包码"></el-option>
                         <el-option label="无红包" value="无红包"></el-option>
                       </el-select>
@@ -171,7 +156,7 @@ export default {
             input1: "",
             input2: "系统自动生成",
             select1: "5001-上海南极人服装有限公司",
-            select2: "1级"
+            select2: "1"
           },
           table: [
             {
@@ -181,8 +166,8 @@ export default {
               input4: "12",
               input5: "内包装码",
               checked1: false,
-              select1: "明码 + 无验证码",
-              select2: "明码 + 验证码"
+              select1: "无防伪",
+              select2: "红包码"
             },
             {
               input1: "瓶",
@@ -192,7 +177,7 @@ export default {
               input5: "内包装码",
               checked1: false,
               select1: "明码 + 无验证码",
-              select2: "明码 + 验证码"
+              select2: "防伪码红包"
             },
             {
               input1: "瓶",
@@ -202,7 +187,7 @@ export default {
               input5: "内包装码",
               checked1: false,
               select1: "明码 + 无验证码",
-              select2: "明码 + 验证码"
+              select2: "防伪码红包"
             }
           ]
         },
@@ -211,7 +196,7 @@ export default {
             input1: "",
             input2: "系统自动生成",
             select1: "5001-上海南极人服装有限公司",
-            select2: "1级"
+            select2: "3"
           },
           table: [
             {
@@ -222,7 +207,7 @@ export default {
               input5: "内包装码",
               checked1: false,
               select1: "明码 + 无验证码",
-              select2: "明码 + 验证码"
+              select2: "防伪码红包"
             },
             {
               input1: "瓶",
@@ -232,7 +217,7 @@ export default {
               input5: "内包装码",
               checked1: false,
               select1: "明码 + 无验证码",
-              select2: "明码 + 验证码"
+              select2: "防伪码红包"
             },
             {
               input1: "瓶",
@@ -242,7 +227,7 @@ export default {
               input5: "内包装码",
               checked1: false,
               select1: "明码 + 无验证码",
-              select2: "明码 + 验证码"
+              select2: "防伪码红包"
             }
           ]
         }
@@ -251,9 +236,7 @@ export default {
   },
 
   created() {},
-  computed: {
-
-  },
+  computed: {},
 
   methods: {
     //方法
@@ -266,7 +249,7 @@ export default {
           input1: "",
           input2: "系统自动生成",
           select1: "5001-上海南极人服装有限公司",
-          select2: "1级"
+          select2: "3"
         },
         table: [
           {
@@ -277,7 +260,7 @@ export default {
             input5: "内包装码",
             checked1: false,
             select1: "明码 + 无验证码",
-            select2: "明码 + 验证码"
+            select2: "防伪码红包"
           },
           {
             input1: "瓶",
@@ -287,7 +270,7 @@ export default {
             input5: "内包装码",
             checked1: false,
             select1: "明码 + 无验证码",
-            select2: "明码 + 验证码"
+            select2: "防伪码红包"
           },
           {
             input1: "瓶",
@@ -297,7 +280,7 @@ export default {
             input5: "内包装码",
             checked1: false,
             select1: "明码 + 无验证码",
-            select2: "明码 + 验证码"
+            select2: "防伪码红包"
           }
         ]
       });
@@ -308,20 +291,10 @@ export default {
     },
     changeValue1(val) {
       console.log(val, "val");
-    },
-
-        aa(index) {
-          console.log(index, "index");
-          if(index == "1级") {
-            
-          }
-      return false
     }
-
   },
   mounted() {
-    this.num = this.$route.params.num,
-    this.aa();
+
     // console.log(this.num)
   }
 };
