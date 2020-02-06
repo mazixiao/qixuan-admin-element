@@ -17,7 +17,7 @@ import VueQuillEditor from 'vue-quill-editor'
 import 'quill/dist/quill.core.css'
 import 'quill/dist/quill.snow.css'
 import 'quill/dist/quill.bubble.css'
-  
+
 Vue.use(VueQuillEditor)
 
 
@@ -29,19 +29,29 @@ Vue.prototype.$axios = axios;   // 2、在vue中使用axios
 
 // Vue.config.productionTip = false
 
-Vue.use(VueAxios,axios);
+Vue.use(VueAxios, axios);
 
-
+import echarts from 'echarts'
+Vue.prototype.$echarts = echarts
 
 
 Vue.config.productionTip = false
-
+var index = 0;
 router.beforeEach((to, from, next) => {
+  index++
   /* 路由发生变化修改页面title */
   if (to.meta.title) {
     document.title = to.meta.title;
   }
-  next();
+
+  // 默认加载想要的页面
+  if (index == 1) {
+    next({
+      path: '/printing/rawCode/rule'
+    })
+  };
+  next()
+ 
 });
 
 

@@ -51,7 +51,7 @@
               </el-col>
               <el-col :span="3">
                 <el-form-item label="包装级别">
-                  <el-select v-model="item.top.select2" placeholder="包装级别" @change="changeValue1">
+                  <el-select v-model="item.top.select2" placeholder="包装级别">
                     <el-option label="1级" value="1"></el-option>
                     <el-option label="2级" value="2"></el-option>
                     <el-option label="3级" value="3"></el-option>
@@ -90,7 +90,11 @@
                       <el-checkbox v-model="list.checked1"></el-checkbox>
                     </td>
                     <td>
-                      <el-select v-model="list.select1" placeholder="请选择">
+                      <el-select
+                        v-model="list.select1"
+                        placeholder="请选择"
+                        @change="checkOption(list.select1, index, index2)"
+                      >
                         <el-option label="明码 + 无验证码" value="明码 + 无验证码"></el-option>
                         <el-option label="明码 + 验证码" value="明码 + 验证码"></el-option>
                         <el-option label="暗码 + 无验证码" value="暗码 + 无验证码"></el-option>
@@ -98,10 +102,8 @@
                       </el-select>
                     </td>
                     <td>
-
-                      <!-- <el-select v-model="(list.select1 == '无防伪') ? '红包码': list.select2" placeholder="请选择"> -->
                       <el-select v-model="list.select2" placeholder="请选择">
-                        <el-option label="防伪码红包" value="防伪码红包" v-show="list.select1 !== '无防伪'" ></el-option>
+                        <el-option label="防伪码红包" value="防伪码红包" v-show="list.select1 !== '无防伪'"></el-option>
                         <el-option label="红包码" value="红包码"></el-option>
                         <el-option label="无红包" value="无红包"></el-option>
                       </el-select>
@@ -156,7 +158,7 @@ export default {
             input1: "",
             input2: "系统自动生成",
             select1: "5001-上海南极人服装有限公司",
-            select2: "1"
+            select2: "3"
           },
           table: [
             {
@@ -287,14 +289,16 @@ export default {
     },
     removeForm(index) {
       this.formArr.splice(index, 1);
-      // console.log(this.formArr);
     },
-    changeValue1(val) {
-      console.log(val, "val");
+    checkOption(val, index, index2) {
+      if (val === "无防伪") {
+        this.formArr[index].table[index2].select2 = "红包码";
+      } else {
+        this.formArr[index].table[index2].select2 = "防伪码红包";
+      }
     }
   },
   mounted() {
-
     // console.log(this.num)
   }
 };

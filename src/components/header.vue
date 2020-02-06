@@ -5,10 +5,10 @@
 <template>
   <div class="header">
     <el-scrollbar style="height: 100%;overflow-x:hidden">
-      <a class="logo-wrap" href="/">
+      <div class="logo-wrap">
         <img class="logo" src="../assets/img/logo.png" alt />
         <span>码+服务云平台</span>
-      </a>
+      </div>
       <!-- :default-active="$route.path" -->
       <el-menu
         router
@@ -29,7 +29,7 @@
               <div class="img-wrap">
                 <img :src="item.icon" alt />
               </div>
-              {{item.label}}11
+              {{item.label}}
             </template>
             <!-- 二级 -->
             <template v-for="list in item.children">
@@ -38,16 +38,16 @@
                 v-if="list.children && list.children.length"
                 :key="list.label"
               >
-                <template slot="title">{{list.label}}22</template>
+                <template slot="title">{{list.label}}</template>
                 <!-- 三级 -->
                 <el-menu-item
                   v-for="list3 in list.children"
                   :index="list3.path"
                   :key="list3.label"
-                >{{list3.label}}33</el-menu-item>
+                >{{list3.label}}</el-menu-item>
               </el-submenu>
               <!-- 二级无下拉 -->
-              <el-menu-item v-else :index="list.path" :key="list.label">{{list.label}}22</el-menu-item>
+              <el-menu-item v-else :index="list.path" :key="list.label">{{list.label}}</el-menu-item>
             </template>
           </el-submenu>
           <!-- 一级无下拉 -->
@@ -55,7 +55,7 @@
             <div class="img-wrap">
               <img :src="item.icon" alt />
             </div>
-            {{item.label}}11
+            {{item.label}}
           </el-menu-item>
         </template>
       </el-menu>
