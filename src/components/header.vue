@@ -83,10 +83,17 @@ export default {
   name: "commonHeader",
   data() {
     return {
+      // // // 导航默认高亮
+      // activeIndex: "2-1-1",
+      // // //   导航第二个默认展开
+      // openeds: ["2", "2-1", "2-1-1"],
+
+
       // // 导航默认高亮
-      activeIndex: "2-1-1",
+      activeIndex: "1",
       // //   导航第二个默认展开
-      openeds: ["2", "2-1", "2-1-1"],
+      openeds: ["1", "1-1"],
+
       num: 0,
 
       // 导航默认高亮
@@ -95,12 +102,12 @@ export default {
       // openeds: ["0"],
 
       menu: [
-        {
-          value: "0",
-          label: "首页",
-          icon: icon1,
-          path: "/"
-        },
+        // {
+        //   value: "0",
+        //   label: "首页",
+        //   icon: icon1,
+        //   path: "/"
+        // },
 
         {
           value: "1",
@@ -116,11 +123,6 @@ export default {
               value: "1-2",
               label: "防伪数据分析",
               path: "/overview/user"
-            },
-            {
-              value: "1-3",
-              label: "营销数据分析",
-              path: "/overview/marketing"
             }
           ]
         },

@@ -427,7 +427,8 @@ randomData() {
             orient: 'horizontal',
             min: 0,
             max: 55000,
-            text:['高','低'],           // 文本，默认为数值文本
+            // 文本，默认为数值文本
+            text:['高','低'],           
             splitNumber:0
         },
         series : [

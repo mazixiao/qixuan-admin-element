@@ -52,10 +52,10 @@
             </el-form-item>
           </el-col>
 
-          <el-col :span="20" class="btns" style="float:left">
+          <!-- <el-col :span="20" class="btns" style="float:left">
             <el-button type="primary">搜索</el-button>
             <el-button type="success">导出</el-button>
-          </el-col>
+          </el-col> -->
         </el-form>
 
         <!-- Form -->

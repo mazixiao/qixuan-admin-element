@@ -10,8 +10,6 @@ import index from '@/views/index'
 import overviewOrderForm from '@/views/overview/orderForm'
 // 防伪数据分析
 import overviewUser from '@/views/overview/user'
-// 营销数据分析
-import overviewMarketing from '@/views/overview/marketing'
 
 
 // 赋码印刷
@@ -64,14 +62,6 @@ export default new Router({
 			component: overviewUser,
 			meta: {
 				title: '防伪数据分析'
-			},
-		},
-		{
-			path: '/overview/marketing',
-			name: 'overviewMarketing',
-			component: overviewMarketing,
-			meta: {
-				title: '营销数据分析'
 			},
 		},
 		{
