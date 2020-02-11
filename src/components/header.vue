@@ -4,6 +4,7 @@
 
 <template>
   <div class="header">
+
     <el-scrollbar style="height: 100%;overflow-x:hidden">
       <div class="logo-wrap">
         <img class="logo" src="../assets/img/logo.png" alt />
@@ -81,6 +82,12 @@ import icon8 from "../assets/img/nav-icon8.png";
 
 export default {
   name: "commonHeader",
+  props: {
+    title99: {
+      type: String,
+      default: '迪迪',
+    }
+  },
   data() {
     return {
       // // // 导航默认高亮

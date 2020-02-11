@@ -38,7 +38,7 @@ Vue.prototype.$echarts = echarts
 Vue.config.productionTip = false
 var index = 0;
 router.beforeEach((to, from, next) => {
-  console.log(to.path);
+  // console.log(to.path);
   index++;
   /* 路由发生变化修改页面title */
   if (to.meta.title) {
@@ -47,9 +47,9 @@ router.beforeEach((to, from, next) => {
 
   // 默认加载想要的页面
   if (index == 1) {
-    next({
-      path: '/overview/user'
-    })
+    // next({
+    //   path: '/overview/user'
+    // })
   };
   next();
 
