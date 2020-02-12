@@ -1,11 +1,11 @@
 
 <template>
-  <div style="border: 1px solid red;padding: 10px;margin:10px">
-    <h1>组件1</h1>
+  <div>
+    <h1>组件通信方式1(prop, 父组件向子组件通信)</h1>
     <slot></slot>
     <div>子组件传过来的静态标题: {{title}}</div>
     <div>子组件传过来的动态内容: {{content}}</div>
-    <div v-show="show" style="width:100px;height: 100px;background:green">父组件控制是否显示该绿框</div>
+    <div v-show="show" style="width:100px;height: 100px;background:green">父组件控制是否显示该绿框<i class="el-icon-close" @click="closeGreen()"></i></div>
   </div>
 </template>
 
@@ -14,7 +14,7 @@
 import { mapState, mapActions, mapGetters } from "vuex";
 
 export default {
-  name: "test1",
+  name: "testProp",
   components: {},
   props: {
       title: {
@@ -52,11 +52,18 @@ export default {
   created() {},
 
   beforeMount() {},
-  mounted() {},
+  mounted() {
+    // 父级 prop 的更新会向下流动到子组件中，但是反过来则不行
+    // this.$props.show = false
+  },
   beforeUpdate() {},
   updated() {},
 
-  methods: {}
+  methods: {
+    closeGreen() {
+
+    }
+  }
 };
 </script>
 

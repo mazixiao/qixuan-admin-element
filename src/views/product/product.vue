@@ -54,12 +54,34 @@
           <input type="checkbox" value="欢欢" name id v-model="checked1" />
           <div v-show="checked1">{{checked1}}</div>
 
-          <test1 title="组件1使用props传过来的静态值" :content="propsContent"  :show="propsShow">
-            <h2 style="background: red">slot插槽组件1组件1组件1</h2>
-            <el-button type="success" @click="checkPropsContent">点击</el-button>
+          <div style="border: 1px solid red;padding: 10px;margin:10px">
+            <el-button type="success" @click="checkPropsContent">点击加1</el-button>
             <el-button type="success" @click="propsShowFun()">显示和隐藏绿色背景</el-button>
-          </test1>
-          <!-- <h2>接收组件1的props值</h2> -->
+            <testProp title="组件1使用props传过来的静态值" :content="propsContent" :show="propsShow">
+              <h2 style="background: red">slot插槽组件1组件1组件1</h2>
+            </testProp>
+          </div>
+
+          <div style="border: 1px solid red;padding: 10px;margin:10px">
+            <el-button type="success" @click="checkchildIsShow">父组件通过ref控制绿框</el-button>
+            <testRef ref="childIsShow"></testRef>
+          </div>
+
+          <div style="border: 1px solid red;padding: 10px;margin:10px">
+            <el-button type="success" @click="controlChildShowFun">父组件通过事件控制绿框</el-button>
+            <testEmit @getControlChildShowFun="controlChildShowFun"></testEmit>
+            <div v-show="controlChildShow" style="width:100px;height: 100px;background:green">子组件控制是否显示该绿框(绿框是父组件中的元素)</div>
+          </div>
+
+
+          <div style="border: 1px solid red;padding: 10px;margin:10px">
+            <eventBus1></eventBus1>
+            <eventBus2></eventBus2>
+          </div>
+
+
+
+          
         </div>
       </el-tab-pane>
     </el-tabs>
@@ -69,14 +91,22 @@
 
 <script>
 import commonHeader from "../../components/header";
-import test1 from "../../components/test1";
+import testProp from "../../components/testProp";
+import testRef from "../../components/testRef";
+import testEmit from "../../components/testEmit";
+import eventBus1 from "../../components/eventBus1";
+import eventBus2 from "../../components/eventBus2";
 import { mapState, mapActions, mapGetters } from "vuex";
 
 export default {
   name: "product",
   components: {
     commonHeader,
-    test1
+    testProp,
+    testRef,
+    testEmit,
+    eventBus1,
+    eventBus2,
   },
   data() {
     return {
@@ -91,7 +121,8 @@ export default {
       },
       checked1: ["欢欢"],
       propsContent: 0,
-      propsShow: true
+      propsShow: true,
+      controlChildShow: true
     };
   },
   computed: {
@@ -144,8 +175,17 @@ export default {
     checkPropsContent() {
       this.propsContent++;
     },
+    // prop组件通信
     propsShowFun() {
       this.propsShow = !this.propsShow;
+    },
+// ref组件通信
+    checkchildIsShow() {
+      this.$refs.childIsShow.closeGreen();
+    },
+    // $emit()子组件向父组件通信
+    controlChildShowFun() {
+      this.controlChildShow = !this.controlChildShow;
     },
 
     // add1() {
