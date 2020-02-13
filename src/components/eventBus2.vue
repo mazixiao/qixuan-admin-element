@@ -5,7 +5,10 @@
     <el-button type="success" @click="showFun">内部通过事件控制绿框</el-button>
     <div v-show="show" style="width:100px;height: 100px;background:green"></div>
     <h2>{{number}}</h2>
-    <h2>eventBus传值:{{content}}</h2>
+    <h2>
+      eventBus传值:
+      <span style="color: red">{{content}}</span>
+    </h2>
   </div>
 </template>
 
@@ -27,25 +30,26 @@ export default {
     return {
       show: true,
       number: 0,
-      content: '我是子组件2'
+      content: "我是子组件2"
     };
   },
   computed: {},
 
   beforeCreate() {},
 
-  created() {},
+  created() {
+    let that = this;
+    eventBus.$on("content", function(val) {
+      that.content = val;
+    });
+  },
 
   beforeMount() {},
   mounted() {
     let that = this;
     eventBus.$on("show", function() {
-      that.showFun()
+      that.showFun();
     });
-    eventBus.$on("content", function(val) {
-      that.content = val;
-    });
-
   },
   beforeUpdate() {},
   updated() {},
