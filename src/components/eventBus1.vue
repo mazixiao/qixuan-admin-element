@@ -21,9 +21,7 @@ export default {
     }
   },
   data() {
-    return {
-      show: true
-    };
+    return {};
   },
   computed: {},
 
@@ -33,7 +31,12 @@ export default {
 
   beforeMount() {},
   mounted() {
-    eventBus.$emit("content", '我是子组件1,覆盖了"我是子组件2"这几个字');
+    // setTimeout(function() {
+    //   eventBus.$emit("content", '我是兄弟组件1,覆盖了"我是兄弟组件2"这几个字');
+    // }, 3000);
+    setTimeout(() => {
+      eventBus.$emit("content", '我是兄弟组件1,覆盖了"我是兄弟组件2"这几个字');
+    }, 3000)
   },
   beforeUpdate() {},
   updated() {},

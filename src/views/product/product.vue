@@ -69,8 +69,9 @@
 
           <div style="border: 1px solid red;padding: 10px;margin:10px">
             <el-button type="success" @click="controlChildShowFun">父组件通过事件控制绿框</el-button>
-            <testEmit @getControlChildShowFun="controlChildShowFun"></testEmit>
+            <testEmit @getControlChildShowFun="controlChildShowFun" @GetCheckParentCon="checkParentCon"></testEmit>
             <div v-show="controlChildShow" style="width:100px;height: 100px;background:green">子组件控制是否显示该绿框(绿框是父组件中的元素)</div>
+            <h2>我是: <span style="color: red">{{parentCon}}</span></h2>
           </div>
 
 
@@ -122,7 +123,8 @@ export default {
       checked1: ["欢欢"],
       propsContent: 0,
       propsShow: true,
-      controlChildShow: true
+      controlChildShow: true,
+      parentCon: '默认我是父组件中的内容'
     };
   },
   computed: {
@@ -186,6 +188,10 @@ export default {
     // $emit()子组件向父组件通信
     controlChildShowFun() {
       this.controlChildShow = !this.controlChildShow;
+    },
+
+    checkParentCon(e) {
+      this.parentCon = e;
     },
 
     // add1() {

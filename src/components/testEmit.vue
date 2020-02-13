@@ -35,7 +35,7 @@ export default {
 
   beforeMount() {},
   mounted() {
-      
+      this.$emit("GetCheckParentCon", '子组件更改了"默认我是父组件中的内容"')
   },
   beforeUpdate() {},
   updated() {},

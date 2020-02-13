@@ -30,7 +30,7 @@ export default {
     return {
       show: true,
       number: 0,
-      content: "我是子组件2"
+      content: "兄弟子组件2"
     };
   },
   computed: {},
