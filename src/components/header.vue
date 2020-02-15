@@ -169,29 +169,19 @@ export default {
           value: "3",
           label: "生产管理",
           icon: icon3,
-          path: "/product/product"
-          // children: [
-          //   {
-          //     value: "3-1",
-          //     label: "生产工单管理",
-          //     children: [
-          //       {
-          //         value: "3-1-1",
-          //         label: "生产工单",
-          //       },
-          //     ]
-          //   },
-          //   {
-          //     value: "3-2",
-          //     label: "生产条码管理",
-          //     children: [
-          //       {
-          //         value: "3-2-1",
-          //         label: "生产条码明细",
-          //       },
-          //     ]
-          //   },
-          // ]
+          
+          children: [
+            {
+              value: "3-1",
+              label: "普通组件通信",
+              path: "/product/product",
+            },
+            {
+              value: "3-2",
+              label: "vuex普通组件通信",
+              path: "/product/productVuex",
+            },
+          ]
         },
         {
           value: "4",

@@ -23,6 +23,7 @@ import printingRawCodeOrdeAdd from '@/views/printing/rawCode/orderAdd'
 
 // 生产管理(测试用)
 import product from '@/views/product/product'
+import productVuex from '@/views/product/productVuex'
 
 // 手机页面设置
 import mobileAntiFake from '@/views/mobile/antiFake'
@@ -104,9 +105,20 @@ export default new Router({
 			name: 'product',
 			component: product,
 			meta: {
-				title: '生产管理'
+				title: '普通组件通信'
 			},
 		},
+		{
+			path: '/product/productVuex',
+			name: 'productVuex',
+			component: productVuex,
+			meta: {
+				title: 'vuex组件通信'
+			},
+		},
+
+
+
 
 		{
 			path: '/mobile/antiFake',

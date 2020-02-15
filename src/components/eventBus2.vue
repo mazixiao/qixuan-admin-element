@@ -8,6 +8,7 @@
     <h2>
       eventBus传值:
       <span style="color: red">{{content}}</span>
+      <h3>我是被兄弟组件传过来的参数改变的值<em style="color: red">{{number1}}</em></h3>
     </h2>
   </div>
 </template>
@@ -30,7 +31,8 @@ export default {
     return {
       show: true,
       number: 0,
-      content: "兄弟子组件2"
+      content: "兄弟子组件2",
+      number1: 0,
     };
   },
   computed: {},
@@ -50,6 +52,9 @@ export default {
     eventBus.$on("show", function() {
       that.showFun();
     });
+    eventBus.$on("addNum", function(val) {
+      that.add(val);
+    });
   },
   beforeUpdate() {},
   updated() {},
@@ -58,6 +63,10 @@ export default {
     showFun() {
       this.show = !this.show;
       this.number++;
+    },
+
+    add(val) {
+      this.number1 = this.number1 + val;
     }
   }
 };

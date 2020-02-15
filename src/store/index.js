@@ -9,6 +9,8 @@ const store = new Vuex.Store({
     state: {
         count: 1,
         count1: 100,
+        text1: "我是使用vuex传过来的静态值",
+        showGreen: true,
     },
     // 类似vue的computed
     getters: {
@@ -40,7 +42,15 @@ const store = new Vuex.Store({
         },
         reduce1(state) {
             state.count1 = state.count1 - 1;
-        }
+        },
+        addNum(state) {
+            state.count++;
+            state.showGreen = !state.showGreen;
+        },
+        subNum(state) {
+            state.count--;
+            state.showGreen = !state.showGreen;
+        },  
     },
     // Action 类似于 mutation，不同在于：
     // Action 提交的是 mutation，而不是直接变更状态。
