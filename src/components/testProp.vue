@@ -11,7 +11,7 @@
 
 
 <script>
-import { mapState, mapActions, mapGetters } from "vuex";
+import { mapState, mapGetters, mapMutations, mapActions } from "vuex";
 
 export default {
   name: "testProp",
@@ -25,10 +25,7 @@ export default {
           type: Number,
           default: 0
       },
-      show: {
-        //   type: String,
-          default: false
-      }
+      show: Boolean,
 
   },
   data() {

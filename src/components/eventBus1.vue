@@ -10,7 +10,7 @@
 
 <script>
 import eventBus from "../assets/js/eventBus.js";
-import { mapState, mapActions, mapGetters } from "vuex";
+import { mapState, mapGetters, mapMutations, mapActions } from "vuex";
 
 export default {
   name: "eventBus1",

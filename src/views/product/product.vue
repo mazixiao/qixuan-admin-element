@@ -98,7 +98,7 @@ import testRef from "../../components/testRef";
 import testEmit from "../../components/testEmit";
 import eventBus1 from "../../components/eventBus1";
 import eventBus2 from "../../components/eventBus2";
-import { mapState, mapActions, mapGetters } from "vuex";
+import { mapState, mapGetters, mapMutations, mapActions } from "vuex";
 
 export default {
   name: "product",
@@ -156,7 +156,8 @@ export default {
   mounted() {
     setTimeout(()=> {
       this.$refs.childIsShow.childCon = "3秒后父组件替换了‘我是子组件的内容’"
-    }, 3000)
+    }, 3000);
+    console.log(this.$refs.childIsShow, 'this.$refs.childIsShow');
   },
   beforeUpdate() {},
   updated() {},
@@ -167,7 +168,7 @@ export default {
     },
     lala(e) {
       this.didi++;
-      console.log(e);
+      console.log(this.$refs.didi.innerHTML, '通过this.$refs获取元素的内容')
     },
     add() {
       this.$store.commit("add", {
@@ -185,7 +186,7 @@ export default {
     propsShowFun() {
       this.propsShow = !this.propsShow;
     },
-// ref组件通信
+    // ref组件通信
     checkchildIsShow() {
       this.$refs.childIsShow.closeGreen();
     },
@@ -193,6 +194,7 @@ export default {
     controlChildShowFun() {
       this.controlChildShow = !this.controlChildShow;
     },
+     // $emit()子组件向父组件通信
     addNumberFun(num) {
       this.emitNumber = this.emitNumber + num;
     },
@@ -210,10 +212,12 @@ export default {
     // },
 
     // 上面注释的简写
-    ...mapActions({
-      add1: "add1",
-      reduce1: "reduce1"
-    })
+    // ...mapActions({
+    //   add1: "add1",
+    //   reduce1: "reduce1"
+    // })
+    ...mapActions(["add1", "reduce1"])
+
   }
 };
 </script>

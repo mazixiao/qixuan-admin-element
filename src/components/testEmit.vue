@@ -10,7 +10,7 @@
 
 
 <script>
-import { mapState, mapActions, mapGetters } from "vuex";
+import { mapState, mapGetters, mapMutations, mapActions } from "vuex";
 
 export default {
   name: "testEmit",
@@ -43,7 +43,6 @@ export default {
 
   methods: {
       closeGreen() {
-        //   this.show = !this.show;
         this.$emit("getControlChildShowFun")
       },  
       addNumber() {
