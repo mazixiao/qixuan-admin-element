@@ -167,7 +167,7 @@ export default {
         },
         {
           value: "3",
-          label: "生产管理",
+          label: "学习vue",
           icon: icon3,
           
           children: [
@@ -178,8 +178,13 @@ export default {
             },
             {
               value: "3-2",
-              label: "vuex普通组件通信",
+              label: "vuex组件通信",
               path: "/product/productVuex",
+            },
+            {
+              value: "3-3",
+              label: "vue学习1",
+              path: "/product/study1",
             },
           ]
         },

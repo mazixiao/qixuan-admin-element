@@ -19,6 +19,7 @@ const store = new Vuex.Store({
         count4: 100,
         text1: "我是使用vuex传过来的静态值",
         showGreen: false,
+        number: 10,
     },
     // 类似vue的computed(计算属性)
     // getter 的返回值会根据它的依赖被缓存起来，且只有当它的依赖值发生了改变才会被重新计算。
@@ -31,7 +32,7 @@ const store = new Vuex.Store({
         // getStateCount: state => {
         //     return state.count1 + 1000;
         // },
-        
+
         // 写法3
         // Getter 也可以接受其他 getter 作为第二个参数
         // getStateCount: (state, getters) => state.count1 + getters.getStateCount1,
@@ -60,8 +61,8 @@ const store = new Vuex.Store({
         add1(state) {
             state.count3 = state.count3 + 1;
         },
-        reduce1(state) {
-            state.count4 = state.count4 - 1;
+        reduce1(state, n) {
+            state.count4 = state.count4 - n.num;
         },
         addNum(state) {
             state.count++;
@@ -70,7 +71,7 @@ const store = new Vuex.Store({
         subNum(state) {
             state.count--;
             state.showGreen = !state.showGreen;
-        },  
+        },
     },
     // Action 类似于 mutation，不同在于：
     // Action 提交的是 mutation，而不是直接变更状态。
@@ -87,8 +88,13 @@ const store = new Vuex.Store({
         add1({ commit }) {
             commit("add1")
         },
-        reduce1({ commit }) {
-            commit("reduce1")
+        reduce1({commit}) {
+            // commit("reduce1")
+            commit({
+                type: "reduce1",
+                num: this.state.number,
+            })
+
         }
 
 

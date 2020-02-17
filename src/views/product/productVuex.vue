@@ -23,6 +23,10 @@
         <h1>异步actions的操作</h1>
         <el-button type="success" @click="add1">vuex通过actions异步事件传参渲染count3的值:{{count3}}</el-button>
         <el-button type="success" @click="reduce1">vuex通过actions异步事件传参渲染count4的值:{{count4}}</el-button>
+
+
+
+
       </el-tab-pane>
     </el-tabs>
   </div>
@@ -47,7 +51,7 @@ export default {
     return {
       // tab标题默认高亮
       activeName: "first",
-      didi: this.$store.getters.getStateCount
+      didi: this.$store.getters.getStateCount,
     };
   },
   computed: {
@@ -71,7 +75,7 @@ export default {
     // }),
 
     // 写法3, 上面注释的简写(2种方式)
-    ...mapState(["count1",  "count2", "count3", "count4", "showGreen",]),
+    ...mapState(["count1",  "count2", "count3", "count4", "showGreen", "number"]),
     ...mapGetters(["getStateCount", "getStateCount1"])
   },
 
@@ -125,8 +129,20 @@ export default {
     // 同步方法映射的简写
     ...mapMutations(['addNum', "count2Fun"]),
 
+// /----------------------------------------
+    // 异步方法actions
+    // add1() {
+    //   this.$store.dispatch('add1')
+    // },
+
+    // reduce1() {
+    //   this.$store.dispatch({
+    //     type: 'reduce1',
+    //   })
+    // },
+    
     // 异步方法映射的简写
-    ...mapActions(['add1', "reduce1"]),
+    ...mapActions(["add1", "reduce1"]),
 
 
   }

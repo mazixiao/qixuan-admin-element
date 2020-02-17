@@ -26,6 +26,7 @@ export default {
     return {};
   },
   computed: {
+        // ...mapState(["text1",  "count",]),
       text1() {
           return this.$store.state.text1
       },
