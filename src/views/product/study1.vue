@@ -3,7 +3,7 @@
   <div class="content">
     <commonHeader></commonHeader>
     <el-tabs v-model="activeName" class="common-tab">
-      <el-tab-pane :label="activeName" name="first" v-once>
+      <el-tab-pane :label="activeName" name="first">
         <el-button type="success" v-on:click="show1 = !show1">动画切换</el-button>
         <transition name="didi1">
           <p v-show="show1" style="width:100px;height: 100px;background:green">hello</p>
@@ -34,20 +34,40 @@
           <div :id="'list' + i">根据元素的下标动态的添加id:{{'list' + i}}，v-bind:id="'list' + i"：{{key}}</div>
         </div>
 
-        <el-button type="success" @[event]="doSomething">@[event]="doSomething"</el-button>
+        <!-- <el-button type="success" @[event]="doSomething">@[event]="doSomething"</el-button> -->
 
-        <hr>
+        <hr />
         <h1>计算属性computed</h1>
-        <p>把“message.split("").reverse().join("")”这句话放到了<strong>计算属性（会有缓存）</strong>中赋给了messageComputed变量： 
+        <p>
+          把“message.split("").reverse().join("")”这句话放到了
+          <strong>计算属性（会有缓存）</strong>中赋给了messageComputed变量：
           <span style="color: red">{{messageComputed}}</span>
         </p>
         <p>在mounted里面渲染的message1：{{message1}}</p>
-        <p>在methods通 <strong>方法(不希望有缓存，请用方法来替代)</strong> 过message2：{{messageMethods()}}</p>
+        <p>
+          在methods通
+          <strong>方法(不希望有缓存，请用方法来替代)</strong>
+          过message2：{{messageMethods()}}
+        </p>
 
-        <hr>
-        <h1>侦听属性watch</h1>
-        <p>{{ fullName }}</p>
-        <p>{{ lastName }}</p>
+        <hr />
+        <h1>Class 与 Style 绑定</h1>
+        <p :class="{ active: style1Change, didi: true }">被computed（计算）过后的样式</p>
+        <p :class="[{active: style1Change}]">当有多个class可以在数组语法中也可以使用对象语法</p>
+        <br />
+        <p>在组件中使用样式,红色和绿色背景</p>
+        <testProp class="red"></testProp>
+        <p
+          :style="{color: color, fontSize: fontSize + 'px', fontWeight: fontWeight}"
+        >动态渲染的style, style="{color: color, fontSize: fontSize + 'px', fontWeight: fontWeight"</p>
+        <hr />
+
+        <template v-if="ok">
+          <h1>使用把一个 template 元素当做不可见的包裹元素件</h1>
+        </template>
+
+        <div v-if="Math.random() > 0.5">v-if="Math.random() > 0.5"能看见</div>
+        <div v-else>v-else不能看见</div>
         <!------------------------------------------------------------------>
       </el-tab-pane>
     </el-tabs>
@@ -57,6 +77,7 @@
 
 <script>
 import commonHeader from "../../components/header";
+import testProp from "../../components/testProp";
 
 // 辅助函数（简写）
 import { mapState, mapGetters, mapMutations, mapActions } from "vuex";
@@ -64,7 +85,8 @@ import { mapState, mapGetters, mapMutations, mapActions } from "vuex";
 export default {
   name: "study1",
   components: {
-    commonHeader
+    commonHeader,
+    testProp
   },
   data() {
     return {
@@ -87,16 +109,24 @@ export default {
       message2: "我是信息2",
       event: "click",
 
-      firstName: 'Fooo',
-      lastName: 'Bar',
-      fullName: 'Foo Bar'
-
-      
+      firstName: "Fooo",
+      lastName: "Bar",
+      fullName: "Foo Bar",
+      style1: false,
+      color: "red",
+      fontSize: "30",
+      fontWeight: "bold"
     };
   },
   computed: {
     messageComputed() {
-      return this.message.split("").reverse().join("")
+      return this.message
+        .split("")
+        .reverse()
+        .join("");
+    },
+    style1Change() {
+      return (this.style1 = true);
     }
   },
 
@@ -108,7 +138,10 @@ export default {
 
   beforeMount() {},
   mounted() {
-    this.message1 = this.message1.split("").reverse().join("");
+    this.message1 = this.message1
+      .split("")
+      .reverse()
+      .join("");
   },
   beforeUpdate() {},
   updated() {},
@@ -120,31 +153,31 @@ export default {
       //  alert("鼠标移入");
     },
     messageMethods() {
-      return this.message2.split("").reverse().join("")
+      return this.message2
+        .split("")
+        .reverse()
+        .join("");
     }
   },
-  watch: {
-
-
-      // firstName: 'Foo',
-      // lastName: 'Bar',
-      // fullName: 'Foo Bar'
-
-    firstName() {
-      this.fullName = "迪迪";
-    },
-    lastName() {
-      this.fullName = this.firstName + ' ' + val
-    }
-
-  }
+  watch: {}
 };
 </script>
 
 
 <style scoped lang="scss">
 .content {
-    padding-bottom: 200px;
+  padding-bottom: 200px;
+}
+
+/deep/ {
+  .red {
+    background-color: red;
+    // transition: all 0.3s;
+    transform: scale(1);
+    h1 {
+      background-color: green;
+    }
+  }
 }
 
 hr {
