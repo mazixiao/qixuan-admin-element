@@ -34,7 +34,6 @@
           <div :id="'list' + i">根据元素的下标动态的添加id:{{'list' + i}}，v-bind:id="'list' + i"：{{key}}</div>
         </div>
 
-        <!-- <el-button type="success" @[event]="doSomething">@[event]="doSomething"</el-button> -->
 
         <hr />
         <h1>计算属性computed</h1>
@@ -68,6 +67,51 @@
 
         <div v-if="Math.random() > 0.5">v-if="Math.random() > 0.5"能看见</div>
         <div v-else>v-else不能看见</div>
+        <hr />
+        <h1>循环</h1>
+        <p>
+          可以写: v-for="item of todos", 也可以写成v-for="item in todos",
+          <br />可以用 of 替代 in 作为分隔符
+        </p>
+        <ul v-for="(item, key, index) of todos" :key="index">
+          <li>下标：{{index}}， 键名：{{key}}， 键值：{{item}}</li>
+        </ul>
+        <br />
+        <ul v-for="item in evenNumbers" :key="item + 'q'">
+          <li>{{item}}</li>
+        </ul>
+
+        <p>组件上使用循环</p>
+        <testProp v-for="item in 3" :key="item + 'qq'"></testProp>
+
+        <input type="text" v-model="newTodoText" />
+        <el-button type="success" @click="addNewTodo">添加</el-button>
+
+        <ul>
+          <!-- is="todo-item" 代指<todo-item></todo-item> -->
+          <li
+            v-for="(todoItem, index) in todos1"
+            :key="todoItem.id"
+            :titleCon="todoItem.title"
+            is="todo-item"
+            @removeFun="remove(index)"
+          ></li>
+        </ul>
+        <!-- 也可以这样渲染(如下) -->
+        <hr>
+        <ul>
+          <todo-item
+            v-for="(todoItem, index) in todos1"
+            :key="todoItem.id"
+            :titleCon="todoItem.title"
+            @removeFun="remove(index)"
+          ></todo-item>
+        </ul>
+
+        <hr>
+        <h1>事件</h1>
+        <el-button type="success" @click="eventFun($event)">访问原始的 DOM 事件,传参 '$event'</el-button>
+
         <!------------------------------------------------------------------>
       </el-tab-pane>
     </el-tabs>
@@ -78,6 +122,7 @@
 <script>
 import commonHeader from "../../components/header";
 import testProp from "../../components/testProp";
+import todoItem from "../../components/todo-item";
 
 // 辅助函数（简写）
 import { mapState, mapGetters, mapMutations, mapActions } from "vuex";
@@ -86,7 +131,8 @@ export default {
   name: "study1",
   components: {
     commonHeader,
-    testProp
+    testProp,
+    todoItem
   },
   data() {
     return {
@@ -115,7 +161,24 @@ export default {
       style1: false,
       color: "red",
       fontSize: "30",
-      fontWeight: "bold"
+      fontWeight: "bold",
+      numbers: [1, 2, 3, 4, 5],
+      todos1: [
+        {
+          id: 1,
+          title: "Do the dishes"
+        },
+        {
+          id: 2,
+          title: "Take out the trash"
+        },
+        {
+          id: 3,
+          title: "Mow the lawn"
+        }
+      ],
+      newTodoText: "",
+      nextTodoId: 4
     };
   },
   computed: {
@@ -127,6 +190,11 @@ export default {
     },
     style1Change() {
       return (this.style1 = true);
+    },
+    evenNumbers() {
+      return this.numbers.filter(function(number) {
+        return number % 2 === 0;
+      });
     }
   },
 
@@ -157,6 +225,25 @@ export default {
         .split("")
         .reverse()
         .join("");
+    },
+    remove(index) {
+      this.todos1.splice(index, 1)
+    },
+    addNewTodo() {
+      this.todos1.push({
+        id: this.nextTodoId++,
+        title: this.newTodoText
+      });
+      this.newTodoText = "";
+    },
+    eventFun(event) {
+        this.$alert(event.target.innerHTML, '标题名称', {
+          confirmButtonText: '确定',
+          callback: action => {
+
+          }
+        });
+        console.log(event.target)
     }
   },
   watch: {}
