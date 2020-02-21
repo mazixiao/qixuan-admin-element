@@ -34,7 +34,6 @@
           <div :id="'list' + i">根据元素的下标动态的添加id:{{'list' + i}}，v-bind:id="'list' + i"：{{key}}</div>
         </div>
 
-
         <hr />
         <h1>计算属性computed</h1>
         <p>
@@ -98,7 +97,7 @@
           ></li>
         </ul>
         <!-- 也可以这样渲染(如下) -->
-        <hr>
+        <hr />
         <ul>
           <todo-item
             v-for="(todoItem, index) in todos1"
@@ -108,9 +107,42 @@
           ></todo-item>
         </ul>
 
-        <hr>
+        <hr />
         <h1>事件</h1>
         <el-button type="success" @click="eventFun($event)">访问原始的 DOM 事件,传参 '$event'</el-button>
+        <br />
+        <br />
+        <el-button type="success" @click="clickStop">
+          阻止单击事件继续传播
+          <el-button type="success" @click.stop="clickStop">阻止单击事件继续传播</el-button>
+        </el-button>
+        <br />
+        <br />
+        <form action @submit.prevent="onSubmit">
+          <input type="text" />
+          <br />v-on:submit.prevent ==》指在该表单中的任何提交按钮都可以触发该事件
+          <br />
+          <input type="submit" value="@submit.prevent提交事件不再重载页面" />
+        </form>
+
+        <br />
+        <p>v-on:click.capture, .capture 冒泡顺序</p>
+        <p>v-on:click.self, 即事件不是从内部元素触发的</p>
+        <el-button type="success" @click="clickCapture('我是一级')">
+          我是一级
+          <el-button type="success" @click.self="clickCapture('我是二级')">
+            我是二级(使用self不生效)
+            <el-button type="success" @click="clickCapture('我是三级')">我是三级</el-button>
+          </el-button>
+        </el-button>
+        <br />
+        <br />按下enter才会触发事件
+        <input v-on:keyup.enter="submit11()" />
+
+        <br>
+        <br>
+        <!-- 有且只有 Ctrl 被按下的时候才触发 -->
+        <el-button type="success" @click.ctrl.exact="onCtrlClick">按下ctrl且同时点击才会触发</el-button>
 
         <!------------------------------------------------------------------>
       </el-tab-pane>
@@ -227,7 +259,7 @@ export default {
         .join("");
     },
     remove(index) {
-      this.todos1.splice(index, 1)
+      this.todos1.splice(index, 1);
     },
     addNewTodo() {
       this.todos1.push({
@@ -237,13 +269,27 @@ export default {
       this.newTodoText = "";
     },
     eventFun(event) {
-        this.$alert(event.target.innerHTML, '标题名称', {
-          confirmButtonText: '确定',
-          callback: action => {
+      this.$alert(event.target.innerHTML, "标题名称", {
+        confirmButtonText: "确定",
+        callback: action => {}
+      });
+      console.log(event.target);
+    },
+    clickStop() {
+      alert("阻止事件继续传播");
+    },
+    onSubmit() {
+      alert(1);
+    },
+    clickCapture(con) {
+      alert(con);
+    },
 
-          }
-        });
-        console.log(event.target)
+    submit11() {
+      alert("enter提交");
+    },
+    onCtrlClick() {
+      alert("按下ctrl且同时点击");
     }
   },
   watch: {}
