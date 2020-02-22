@@ -139,10 +139,90 @@
         <br />按下enter才会触发事件
         <input v-on:keyup.enter="submit11()" />
 
-        <br>
-        <br>
+        <br />
+        <br />
         <!-- 有且只有 Ctrl 被按下的时候才触发 -->
         <el-button type="success" @click.ctrl.exact="onCtrlClick">按下ctrl且同时点击才会触发</el-button>
+
+        <hr />
+        <h1>表单输入绑定</h1>
+        <h3>v-model 会忽略所有表单元素的 value、checked、selected attribute 的初始值而总是将 Vue 实例的数据作为数据来源。你应该通过 JavaScript 在组件的 data 选项中声明初始值。</h3>
+        <input type="text" value="迪迪" v-model="value1" />
+        <p>{{value1}}</p>
+
+        <textarea name id cols="30" rows="10" v-model="value2"></textarea>
+        <p>textarea的值：{{value2}}</p>
+
+        <p>
+          复选框
+          <br />
+          <input type="checkbox" v-model="value3" />
+          {{value3}}
+        </p>
+
+        <div>
+          <input type="checkbox" value="11" id="value1_1" v-model="checkedNames" />
+          <label for="value1_1">11</label>
+          <input type="checkbox" value="22" id="value2_2" v-model="checkedNames" />
+          <label for="value2_2">22</label>
+          <input type="checkbox" value="33" id="value3_3" v-model="checkedNames" />
+          <label for="value3_3">33</label>
+          <p v-if="checkedNames.length != 0">选择了：{{checkedNames}}</p>
+        </div>
+
+        <div>
+          <br />单选框
+          <br />
+          <input type="radio" name="didi" value="one" v-model="picked" />
+          <input type="radio" name="didi" value="two" v-model="picked" />
+          <span>单选框内容: {{picked}}</span>
+        </div>
+
+        <div>
+          <br />选择框select
+          <br />
+          <select name id v-model="selected">
+            <option value="迪迪">迪迪</option>
+            <option value="乐乐">乐乐</option>
+            <option value="果果">果果</option>
+          </select>
+          <p>选中的内容：{{selected}}</p>
+          <br />
+
+          <p>用 v-for 渲染的动态选项：</p>
+          <select name id v-model="selected1">
+            <option v-for="item in selectArray" :value="item.value" :key="item.value">{{item.text}}</option>
+          </select>
+          <p>选中的内容：{{selected1}}</p>
+        </div>
+        <br />如果想自动将用户的输入值转为数值类型，可以给 v-model 添加 number 修饰符：
+        <br />
+        <input v-model.number="ages" type="number" />
+        <br />如果要自动过滤用户输入的首尾空白字符，可以给 v-model 添加 trim 修饰符：
+        <input v-model.trim="msg" />
+        <p>过滤首尾空白字符: {{msg}}</p>
+
+        <hr />
+        <h1>组件</h1>
+        <p>这两种写法功能一致:</p>
+        <custom-input :valueCon="searchText" @inputPerent="searchTextFun($event)"></custom-input>
+        <custom-input :valueCon="searchText" @inputPerent="searchText = $event"></custom-input>
+        <p>父组件接收的内容： {{searchText}}</p>
+
+        <br />
+        <hr />
+        <h1>插槽</h1>
+        <slotTest>
+          <!-- <template v-slot:title>
+            作为子组件的插槽中显示的内容(标题)
+          </template>-->
+          <!-- 简写 -->
+          <template #title>作为子组件的插槽中显示的内容(标题)</template>
+          <template #con>作为子组件的插槽中显示的内容(内容)</template>
+
+          <!-- 作用域插槽(看不明白) -->
+          <template v-slot="con2">作用域插槽: {{con2.user.aa}}</template>
+        </slotTest>
 
         <!------------------------------------------------------------------>
       </el-tab-pane>
@@ -155,6 +235,8 @@
 import commonHeader from "../../components/header";
 import testProp from "../../components/testProp";
 import todoItem from "../../components/todo-item";
+import customInput from "../../components/custom-input";
+import slotTest from "../../components/slot-test";
 
 // 辅助函数（简写）
 import { mapState, mapGetters, mapMutations, mapActions } from "vuex";
@@ -164,7 +246,9 @@ export default {
   components: {
     commonHeader,
     testProp,
-    todoItem
+    todoItem,
+    customInput,
+    slotTest
   },
   data() {
     return {
@@ -210,7 +294,34 @@ export default {
         }
       ],
       newTodoText: "",
-      nextTodoId: 4
+      nextTodoId: 4,
+      value1: "乐乐",
+      value2: "乐乐",
+      value3: false,
+      checkedNames: [],
+      picked: "one",
+      selected: "迪迪",
+      selected1: "迪迪",
+      selectArray: [
+        {
+          text: "迪迪",
+          value: "迪迪"
+        },
+        {
+          text: "乐乐",
+          value: "乐乐"
+        },
+        {
+          text: "果果",
+          value: "果果"
+        }
+      ],
+      ages: "10",
+      msg: "",
+      searchText: "乐乐",
+      con2222: {
+        firstName: "乐乐"
+      }
     };
   },
   computed: {
@@ -290,6 +401,9 @@ export default {
     },
     onCtrlClick() {
       alert("按下ctrl且同时点击");
+    },
+    searchTextFun(e) {
+      this.searchText = e;
     }
   },
   watch: {}
