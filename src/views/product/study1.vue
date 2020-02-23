@@ -212,6 +212,7 @@
         <br />
         <hr />
         <h1>插槽</h1>
+        <p>注意 v-slot 只能添加在 template标签上</p>
         <slotTest>
           <!-- <template v-slot:title>
             作为子组件的插槽中显示的内容(标题)
@@ -220,9 +221,43 @@
           <template #title>作为子组件的插槽中显示的内容(标题)</template>
           <template #con>作为子组件的插槽中显示的内容(内容)</template>
 
-          <!-- 作用域插槽(看不明白) -->
-          <template v-slot="con2">作用域插槽: {{con2.user.aa}}</template>
+          <!-- 作用域插槽 -->
+          <template #con2="slotProps">作用域插槽: {{slotProps.userName.name1}}</template>
         </slotTest>
+
+        <hr />
+        <h1>动态组件</h1>
+        <br />
+        <el-button
+          type="success"
+          :class="{activeTab: currentTab === index}"
+          @click="tabsFun(tab, index)"
+          v-for="(tab, index) in tabs"
+          :key="tab"
+        >{{tab}}</el-button>
+        <!-- <dynamic1></dynamic1>
+        <dynamic2></dynamic2>
+        <dynamic3></dynamic3>-->
+        <!-- 三个组件被做成tab切换里的内容 -->
+        <component :is="currentTabComponent"></component>
+        <br />
+        <h1>在动态组件上使用 keep-alive</h1>
+        <p>当在这些组件之间切换的时候，你有时会想保持这些组件的状态，以避免反复重渲染导致的性能问题。</p>
+        <br />
+        <el-button
+          type="success"
+          :class="{activeTab: currentTabkeepAlive === index}"
+          @click="tabskeepAliveFun(tab, index)"
+          v-for="(tab, index) in tabskeepAlive"
+          :key="tab"
+        >{{tab}}</el-button>
+        <br />
+        <br />
+        <!-- 失活的组件将会被缓存！ -->
+        <keep-alive>
+          <!-- 三个组件被做成tab切换里的内容 -->
+          <component :is="currentTabComponentkeepAlive"></component>
+        </keep-alive>
 
         <!------------------------------------------------------------------>
       </el-tab-pane>
@@ -237,6 +272,14 @@ import testProp from "../../components/testProp";
 import todoItem from "../../components/todo-item";
 import customInput from "../../components/custom-input";
 import slotTest from "../../components/slot-test";
+// 动态组件
+import dynamic1 from "../../components/dynamic/dynamic1";
+import dynamic2 from "../../components/dynamic/dynamic2";
+import dynamic3 from "../../components/dynamic/dynamic3";
+// 动态组件(keep-alive)
+import keepAlive1 from "../../components/keepAlive/keepAlive1";
+import keepAlive2 from "../../components/keepAlive/keepAlive2";
+import keepAlive3 from "../../components/keepAlive/keepAlive3";
 
 // 辅助函数（简写）
 import { mapState, mapGetters, mapMutations, mapActions } from "vuex";
@@ -248,7 +291,13 @@ export default {
     testProp,
     todoItem,
     customInput,
-    slotTest
+    slotTest,
+    dynamic1,
+    dynamic2,
+    dynamic3,
+    keepAlive1,
+    keepAlive2,
+    keepAlive3
   },
   data() {
     return {
@@ -321,7 +370,11 @@ export default {
       searchText: "乐乐",
       con2222: {
         firstName: "乐乐"
-      }
+      },
+      currentTab: 0,
+      tabs: ["tab1", "tab2", "tab3"],
+      currentTabkeepAlive: 0,
+      tabskeepAlive: ["tabskeepAlive1", "tabskeepAlive2", "tabskeepAlive3"]
     };
   },
   computed: {
@@ -338,6 +391,16 @@ export default {
       return this.numbers.filter(function(number) {
         return number % 2 === 0;
       });
+    },
+    // 动态组件
+    currentTabComponent() {
+      let currentTabPlus = this.currentTab + 1;
+      return "dynamic" + currentTabPlus;
+    },
+    // 动态组件(keep-alive)
+    currentTabComponentkeepAlive() {
+      let currentTabPlus = this.currentTabkeepAlive + 1;
+      return "keepAlive" + currentTabPlus;
     }
   },
 
@@ -404,6 +467,12 @@ export default {
     },
     searchTextFun(e) {
       this.searchText = e;
+    },
+    tabsFun(tab, index) {
+      this.currentTab = index;
+    },
+    tabskeepAliveFun(tab, index) {
+      this.currentTabkeepAlive = index;
     }
   },
   watch: {}
@@ -443,6 +512,10 @@ hr {
 /* .slide-fade-leave-active for below version 2.1.8 */ {
   transform: translateX(10px);
   opacity: 0;
+}
+
+.activeTab {
+  background-color: red;
 }
 </style>
 

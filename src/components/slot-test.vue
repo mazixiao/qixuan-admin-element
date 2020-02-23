@@ -2,16 +2,14 @@
   <div>
     下面是从父组件传过来的内容作为插槽写入：
     <h2>
-      <slot name="title"></slot>
+      <slot name="title">啦啦啦啦(这叫后备内容，当父集不提供任何插槽内容时会显示)</slot>
     </h2>
     <p>
       <slot name="con"></slot>
     </p>
-
-    <p>
-      <slot name="con2" :user="user">
-          {{ user.bb }}
-      </slot>
+    <!-- 作用域插槽 -->
+    <p style="background: red">
+      <slot name="con2" :userName="userName">{{ userName.name2 }}</slot>
     </p>
   </div>
 </template>
@@ -28,9 +26,9 @@ export default {
   },
   data() {
     return {
-      user: {
-        aa: "迪迪",
-        bb: "乐乐"
+      userName: {
+        name1: "迪迪11",
+        name2: "乐乐22"
       }
     };
   },
