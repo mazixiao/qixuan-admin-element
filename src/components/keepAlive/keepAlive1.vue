@@ -10,9 +10,11 @@
       :key="tab"
     >{{tab}}</el-button>
     <div class="tab-con">
-      <strong v-show="currentTabTit === index" v-for="(item, index) in tabCon" :key="index">
-        {{item}}
-      </strong>
+      <transition-group name="list-complete">
+        <strong class="list-complete-item" v-if="currentTabTit === index" v-for="(item, index) in tabCon" :key="index">
+          {{item}}
+        </strong>
+      </transition-group>
     </div>
 
   </div>
@@ -69,8 +71,24 @@ export default {
 
 <style scoped lang="scss">
   .activeTab {
-    background-color: pink;
+    background-color: pink; 
   }
+
+
+
+.list-complete-item {
+  transition: all 1s;
+}
+.list-complete-enter, .list-complete-leave-to {
+  opacity: 0;
+  transform: translateY(30px);
+}
+.list-complete-leave-active {
+  position: absolute;
+}
+
+
+
 </style>
 
 

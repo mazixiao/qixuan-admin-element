@@ -3,7 +3,7 @@
   <div class="content">
     <commonHeader></commonHeader>
     <el-tabs v-model="activeName" class="common-tab">
-      <el-tab-pane :label="activeName" name="first">
+      <el-tab-pane label="vue学习1" name="first">
         <el-button type="success" v-on:click="show1 = !show1">动画切换</el-button>
         <transition name="didi1">
           <p v-show="show1" style="width:100px;height: 100px;background:green">hello</p>
@@ -256,9 +256,19 @@
         <!-- 失活的组件将会被缓存！ -->
         <keep-alive>
           <!-- 三个组件被做成tab切换里的内容 -->
-          <component :is="currentTabComponentkeepAlive"></component>
+            <component :is="currentTabComponentkeepAlive"></component>
         </keep-alive>
+        <br>
 
+        <hr>
+        <h1>混入 (mixin)</h1>
+        <p>我是从commonMixin.js传过来的值：{{this.mixin1}}</p>
+        <p>被计算过后的值： {{mixin1Con}}</p>
+        <br>
+        
+        <p>
+          同名钩子函数将合并为一个数组，因此都将被调用。另外，混入对象的钩子将在组件自身钩子之前调用。
+        </p>
         <!------------------------------------------------------------------>
       </el-tab-pane>
     </el-tabs>
@@ -280,6 +290,8 @@ import dynamic3 from "../../components/dynamic/dynamic3";
 import keepAlive1 from "../../components/keepAlive/keepAlive1";
 import keepAlive2 from "../../components/keepAlive/keepAlive2";
 import keepAlive3 from "../../components/keepAlive/keepAlive3";
+// 混入 (mixin)
+import commonMixin from "../../assets/js/commonMixin.js";
 
 // 辅助函数（简写）
 import { mapState, mapGetters, mapMutations, mapActions } from "vuex";
@@ -377,6 +389,8 @@ export default {
       tabskeepAlive: ["tabskeepAlive1", "tabskeepAlive2", "tabskeepAlive3"]
     };
   },
+  // 混入 (mixin)
+  mixins:[commonMixin],
   computed: {
     messageComputed() {
       return this.message
@@ -401,10 +415,15 @@ export default {
     currentTabComponentkeepAlive() {
       let currentTabPlus = this.currentTabkeepAlive + 1;
       return "keepAlive" + currentTabPlus;
+    },
+    mixin1Con() {
+      return this.mixin1 + 100;
     }
   },
 
-  created: function() {},
+  created: function() {
+    console.log('组件钩子被调用');
+  },
 
   beforeCreate() {},
 
@@ -412,10 +431,9 @@ export default {
 
   beforeMount() {},
   mounted() {
-    this.message1 = this.message1
-      .split("")
-      .reverse()
-      .join("");
+    this.message1 = this.message1.split("").reverse().join("");
+    // 调用commonMixin.js里的方法
+    this.sayHello();
   },
   beforeUpdate() {},
   updated() {},
@@ -473,7 +491,9 @@ export default {
     },
     tabskeepAliveFun(tab, index) {
       this.currentTabkeepAlive = index;
-    }
+    },
+
+
   },
   watch: {}
 };
@@ -517,6 +537,18 @@ hr {
 .activeTab {
   background-color: red;
 }
+
+.list-complete-item {
+  transition: all 1s;
+}
+.list-complete-enter, .list-complete-leave-to {
+  opacity: 0;
+  transform: translateY(30px);
+}
+.list-complete-leave-active {
+  position: absolute;
+}
+
 </style>
 
 

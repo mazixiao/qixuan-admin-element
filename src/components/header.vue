@@ -186,6 +186,11 @@ export default {
               label: "vue学习1",
               path: "/product/study1",
             },
+            {
+              value: "3-4",
+              label: "vue学习2",
+              path: "/product/study2",
+            },
           ]
         },
         {

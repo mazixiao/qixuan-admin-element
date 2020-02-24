@@ -25,6 +25,7 @@ import printingRawCodeOrdeAdd from '@/views/printing/rawCode/orderAdd'
 import product from '@/views/product/product'
 import productVuex from '@/views/product/productVuex'
 import study1 from '@/views/product/study1'
+import study2 from '@/views/product/study2'
 
 // 手机页面设置
 import mobileAntiFake from '@/views/mobile/antiFake'
@@ -125,11 +126,14 @@ export default new Router({
 				title: 'vue学习1'
 			},
 		},
-
-
-
-
-
+		{
+			path: '/product/study2',
+			name: 'study2',
+			component: study2,
+			meta: {
+				title: 'vue学习2'
+			},
+		},
 		{
 			path: '/mobile/antiFake',
 			name: 'mobileAntiFake',
@@ -138,7 +142,6 @@ export default new Router({
 				title: '防伪页面管理'
 			},
 		},
-
 		{
 			path: '/basics/firmManage',
 			name: 'basicsFirmManage',
@@ -163,10 +166,6 @@ export default new Router({
 				title: '客户管理'
 			},
 		},
-
-
-
-
 
 
 	],
