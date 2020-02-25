@@ -380,7 +380,7 @@ export default {
         return "/printing/rawCode/rule";
       } else if (this.$route.path == "/printing/rawCode/orderAdd/123") {
         return "/printing/rawCode/orde";
-      }
+      };
       return this.$route.path;
     },
 

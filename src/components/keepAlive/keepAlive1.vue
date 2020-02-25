@@ -1,7 +1,7 @@
 <template>
   <div>
     <h3>组件1(keep-alive)</h3>
-    <br>
+    <br />
     <el-button
       type="success"
       :class="{activeTab: currentTabTit === index}"
@@ -9,14 +9,18 @@
       v-for="(tab, index) in tabsTit"
       :key="tab"
     >{{tab}}</el-button>
+
     <div class="tab-con">
       <transition-group name="list-complete">
-        <strong class="list-complete-item" v-if="currentTabTit === index" v-for="(item, index) in tabCon" :key="index">
-          {{item}}
-        </strong>
+        <template v-for="(item, index) in tabCon">
+          <strong
+            class="list-complete-item"
+            v-if="currentTabTit === index"
+            :key="index"
+          >{{item}}, 使用template在外层套一个用来循环，能够解决v-for和v-if同时使用的问题</strong>
+        </template>
       </transition-group>
     </div>
-
   </div>
 </template>
 
@@ -34,16 +38,8 @@ export default {
     return {
       currentTabTit: 0,
       currentTabCon: 0,
-      tabsTit: [
-        "按钮1",
-        "按钮2",
-        "按钮3",
-      ],
-      tabCon: [
-        "我是内容1",
-        "我是内容2",
-        "我是内容3",
-      ]
+      tabsTit: ["按钮1", "按钮2", "按钮3"],
+      tabCon: ["我是内容1", "我是内容2", "我是内容3"]
     };
   },
   computed: {},
@@ -62,7 +58,7 @@ export default {
 
   methods: {
     tabsFun(tab, index) {
-        this.currentTabTit = index;
+      this.currentTabTit = index;
     }
   }
 };
@@ -70,25 +66,21 @@ export default {
 
 
 <style scoped lang="scss">
-  .activeTab {
-    background-color: pink; 
-  }
-
-
+.activeTab {
+  background-color: pink;
+}
 
 .list-complete-item {
   transition: all 1s;
 }
-.list-complete-enter, .list-complete-leave-to {
+.list-complete-enter,
+.list-complete-leave-to {
   opacity: 0;
   transform: translateY(30px);
 }
 .list-complete-leave-active {
   position: absolute;
 }
-
-
-
 </style>
 
 
