@@ -26,6 +26,10 @@ import product from '@/views/product/product'
 import productVuex from '@/views/product/productVuex'
 import study1 from '@/views/product/study1'
 import study2 from '@/views/product/study2'
+// 路由学习
+import routerStudy1 from '@/views/product/routerStudy/routerStudy1'
+import router1 from '@/views/product/routerStudy/router1'
+import router2 from '@/views/product/routerStudy/router2'
 
 // 手机页面设置
 import mobileAntiFake from '@/views/mobile/antiFake'
@@ -134,6 +138,40 @@ export default new Router({
 				title: 'vue学习2'
 			},
 		},
+		{
+			path: '/product/routerStudy/routerStudy1',
+			name: 'routerStudy1',
+			component: routerStudy1,
+			meta: {
+				title: '学习路由1'
+			},
+			children: [
+				// {
+				// 	path: '',
+				// 	name: 'router1',
+				// 	component: router1
+				// },
+				{
+					path: 'router1',
+					name: 'router1',
+					component: router1,
+					meta: {
+						title: '路由学习1'
+					},
+				},
+				{
+					path: 'router2',
+					name: 'router2',
+					component: router2,
+					meta: {
+						title: '路由学习22'
+					},
+				},
+			],
+			// 想要默认展示的子路由名字
+			redirect: '/product/routerStudy/routerStudy1/router1'
+		},
+
 		{
 			path: '/mobile/antiFake',
 			name: 'mobileAntiFake',

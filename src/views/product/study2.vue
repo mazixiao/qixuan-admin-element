@@ -50,10 +50,16 @@
         <br />
 
         <p ref="myWidth" v-if="showMe">{{ message }}</p>
-        <button @click="getMyWidth">获取p元素宽度</button>
+        <el-button type="success" @click="getMyWidth">获取p元素宽度</el-button>
+        <br>
+        <br>
+        <el-button type="success" @click="showInputFun">点击按钮显示下面的输入框并且获取焦点</el-button>
+        <br>
+        <br>
+        <input type="text" v-if="showInput" id="keywords">
 
-        <!-- https://segmentfault.com/a/1190000012861862?utm_source=tag-newest -->
-        <!-- https://www.jianshu.com/p/a7550c0e164f -->
+
+
 
         <!------------------------------------------------------------------>
       </el-tab-pane>
@@ -90,7 +96,8 @@ export default {
       msg2: "",
       msg3: "",
       showMe: false,
-      message: "迪迪"
+      message: "迪迪",
+      showInput: false
     };
   },
   // 自定义指令
@@ -147,6 +154,15 @@ export default {
         //dom元素更新后执行，此时能拿到p元素的属性
         this.message = this.$refs.myWidth.offsetWidth;
       });
+    },
+    showInputFun() {
+      this.showInput = true;
+      // this.$nextTick(function() {
+      //   document.getElementById("keywords").focus();
+      // });
+      this.$nextTick(() => {
+        document.getElementById("keywords").focus();
+      })
     }
   },
   watch: {

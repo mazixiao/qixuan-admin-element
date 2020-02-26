@@ -4,7 +4,6 @@
 
 <template>
   <div class="header">
-
     <el-scrollbar style="height: 100%;overflow-x:hidden">
       <div class="logo-wrap">
         <img class="logo" src="../assets/img/logo.png" alt />
@@ -85,7 +84,7 @@ export default {
   props: {
     title99: {
       type: String,
-      default: '迪迪',
+      default: "迪迪"
     }
   },
   data() {
@@ -94,7 +93,6 @@ export default {
       // activeIndex: "2-1-1",
       // // //   导航第二个默认展开
       // openeds: ["2", "2-1", "2-1-1"],
-
 
       // // 导航默认高亮
       activeIndex: "1",
@@ -169,28 +167,40 @@ export default {
           value: "3",
           label: "学习vue",
           icon: icon3,
-          
+
           children: [
             {
               value: "3-1",
               label: "普通组件通信",
-              path: "/product/product",
+              path: "/product/product"
             },
             {
               value: "3-2",
               label: "vuex组件通信",
-              path: "/product/productVuex",
+              path: "/product/productVuex"
             },
             {
               value: "3-3",
               label: "vue学习1",
-              path: "/product/study1",
+              path: "/product/study1"
             },
             {
               value: "3-4",
               label: "vue学习2",
-              path: "/product/study2",
+              path: "/product/study2"
             },
+            {
+              value: "3-5",
+              label: "学习路由",
+              icon: icon3,
+              children: [
+                {
+                  value: "3-5-1",
+                  label: "学习路由1",
+                  path: "/product/routerStudy/routerStudy1"
+                }
+              ]
+            }
           ]
         },
         {
@@ -202,8 +212,7 @@ export default {
               value: "4-1-1",
               label: "防伪页面管理",
               path: "/mobile/antiFake"
-              
-            },
+            }
             // {
             //   value: "4-1-2",
             //   label: "追溯页面管理"
@@ -231,7 +240,6 @@ export default {
               value: "5-1-1",
               label: "企业管理",
               path: "/basics/firmManage"
-              
             },
             {
               value: "5-1-2",
@@ -253,14 +261,14 @@ export default {
             {
               value: "5-1-6",
               label: "客户管理",
-              path: '/basics/client',
-            },
+              path: "/basics/client"
+            }
             // {
             //   value: "5-1-7",
             //   label: "产品BOM清单"
             // }
           ]
-        },
+        }
         // {
         //   value: "6",
         //   label: "智能营销",
@@ -380,7 +388,7 @@ export default {
         return "/printing/rawCode/rule";
       } else if (this.$route.path == "/printing/rawCode/orderAdd/123") {
         return "/printing/rawCode/orde";
-      };
+      }
       return this.$route.path;
     },
 
