@@ -1,7 +1,7 @@
 
 <template>
-  <div class="content">
-    <commonHeader></commonHeader>
+  <div class="content-touter">
+    <!-- <commonHeader></commonHeader> -->
     <h1>路由组件2</h1>
   </div>
 </template>

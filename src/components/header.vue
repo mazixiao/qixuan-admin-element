@@ -388,6 +388,8 @@ export default {
         return "/printing/rawCode/rule";
       } else if (this.$route.path == "/printing/rawCode/orderAdd/123") {
         return "/printing/rawCode/orde";
+      } else if (this.$route.path == "/product/routerStudy/routerStudy1/router1" || this.$route.path == "/product/routerStudy/routerStudy1/router2") {
+        return "/product/routerStudy/routerStudy1";
       }
       return this.$route.path;
     },

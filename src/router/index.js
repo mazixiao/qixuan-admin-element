@@ -143,20 +143,26 @@ export default new Router({
 			name: 'routerStudy1',
 			component: routerStudy1,
 			meta: {
-				title: '学习路由1'
+				title: '学习路由1',
 			},
 			children: [
-				// {
-				// 	path: '',
-				// 	name: 'router1',
-				// 	component: router1
-				// },
+				// 默认渲染一些东西, 可以提供一个空的子路由
+				{
+					path: '',
+					name: 'router1',
+					component: router1,
+					meta: {
+						title: '路由学习1',
+						index: 0,
+					},
+				},
 				{
 					path: 'router1',
 					name: 'router1',
 					component: router1,
 					meta: {
-						title: '路由学习1'
+						title: '路由学习1',
+						index: 0,
 					},
 				},
 				{
@@ -164,12 +170,11 @@ export default new Router({
 					name: 'router2',
 					component: router2,
 					meta: {
-						title: '路由学习22'
+						title: '路由学习22',
+						index: 1,
 					},
 				},
 			],
-			// 想要默认展示的子路由名字
-			redirect: '/product/routerStudy/routerStudy1/router1'
 		},
 
 		{
