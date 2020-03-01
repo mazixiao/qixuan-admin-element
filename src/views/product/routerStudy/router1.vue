@@ -3,6 +3,15 @@
   <div class="content-touter">
       <!-- <commonHeader></commonHeader> -->
     <h1>路由组件1</h1>
+
+    <!-- 模拟复选框测试 -->
+
+    <div>
+      <p v-for="item in arr" :key="item" @click="checkboxFun(item)">
+        <span :class="[checkbox.indexOf(item) != -1 ? 'red': '']">0</span>
+        {{item}}
+      </p>
+    </div>
   </div>
 </template>
 
@@ -26,6 +35,9 @@ export default {
       activeName: "first",
       show: true,
       value1: "ad",
+      arr: ["贝贝", "晶晶", "欢欢"],
+      checkbox: [],
+      didi: []
     };
   },
   // 自定义指令
@@ -53,6 +65,19 @@ export default {
 
   methods: {
 
+    checkboxFun(item) {
+      var item_s = this.checkbox.indexOf(item);
+      if(item_s == -1) {
+        this.checkbox.push(item);
+      } else {
+        this.checkbox.splice(item_s, 1);
+      };
+      console.log(this.checkbox);
+
+      
+
+
+    }
 
 
   },
@@ -67,6 +92,9 @@ export default {
 .content {
   padding-bottom: 200px;
   margin-left: 50px;
+}
+.red {
+  color: red;
 }
 
 /deep/ {

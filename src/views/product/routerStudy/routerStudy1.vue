@@ -12,14 +12,29 @@
           v-for="(item, index) in routers"
           :to="{path: item.url}"
           :key="index"
-        >
-        {{item.name}}
-        </router-link>
+        >{{item.name}}</router-link>
 
         <!-- 路由匹配到的组件将渲染在这里 -->
         <router-view></router-view>
 
         <p>这个页面的其他内容</p>
+
+
+
+        <!-- 模拟多选框 -->
+        <!-- https://blog.csdn.net/a_grain_of_wheat/article/details/93159391 -->
+        <div>
+          <div
+            @click="selectReason($event, index)"
+            :class="selectArr.indexOf(index) != -1?'selectColor':''"
+            v-for="(item, index) in peoples"
+            :key="index"
+          >
+            <span v-if="selectArr.indexOf(index) != -1">被选中</span>
+            <span v-else>点击选中</span>
+            <strong>{{item}}</strong>
+          </div>
+        </div>
 
         <!------------------------------------------------------------------>
       </el-tab-pane>
@@ -58,7 +73,10 @@ export default {
           url: "/product/routerStudy/routerStudy1/router2",
           name: "跳转路由组件2"
         }
-      ]
+      ],
+      peoples: ["迪迪", "乐乐", "果果"],
+      selectArr: [],
+      con: []
     };
   },
   // 自定义指令
@@ -72,32 +90,30 @@ export default {
 
   beforeCreate() {},
 
-  created() {
-
-
-  },
+  created() {},
 
   beforeMount() {},
   mounted() {
-    console.log(this.$route.meta.index);
 
-    // if (this.$route.path == "/product/routerStudy/routerStudy1") {
-    //   this.$route.path = "/product/routerStudy/routerStudy1/router1"
-    //   // alert(1)
-    // }
-
-  // this.router.beforeEach((to, from, next) => {
-  //   // `to` 和 `from` 都是路由对象
-  //   console.log(to, "to");
-  //   console.log(from, "from");
-  //   console.log(next, "next");
-  // })
 
   },
   beforeUpdate() {},
   updated() {},
 
-  methods: {},
+  methods: {
+    selectReason(event, index) {
+      let indexItem = this.selectArr.indexOf(index);
+      let item = event.currentTarget.querySelector("strong").innerHTML;
+      if (indexItem == -1) {
+        this.selectArr.push(index);
+        this.con.push(item);
+        console.log(this.con);
+      } else {
+        this.selectArr.splice(indexItem, 1);
+        this.con.splice(indexItem, 1);
+      }
+    }
+  },
   watch: {}
 };
 </script>
@@ -113,8 +129,14 @@ export default {
   margin: 5px;
 }
 
-.router-link-active, .link-active {
+.router-link-active,
+.link-active {
   color: red;
+}
+.selectColor {
+  strong {
+    color: red;
+  }
 }
 
 /deep/ {
