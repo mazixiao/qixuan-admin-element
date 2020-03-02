@@ -11,6 +11,7 @@
         <span :class="[checkbox.indexOf(item) != -1 ? 'red': '']">0</span>
         {{item}}
       </p>
+      <strong>选中了： {{checkbox}}</strong>
     </div>
   </div>
 </template>
@@ -37,7 +38,6 @@ export default {
       value1: "ad",
       arr: ["贝贝", "晶晶", "欢欢"],
       checkbox: [],
-      didi: []
     };
   },
   // 自定义指令
@@ -72,11 +72,6 @@ export default {
       } else {
         this.checkbox.splice(item_s, 1);
       };
-      console.log(this.checkbox);
-
-      
-
-
     }
 
 

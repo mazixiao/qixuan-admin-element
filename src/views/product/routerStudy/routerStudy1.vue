@@ -7,6 +7,17 @@
         <!-- <h1>自定义指令</h1> -->
         <br />
 
+        <div>
+          <el-button
+            v-for="(item, index) in routers"
+            :to="{path: item.url}"
+            :key="index"
+            type="success"
+            @click="routerLink(item, index)"
+            :class="[$route.meta.index === index ? 'red': '' ]"
+          >点击跳转{{item.name}}</el-button>
+        </div>
+
         <router-link
           :class="['link', $route.meta.index === index ? 'link-active': '' ]"
           v-for="(item, index) in routers"
@@ -18,8 +29,6 @@
         <router-view></router-view>
 
         <p>这个页面的其他内容</p>
-
-
 
         <!-- 模拟多选框 -->
         <!-- https://blog.csdn.net/a_grain_of_wheat/article/details/93159391 -->
@@ -67,11 +76,11 @@ export default {
       routers: [
         {
           url: "/product/routerStudy/routerStudy1/router1",
-          name: "跳转路由组件1"
+          name: "路由组件1"
         },
         {
           url: "/product/routerStudy/routerStudy1/router2",
-          name: "跳转路由组件2"
+          name: "路由组件2"
         }
       ],
       peoples: ["迪迪", "乐乐", "果果"],
@@ -93,10 +102,7 @@ export default {
   created() {},
 
   beforeMount() {},
-  mounted() {
-
-
-  },
+  mounted() {},
   beforeUpdate() {},
   updated() {},
 
@@ -112,6 +118,9 @@ export default {
         this.selectArr.splice(indexItem, 1);
         this.con.splice(indexItem, 1);
       }
+    },
+    routerLink(item, index) {
+      this.$router.push(item.url)
     }
   },
   watch: {}
@@ -127,6 +136,9 @@ export default {
 .link {
   padding: 5px;
   margin: 5px;
+}
+.red {
+  background-color: red;
 }
 
 .router-link-active,
