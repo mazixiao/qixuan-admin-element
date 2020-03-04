@@ -10,7 +10,6 @@
         <div>
           <el-button
             v-for="(item, index) in routers"
-            :to="{path: item.url}"
             :key="index"
             type="success"
             @click="routerLink(item, index)"
@@ -34,15 +33,16 @@
         <!-- https://blog.csdn.net/a_grain_of_wheat/article/details/93159391 -->
         <div>
           <div
-            @click="selectReason($event, index)"
-            :class="selectArr.indexOf(index) != -1?'selectColor':''"
+            @click="selectReason(item, index)"
+            :class="selectArr.indexOf(item) != -1?'selectColor':''"
             v-for="(item, index) in peoples"
             :key="index"
           >
-            <span v-if="selectArr.indexOf(index) != -1">被选中</span>
+            <span v-if="selectArr.indexOf(item) != -1">被选中</span>
             <span v-else>点击选中</span>
             <strong>{{item}}</strong>
           </div>
+          我选中了：{{selectArr}}
         </div>
 
         <!------------------------------------------------------------------>
@@ -84,8 +84,7 @@ export default {
         }
       ],
       peoples: ["迪迪", "乐乐", "果果"],
-      selectArr: [],
-      con: []
+      selectArr: []
     };
   },
   // 自定义指令
@@ -102,25 +101,72 @@ export default {
   created() {},
 
   beforeMount() {},
-  mounted() {},
+  mounted() {
+    var arr = [11, 12, 13, 14, 15, 16, 17, 18];
+
+    // arr.forEach(function(index, item) {
+    //   // console.log(index);
+    //   // console.log(item);
+    // });
+
+    // arr.map((index, item) => {
+    //   // console.log(index);
+    //   // console.log(item);
+    // });
+
+
+    // filter()：“过滤”功能，数组中的每一项运行给定函数，返回满足过滤条件组成的数组。
+    var arr2 = arr.filter((item, index) => {
+      return item % 3 === 0;
+    });
+    console.log(arr2);
+
+    // every()：判断数组中每一项都是否满足条件，只有所有项都满足条件，才会返回true。
+    var arr3 = arr.every(item => {
+      return item > 1;
+    });
+
+    console.log(arr3);
+
+    // some()：判断数组中是否存在满足条件的项，只要有一项满足条件，就会返回true。
+    var arr4 = arr.some(item => {
+      return item < 1;
+    });
+    console.log(arr4);
+
+  arr.reduce((item, index)=> {
+    console.log(item)
+    console.log(index)
+  })
+
+// js遍历跳出循环
+// https://blog.csdn.net/guxin_duyin/article/details/82980062
+
+  },
   beforeUpdate() {},
   updated() {},
 
   methods: {
-    selectReason(event, index) {
-      let indexItem = this.selectArr.indexOf(index);
-      let item = event.currentTarget.querySelector("strong").innerHTML;
+    sortFun(value1, value2) {
+      if (value1 < value2) {
+        return -1;
+      } else if (value1 > value2) {
+        return 1;
+      } else {
+        return 0;
+      }
+    },
+
+    selectReason(item, index) {
+      let indexItem = this.selectArr.indexOf(item);
       if (indexItem == -1) {
-        this.selectArr.push(index);
-        this.con.push(item);
-        console.log(this.con);
+        this.selectArr.push(item);
       } else {
         this.selectArr.splice(indexItem, 1);
-        this.con.splice(indexItem, 1);
       }
     },
     routerLink(item, index) {
-      this.$router.push(item.url)
+      this.$router.push(item.url);
     }
   },
   watch: {}
