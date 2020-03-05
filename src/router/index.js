@@ -43,6 +43,9 @@ import basicsFactoryManage from '@/views/basics/factoryManage'
 //客户管理
 import basicsClient from '@/views/basics/client'
 
+// 404
+import notfind404 from '@/views/404'
+
 Vue.use(Router)
 
 export default new Router({
@@ -140,7 +143,9 @@ export default new Router({
 		},
 		{
 			path: '/product/routerStudy/routerStudy1',
-			name: 'routerStudy1',
+			// https://blog.csdn.net/weixin_39015132/article/details/83614689
+			// 这是因为我们为一级路由设置了默认的子路由，实际是访问了设置的子路由，所以把一级路由的name属性去掉即可。
+			// name: 'routerStudy1',
 			component: routerStudy1,
 			meta: {
 				title: '学习路由1',
@@ -149,7 +154,9 @@ export default new Router({
 				// 默认渲染一些东西, 可以提供一个空的子路由
 				{
 					path: '',
-					name: 'router1',
+					// https://blog.csdn.net/weixin_39015132/article/details/83614689
+					// name要保证唯一性(页面上只能有一个)
+					// name: 'router1',
 					component: router1,
 					meta: {
 						title: '路由学习1',
@@ -166,7 +173,7 @@ export default new Router({
 					},
 				},
 				{
-					path: 'router2',
+					path: 'router2/:id',
 					name: 'router2',
 					component: router2,
 					meta: {
@@ -209,6 +216,16 @@ export default new Router({
 				title: '客户管理'
 			},
 		},
+
+		{
+			path: '*',
+			name: 'notfind404',
+			component: notfind404,
+			meta: {
+				title: '404页面'
+			},
+		},
+
 
 
 	],

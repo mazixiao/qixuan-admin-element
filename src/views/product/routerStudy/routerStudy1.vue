@@ -7,6 +7,7 @@
         <!-- <h1>自定义指令</h1> -->
         <br />
 
+        <p>这个页面的其他内容</p>
         <div>
           <el-button
             v-for="(item, index) in routers"
@@ -22,7 +23,10 @@
           v-for="(item, index) in routers"
           :to="{path: item.url}"
           :key="index"
+          replace
         >{{item.name}}</router-link>
+
+
 
         <!-- 路由匹配到的组件将渲染在这里 -->
         <router-view></router-view>
@@ -45,6 +49,8 @@
           我选中了：{{selectArr}}
         </div>
 
+
+        
         <!------------------------------------------------------------------>
       </el-tab-pane>
     </el-tabs>
@@ -79,7 +85,7 @@ export default {
           name: "路由组件1"
         },
         {
-          url: "/product/routerStudy/routerStudy1/router2",
+          url: "/product/routerStudy/routerStudy1/router2/1111",
           name: "路由组件2"
         }
       ],
@@ -102,45 +108,20 @@ export default {
 
   beforeMount() {},
   mounted() {
-    var arr = [11, 12, 13, 14, 15, 16, 17, 18];
-
-    // arr.forEach(function(index, item) {
-    //   // console.log(index);
-    //   // console.log(item);
-    // });
-
-    // arr.map((index, item) => {
-    //   // console.log(index);
-    //   // console.log(item);
-    // });
-
-
-    // filter()：“过滤”功能，数组中的每一项运行给定函数，返回满足过滤条件组成的数组。
-    var arr2 = arr.filter((item, index) => {
-      return item % 3 === 0;
-    });
-    console.log(arr2);
-
-    // every()：判断数组中每一项都是否满足条件，只有所有项都满足条件，才会返回true。
-    var arr3 = arr.every(item => {
-      return item > 1;
-    });
-
-    console.log(arr3);
-
-    // some()：判断数组中是否存在满足条件的项，只要有一项满足条件，就会返回true。
-    var arr4 = arr.some(item => {
-      return item < 1;
-    });
-    console.log(arr4);
-
-  arr.reduce((item, index)=> {
-    console.log(item)
-    console.log(index)
-  })
 
 // js遍历跳出循环
 // https://blog.csdn.net/guxin_duyin/article/details/82980062
+
+
+// 给出一个路由 { path: '/user-*' }
+// this.$router.push('/user-admin')
+ // 'admin'
+// 给出一个路由 { path: '*' }
+// this.$router.push('/non-existing')
+// this.$route.params.pathMatch // '/non-existing'
+
+
+
 
   },
   beforeUpdate() {},
@@ -166,7 +147,8 @@ export default {
       }
     },
     routerLink(item, index) {
-      this.$router.push(item.url);
+      // this.$router.push(item.url);
+      this.$router.push({path: item.url});
     }
   },
   watch: {}

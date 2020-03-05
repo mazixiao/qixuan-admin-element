@@ -1,18 +1,12 @@
 
 <template>
-  <div class="content-touter">
-    <!-- <commonHeader></commonHeader> -->
-    <h1>路由组件2</h1>
-    <hr>
+  <div class="content">
+    <commonHeader></commonHeader>
 
-    <h1>动态路由匹配</h1>
-    <router-link to="/product/routerStudy/routerStudy1/router2/迪迪">/router2/迪迪</router-link>
-    <router-link to="/product/routerStudy/routerStudy1/router2/果果">router2/果果</router-link>
-    <router-link to="/product/routerStudy/routerStudy1/router2/静静">/router2/静静</router-link>
 
-    <p>
-      <strong style="background: red">动态路径参数, path: 'router2/:id',: {{$route.params.id}}</strong>
-    </p>
+    <h1 class="notFind">404</h1>
+
+    <h1>{{this.$route.params.pathMatch}}</h1>
 
 
 
@@ -21,13 +15,13 @@
 
 
 <script>
-import commonHeader from "../../../components/header";
+import commonHeader from "../components/header";
 
 // 辅助函数（简写）
 import { mapState, mapGetters, mapMutations, mapActions } from "vuex";
 
 export default {
-  name: "router2",
+  name: "notfind404",
   components: {
     commonHeader
   },
@@ -53,15 +47,18 @@ export default {
   created() {},
 
   beforeMount() {},
-  mounted() {},
+  mounted() {
+
+
+  },
   beforeUpdate() {},
   updated() {},
 
   methods: {},
   watch: {
     '$route'(to, from) {
-      console.log(to, "我是当前页面的路由信息");
-      console.log(from, "我是上一个页面的路由信息");
+      // console.log(to, "我是当前页面的路由信息");
+      // console.log(from, "我是上一个页面的路由信息");
     }
   },
 
@@ -103,6 +100,14 @@ export default {
   .aa {
     background: red;
   }
+}
+
+.notFind {
+  font-size: 150px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  position: absolute;
 }
 
 hr,

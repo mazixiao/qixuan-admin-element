@@ -13,6 +13,7 @@
       </p>
       <strong>选中了： {{checkbox}}</strong>
     </div>
+    <hr>
   </div>
 </template>
 
