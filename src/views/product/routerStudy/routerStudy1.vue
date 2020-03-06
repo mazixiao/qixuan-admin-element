@@ -21,9 +21,8 @@
         <router-link
           :class="['link', $route.meta.index === index ? 'link-active': '' ]"
           v-for="(item, index) in routers"
-          :to="{path: item.url}"
+          :to="{path: item.url, query: item.query, hash: item.hash}"
           :key="index"
-          replace
         >{{item.name}}</router-link>
 
 
@@ -49,7 +48,16 @@
           我选中了：{{selectArr}}
         </div>
 
+        <p>通过query传过来的值：{{$route.query}}</p>
+        <p>根据params路径参数传参： {{$route.params}}</p>
+        <p>根据hash(#)传参： {{$route.hash}}</p>
 
+        <router-link :to="{name:'router1',params:{userId:'12326',youId:'4699'}}">
+          通过router-link，vue里的params传值只能用name不能用path -- params方式传递来的参数存储在router对象里,使用this.$route方式获取该对象
+          <br>
+          <br>
+          :to="{name:'router1',params:{userId:'12326',youId:'4699'}}"
+        </router-link>
         
         <!------------------------------------------------------------------>
       </el-tab-pane>
@@ -81,12 +89,21 @@ export default {
       value1: "ad",
       routers: [
         {
-          url: "/product/routerStudy/routerStudy1/router1",
-          name: "路由组件1"
+          url: "/product/routerStudy/routerStudy1/router1/",
+          name: "路由组件1",
+          query: {
+            query1: '过query查询参数传参11,不需要配置路由',
+            query8: '过query查询参数传参',
+          },
+          hash: "#后面的参数11"
         },
         {
           url: "/product/routerStudy/routerStudy1/router2/1111",
-          name: "路由组件2"
+          name: "路由组件2",
+          query: {
+            query1: '过query查询参数传参22,不需要配置路由'
+          },
+          hash: "#后面的参数22"
         }
       ],
       peoples: ["迪迪", "乐乐", "果果"],
@@ -108,6 +125,8 @@ export default {
 
   beforeMount() {},
   mounted() {
+
+    console.log(this.$route, "this.$route");
 
 // js遍历跳出循环
 // https://blog.csdn.net/guxin_duyin/article/details/82980062

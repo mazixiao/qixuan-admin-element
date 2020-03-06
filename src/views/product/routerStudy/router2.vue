@@ -13,6 +13,7 @@
     <p>
       <strong style="background: red">动态路径参数, path: 'router2/:id',: {{$route.params.id}}</strong>
     </p>
+  
 
 
 
@@ -60,8 +61,8 @@ export default {
   methods: {},
   watch: {
     '$route'(to, from) {
-      console.log(to, "我是当前页面的路由信息");
-      console.log(from, "我是上一个页面的路由信息");
+      // console.log(to, "我是当前页面的路由信息");
+      // console.log(from, "我是上一个页面的路由信息");
     }
   },
 
@@ -84,6 +85,7 @@ export default {
   beforeRouteLeave (to, from, next) {
     // 导航离开该组件的对应路由时调用
     // 可以访问组件实例 `this`
+    // alert('我要跳转了哦')
     next()
   }
 
