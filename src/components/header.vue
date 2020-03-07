@@ -198,7 +198,12 @@ export default {
                   value: "3-5-1",
                   label: "学习路由1",
                   path: "/product/routerStudy/routerStudy1"
-                }
+                },
+                {
+                  value: "3-5-2",
+                  label: "命名视图学习",
+                  path: "/product/routerStudy/namedView"
+                },
               ]
             }
           ]

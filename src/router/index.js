@@ -30,6 +30,11 @@ import study2 from '@/views/product/study2'
 import routerStudy1 from '@/views/product/routerStudy/routerStudy1'
 import router1 from '@/views/product/routerStudy/router1'
 import router2 from '@/views/product/routerStudy/router2'
+// 命名视图
+import namedView from '@/views/product/routerStudy/namedView'
+import namedViewChild1 from '@/views/product/routerStudy/namedViewChild1'
+import namedViewChild2 from '@/views/product/routerStudy/namedViewChild2'
+import namedViewChild3 from '@/views/product/routerStudy/namedViewChild3'
 
 // 手机页面设置
 import mobileAntiFake from '@/views/mobile/antiFake'
@@ -183,6 +188,52 @@ export default new Router({
 				},
 			],
 		},
+
+		// 命名视图学习
+		{
+			path: '/product/routerStudy/namedView',
+			name: 'namedView',
+			component: namedView,
+			// components: {
+			// 	default: namedViewChild1,
+			// 	a: namedViewChild2,
+			// 	b: namedViewChild3,
+			// },
+			meta: {
+				title: '命名视图学习'
+			}
+		},
+
+
+
+		{
+			path: "/product/routerStudy/namedViewChild2",
+			name: namedViewChild2,
+			components: {
+				default: namedViewChild2,
+				a: namedViewChild1,
+				b: namedViewChild3,
+			},
+			meta: {
+				title: '命名视图学习2'
+			},
+		},
+		{
+			path: "/product/routerStudy/namedViewChild3",
+			name: namedViewChild3,
+			components: {
+				default: namedViewChild3,
+				a: namedViewChild1,
+				b: namedViewChild2,
+			},
+			meta: {
+				title: '命名视图学习3'
+			},
+		},
+
+
+
+
 
 		{
 			path: '/mobile/antiFake',

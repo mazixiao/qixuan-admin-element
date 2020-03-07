@@ -58,6 +58,68 @@
           <br>
           :to="{name:'router1',params:{userId:'12326',youId:'4699'}}"
         </router-link>
+
+        <br>
+        <br>
+        <br>
+        <el-button type="success" @click="$router.push('/')">点击跳转至首页(字符串写法)</el-button>
+        <el-button type="success" @click="$router.push({path: '/'})">点击跳转至首页(对象写法)</el-button>
+        <p>
+          命名路由
+          <el-button type="success" @click="$router.push({name: 'index', params: {userId: '迪迪'}})">点击跳转至首页(命名路由)</el-button>
+        </p>
+        <p>
+          带查询参数(?后面的值)
+          <el-button type="success" @click="$router.push({path: '/', query: {userId: '我是传给首页的参数'}})">点击跳转至首页(query)</el-button>
+        </p>
+        <br>
+        <br>
+        <h1>router.replace</h1>
+        <br>  
+        <router-link :to="{name: 'index'}" replace>声明式:to="..." replace</router-link>
+        <br>
+        <br>
+        <el-button type="success" @click="$router.replace({path: '/'})">编程式：$router.replace(...)</el-button>
+
+        <br>
+        <br>
+        <h1>router.go(n)</h1>
+
+        <el-button type="success" @click="$router.go(1)">$router.go(1)在浏览器记录中前进一步，</el-button>
+        <el-button type="success" @click="$router.go(-3)">$router.go(3)在浏览器记录中后退三步，</el-button>
+
+
+        <br>
+        <br>
+        <h1>命名路由</h1>
+        <br>
+        <pre>
+          routes: [
+            {
+              path: '/user/:userId',
+              name: 'user',
+              component: User
+            }
+          ]
+        </pre>
+        <br>
+        <br>
+        <h2>用 :to="{path: '/'}" 和 :to="{name: 'index'}" 效果是一样的</h2>
+        <br>
+        <router-link :to="{path: '/'}">:to="{path: '/'}"(可以给 router-link 的 to 属性传一个对象)</router-link>
+        <br>
+        <br>
+        <router-link :to="{name: 'index'}">:to="{name: 'index'}" (命名路由)</router-link>
+
+
+
+
+
+
+
+
+
+
         
         <!------------------------------------------------------------------>
       </el-tab-pane>
