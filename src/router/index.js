@@ -189,50 +189,62 @@ export default new Router({
 			],
 		},
 
+
 		// 命名视图学习
 		{
 			path: '/product/routerStudy/namedView',
 			name: 'namedView',
 			component: namedView,
-			// components: {
-			// 	default: namedViewChild1,
-			// 	a: namedViewChild2,
-			// 	b: namedViewChild3,
-			// },
-			meta: {
-				title: '命名视图学习'
-			}
+			children: [
+				// 默认渲染一些东西, 可以提供一个空的子路由
+				{
+					path: '',
+					components: {
+						default: namedViewChild1,
+						namedViewChild2: namedViewChild2,
+						namedViewChild3: namedViewChild3
+					},
+					meta: {
+						title: '命名视图1',
+					},
+				},
+				{
+					path: 'namedViewChild1',
+					components: {
+						default: namedViewChild1,
+						namedViewChild2: namedViewChild2,
+						namedViewChild3: namedViewChild3
+					},
+					meta: {
+						title: '命名视图1',
+					},
+				},
+				{
+					path: 'namedViewChild2',
+					name: 'namedViewChild2',
+					components: {
+						default: namedViewChild2,
+						namedViewChild1: namedViewChild1,
+						namedViewChild3: namedViewChild3
+					},
+					meta: {
+						title: '命名视图2',
+					},
+				},
+				{
+					path: 'namedViewChild3',
+					name: 'namedViewChild3',
+					components: {
+						default:namedViewChild3,
+						namedViewChild1: namedViewChild1,
+						namedViewChild2: namedViewChild2,
+					},
+					meta: {
+						title: '命名视图3',
+					},
+				},
+			],
 		},
-
-
-
-		{
-			path: "/product/routerStudy/namedViewChild2",
-			name: namedViewChild2,
-			components: {
-				default: namedViewChild2,
-				a: namedViewChild1,
-				b: namedViewChild3,
-			},
-			meta: {
-				title: '命名视图学习2'
-			},
-		},
-		{
-			path: "/product/routerStudy/namedViewChild3",
-			name: namedViewChild3,
-			components: {
-				default: namedViewChild3,
-				a: namedViewChild1,
-				b: namedViewChild2,
-			},
-			meta: {
-				title: '命名视图学习3'
-			},
-		},
-
-
-
 
 
 		{

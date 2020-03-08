@@ -1,33 +1,28 @@
 
 <template>
   <div class="content">
-      <commonHeader></commonHeader>
+    <commonHeader></commonHeader>
     <h1>命名视图</h1>
+    <hr>
 
+<!-- /product/routerStudy/routerStudy1/router1/ -->
+    <ul>
+      <li>
+        <router-link to="/product/routerStudy/namedView/namedViewChild1">namedViewChild1</router-link>
+      </li>
+      <li>
+        <router-link to="/product/routerStudy/namedView/namedViewChild2">namedViewChild2</router-link>
+      </li>
+      <li>
+        <router-link to="/product/routerStudy/namedView/namedViewChild3">namedViewChild3</router-link>
+      </li>
+    </ul>
 
-
-
-　　<div>
-　　　　<ul class="nav">
-　　　　　　<li><router-link :to="{path: '/product/routerStudy/namedViewChild1'}">list1</router-link></li>
-　　　　　　<li><router-link :to="{path: '/product/routerStudy/namedViewChild2'}">list2</router-link></li>
-　　　　　　<li><router-link :to="{path: '/product/routerStudy/namedViewChild3'}">list3</router-link></li>
-　　　　</ul>
-　　　　<h6>默认视图</h6>
-　　　　<div class="view">
-　　　　　　<router-view></router-view>
-　　　　</div>
-　　　　<h6>a视图</h6>
-　　　　<div class="view">
-　　　　　　<router-view name="a"></router-view>
-　　　　</div>
-　　　　<h6>b视图</h6>
-　　　　<div class="view">
-　　　　　　<router-view name="b"></router-view>
-　　　　</div>
-　　</div>
-
-
+    <router-view></router-view>
+    <router-view name="namedViewChild1"></router-view>
+    <router-view name="namedViewChild2"></router-view>
+    <router-view name="namedViewChild3"></router-view>
+    
 
   </div>
 </template>
@@ -39,7 +34,6 @@ import namedViewChild1 from "./namedViewChild1";
 import namedViewChild2 from "./namedViewChild2";
 import namedViewChild3 from "./namedViewChild3";
 // import router2 from "./router2";
-
 
 // 辅助函数（简写）
 import { mapState, mapGetters, mapMutations, mapActions } from "vuex";
@@ -55,19 +49,13 @@ export default {
   data() {
     return {
       // tab标题默认高亮
-      activeName: "first",
-
+      activeName: "first"
     };
   },
   // 自定义指令
-  directives: {
-
-  },
+  directives: {},
   // 过滤器
-  filters: {
-
-  },
-
+  filters: {},
 
   computed: {},
 
@@ -82,15 +70,8 @@ export default {
   beforeUpdate() {},
   updated() {},
 
-  methods: {
-
-
-
-
-  },
-  watch: {
-
-  }
+  methods: {},
+  watch: {}
 };
 </script>
 

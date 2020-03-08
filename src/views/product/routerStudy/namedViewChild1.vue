@@ -1,7 +1,6 @@
 
 <template>
-  <div class="content">
-      <commonHeader></commonHeader>
+  <div class="content-s">
     <h1>命名视图1</h1>
 
 
@@ -19,9 +18,9 @@ import commonHeader from "../../../components/header";
 import { mapState, mapGetters, mapMutations, mapActions } from "vuex";
 
 export default {
-  name: "namedView",
+  name: "namedViewChild1",
   components: {
-    commonHeader
+    commonHeader,
   },
   data() {
     return {
