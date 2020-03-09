@@ -181,6 +181,8 @@ export default new Router({
 					path: 'router2/:id',
 					name: 'router2',
 					component: router2,
+					// 使用 props 将组件和路由解耦：
+					props: true,
 					meta: {
 						title: '路由学习22',
 						index: 1,
@@ -193,12 +195,25 @@ export default new Router({
 		// 命名视图学习
 		{
 			path: '/product/routerStudy/namedView',
-			name: 'namedView',
+			// 别名
+			alias: '/product/routerStudy/lelelele',
+			// name: 'namedView',
 			component: namedView,
 			children: [
 				// 默认渲染一些东西, 可以提供一个空的子路由
 				{
 					path: '',
+					// 重定向(一共三种方法)
+					// 1.直接写路径
+					// redirect: '/',
+					// 2.重定向也可以是一个命名的路由
+					// redirect: {name: 'index'},
+					// 3.可以使一个方法,动态返回重定向目标
+					//  redirect: to => {
+					// 	// 方法接收 目标路由 作为参数
+					// 	// return 重定向的 字符串路径/路径对象
+					// 	return '/'
+					//   },
 					components: {
 						default: namedViewChild1,
 						namedViewChild2: namedViewChild2,

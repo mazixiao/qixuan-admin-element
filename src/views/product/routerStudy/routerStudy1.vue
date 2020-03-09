@@ -111,9 +111,22 @@
         <br>
         <router-link :to="{name: 'index'}">:to="{name: 'index'}" (命名路由)</router-link>
 
+        <hr>
 
-
-
+        <h1>重定向</h1>
+        <br>
+        <br>
+        
+        <h1>别名</h1>
+        <p>
+                path: '/product/routerStudy/namedView', <br>
+              // 别名  <br>
+              alias: '/product/routerStudy/lelelele',  <br>
+        </p>
+        <router-link to="/product/routerStudy/lelelele">跳转的'命名视图'页面</router-link>
+        <br>
+        <br>
+        <router-link to="/product/routerStudy/lelelele">别名, 默认的path是namedView，设置别名成lelelele，跳转的也是'命名视图'页面</router-link>
 
 
 

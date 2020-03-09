@@ -32,6 +32,7 @@ export default {
   components: {
     commonHeader
   },
+  props: ["id"],
   data() {
     return {
       // tab标题默认高亮
@@ -54,7 +55,9 @@ export default {
   created() {},
 
   beforeMount() {},
-  mounted() {},
+  mounted() {
+    console.log(this.$route.params.id, "this.id");
+  },
   beforeUpdate() {},
   updated() {},
 
