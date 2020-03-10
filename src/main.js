@@ -37,9 +37,11 @@ Vue.prototype.$echarts = echarts
 
 Vue.config.productionTip = false
 var index = 0;
+// 全局前置守卫
 router.beforeEach((to, from, next) => {
-  // console.log(to.path);
-  index++;
+  // console.log(to.path, "to.path to.path");
+  // console.log(from.path, "from from");
+  index ++;
   /* 路由发生变化修改页面title */
   if (to.meta.title) {
     document.title = to.meta.title;
@@ -51,11 +53,20 @@ router.beforeEach((to, from, next) => {
     //   path: '/overview/user'
     // })
   };
-  next();
+  next(
+    true
+  );
 
   
 
 });
+
+// 全局后置钩子
+router.afterEach((to, from) => {
+  // console.log(to.path, "to.path to.path");
+  // console.log(from.path, "from from");
+})
+
 
 
 /* eslint-disable no-new */

@@ -70,6 +70,11 @@ export default new Router({
 			meta: {
 				title: '订单数据分析'
 			},
+			// 路由独享的守卫
+			// 可以在路由配置上直接定义 beforeEnter 守卫：
+			beforeEnter: (to, from, next) => {
+				next(true)
+			  }
 		},
 		{
 			path: '/overview/user',
