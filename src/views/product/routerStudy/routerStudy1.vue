@@ -17,15 +17,12 @@
             :class="[$route.meta.index === index ? 'red': '' ]"
           >点击跳转{{item.name}}</el-button>
         </div>
-
         <router-link
           :class="['link', $route.meta.index === index ? 'link-active': '' ]"
           v-for="(item, index) in routers"
           :to="{path: item.url, query: item.query, hash: item.hash}"
           :key="index"
         >{{item.name}}</router-link>
-
-
 
         <!-- 路由匹配到的组件将渲染在这里 -->
         <router-view></router-view>
@@ -54,45 +51,50 @@
 
         <router-link :to="{name:'router1',params:{userId:'12326',youId:'4699'}}">
           通过router-link，vue里的params传值只能用name不能用path -- params方式传递来的参数存储在router对象里,使用this.$route方式获取该对象
-          <br>
-          <br>
+          <br />
+          <br />
           :to="{name:'router1',params:{userId:'12326',youId:'4699'}}"
         </router-link>
 
-        <br>
-        <br>
-        <br>
+        <br />
+        <br />
+        <br />
         <el-button type="success" @click="$router.push('/')">点击跳转至首页(字符串写法)</el-button>
         <el-button type="success" @click="$router.push({path: '/'})">点击跳转至首页(对象写法)</el-button>
         <p>
           命名路由
-          <el-button type="success" @click="$router.push({name: 'index', params: {userId: '迪迪'}})">点击跳转至首页(命名路由)</el-button>
+          <el-button
+            type="success"
+            @click="$router.push({name: 'index', params: {userId: '迪迪'}})"
+          >点击跳转至首页(命名路由)</el-button>
         </p>
         <p>
           带查询参数(?后面的值)
-          <el-button type="success" @click="$router.push({path: '/', query: {userId: '我是传给首页的参数'}})">点击跳转至首页(query)</el-button>
+          <el-button
+            type="success"
+            @click="$router.push({path: '/', query: {userId: '我是传给首页的参数'}})"
+          >点击跳转至首页(query)</el-button>
         </p>
-        <br>
-        <br>
+        <br />
+        <br />
         <h1>router.replace</h1>
-        <br>  
+        <br />
         <router-link :to="{name: 'index'}" replace>声明式:to="..." replace</router-link>
-        <br>
-        <br>
+        <br />
+        <br />
         <el-button type="success" @click="$router.replace({path: '/'})">编程式：$router.replace(...)</el-button>
 
-        <br>
-        <br>
+        <br />
+        <br />
         <h1>router.go(n)</h1>
 
         <el-button type="success" @click="$router.go(1)">$router.go(1)在浏览器记录中前进一步，</el-button>
         <el-button type="success" @click="$router.go(-3)">$router.go(3)在浏览器记录中后退三步，</el-button>
 
-
-        <br>
-        <br>
+        <br />
+        <br />
         <h1>命名路由</h1>
-        <br>
+        <br />
         <pre>
           routes: [
             {
@@ -102,38 +104,47 @@
             }
           ]
         </pre>
-        <br>
-        <br>
+        <br />
+        <br />
         <h2>用 :to="{path: '/'}" 和 :to="{name: 'index'}" 效果是一样的</h2>
-        <br>
+        <br />
         <router-link :to="{path: '/'}">:to="{path: '/'}"(可以给 router-link 的 to 属性传一个对象)</router-link>
-        <br>
-        <br>
+        <br />
+        <br />
         <router-link :to="{name: 'index'}">:to="{name: 'index'}" (命名路由)</router-link>
 
-        <hr>
-
+        <hr />a
         <h1>重定向</h1>
-        <br>
-        <br>
-        
+        <br />
+        <br />
+
         <h1>别名</h1>
         <p>
-                path: '/product/routerStudy/namedView', <br>
-              // 别名  <br>
-              alias: '/product/routerStudy/lelelele',  <br>
+          path: '/product/routerStudy/namedView',
+          <br />// 别名
+          <br />alias: '/product/routerStudy/lelelele',
+          <br />
         </p>
         <router-link to="/product/routerStudy/lelelele">跳转的'命名视图'页面</router-link>
-        <br>
-        <br>
-        <router-link to="/product/routerStudy/lelelele">别名, 默认的path是namedView，设置别名成lelelele，跳转的也是'命名视图'页面</router-link>
+        <br />
+        <br />
+        <router-link
+          to="/product/routerStudy/lelelele"
+        >别名, 默认的path是namedView，设置别名成lelelele，跳转的也是'命名视图'页面</router-link>
 
+        <br />
+        <br />
+        <br />
+        <br />
+        <hr />
+        <h1>组件内的守卫</h1>
+        <p>
+          beforeRouteEnter
+          <br />beforeRouteUpdate
+          <br />beforeRouteLeave
+          <br />
+        </p>
 
-
-
-
-
-        
         <!------------------------------------------------------------------>
       </el-tab-pane>
     </el-tabs>
@@ -167,8 +178,8 @@ export default {
           url: "/product/routerStudy/routerStudy1/router1/",
           name: "路由组件1",
           query: {
-            query1: '过query查询参数传参11,不需要配置路由',
-            query8: '过query查询参数传参',
+            query1: "过query查询参数传参11,不需要配置路由",
+            query8: "过query查询参数传参"
           },
           hash: "#后面的参数11"
         },
@@ -176,7 +187,7 @@ export default {
           url: "/product/routerStudy/routerStudy1/router2/1111",
           name: "路由组件2",
           query: {
-            query1: '过query查询参数传参22,不需要配置路由'
+            query1: "过query查询参数传参22,不需要配置路由"
           },
           hash: "#后面的参数22"
         }
@@ -190,6 +201,44 @@ export default {
   // 过滤器
   filters: {},
 
+  // 组件内的守卫
+  beforeRouteEnter(to, from, next) {
+    // 不！能！获取组件实例 `this`
+    // 因为当守卫执行前，组件实例还没被创建
+    // console.log(this, 'this'); undefined
+    // next(true);
+
+    // 不过可以通过传一个回调给 next来访问组件实例
+    // next(vm => {
+    //   true,
+    //   console.log(vm, "我是组件实例");
+    // })
+
+    next()
+  },
+  beforeRouteUpdate(to, from, next) {
+    // 在当前路由改变，但是该组件被复用时调用
+    // 举例来说，对于一个带有动态参数的路径 /foo/:id，在 /foo/1 和 /foo/2 之间跳转的时候，
+    // 由于会渲染同样的 Foo 组件，因此组件实例会被复用。而这个钩子就会在这个情况下被调用。
+    // 可以访问组件实例 `this`
+      next()
+  },
+
+  beforeRouteLeave(to, from, next) {
+    // 导航离开该组件的对应路由时调用
+    // 可以访问组件实例 `this`
+    // 这个离开守卫通常用来禁止用户在还未保存修改前突然离开
+    const answer = window.confirm(
+      "你真的想离开吗?您有未保存的更改!"
+    );
+    if (answer) {
+      next();
+    } else {
+      next(false);
+    }
+    
+  },
+
   computed: {},
 
   created: function() {},
@@ -201,22 +250,18 @@ export default {
   beforeMount() {},
   mounted() {
 
-    console.log(this.$route, "this.$route");
-
-// js遍历跳出循环
-// https://blog.csdn.net/guxin_duyin/article/details/82980062
-
-
-// 给出一个路由 { path: '/user-*' }
-// this.$router.push('/user-admin')
- // 'admin'
-// 给出一个路由 { path: '*' }
-// this.$router.push('/non-existing')
-// this.$route.params.pathMatch // '/non-existing'
 
 
 
+    // js遍历跳出循环
+    // https://blog.csdn.net/guxin_duyin/article/details/82980062
 
+    // 给出一个路由 { path: '/user-*' }
+    // this.$router.push('/user-admin')
+    // 'admin'
+    // 给出一个路由 { path: '*' }
+    // this.$router.push('/non-existing')
+    // this.$route.params.pathMatch // '/non-existing'
   },
   beforeUpdate() {},
   updated() {},
@@ -242,7 +287,7 @@ export default {
     },
     routerLink(item, index) {
       // this.$router.push(item.url);
-      this.$router.push({path: item.url});
+      this.$router.push({ path: item.url });
     }
   },
   watch: {}

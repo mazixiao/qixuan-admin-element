@@ -3,9 +3,9 @@
   <div class="content">
     <commonHeader></commonHeader>
     <h1>命名视图</h1>
-    <hr>
+    <hr />
 
-<!-- /product/routerStudy/routerStudy1/router1/ -->
+    <!-- /product/routerStudy/routerStudy1/router1/ -->
     <ul>
       <li>
         <router-link to="/product/routerStudy/namedView/namedViewChild1">namedViewChild1</router-link>
@@ -18,14 +18,21 @@
       </li>
     </ul>
 
-    <router-view></router-view>
-    <router-view name="namedViewChild1"></router-view>
-    <router-view name="namedViewChild2"></router-view>
-    <router-view name="namedViewChild3"></router-view>
-    
+    <transition name="fade">
+      <router-view></router-view>
+    </transition>
 
+    <transition name="fade">
+      <router-view name="namedViewChild1"></router-view>
+    </transition>
 
+    <transition name="fade">
+      <router-view name="namedViewChild2"></router-view>
+    </transition>
 
+    <transition name="fade">
+      <router-view name="namedViewChild3"></router-view>
+    </transition>
   </div>
 </template>
 
@@ -97,6 +104,16 @@ hr,
 div,
 p {
   margin: 10px 0;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s;
+    display: block;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
+  display: block;
 }
 </style>
 

@@ -73,8 +73,13 @@ export default new Router({
 			// 路由独享的守卫
 			// 可以在路由配置上直接定义 beforeEnter 守卫：
 			beforeEnter: (to, from, next) => {
-				next(true)
-			  }
+				next(
+					{
+						query: { redirect: "我是迪迪"}
+					}
+				)
+				
+			}
 		},
 		{
 			path: '/overview/user',
@@ -189,7 +194,7 @@ export default new Router({
 					// 使用 props 将组件和路由解耦：
 					props: true,
 					meta: {
-						title: '路由学习22',
+						title: '路由学习2',
 						index: 1,
 					},
 				},
