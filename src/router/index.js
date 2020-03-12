@@ -6,11 +6,15 @@ import index from '@/views/index'
 
 // 概览
 
-// 订单数据分析
-import overviewOrderForm from '@/views/overview/orderForm'
-// 防伪数据分析
-import overviewUser from '@/views/overview/user'
+// const Foo = () => import('./Foo.vue')
 
+// 订单数据分析
+// import overviewOrderForm from '@/views/overview/orderForm'
+const overviewOrderForm = () => import('@/views/overview/orderForm')
+
+// 防伪数据分析
+// import overviewUser from '@/views/overview/user'
+const overviewUser = () => import('@/views/overview/user')
 
 // 赋码印刷
 
@@ -26,10 +30,19 @@ import product from '@/views/product/product'
 import productVuex from '@/views/product/productVuex'
 import study1 from '@/views/product/study1'
 import study2 from '@/views/product/study2'
+
+
 // 路由学习
-import routerStudy1 from '@/views/product/routerStudy/routerStudy1'
-import router1 from '@/views/product/routerStudy/router1'
-import router2 from '@/views/product/routerStudy/router2'
+// import routerStudy1 from '@/views/product/routerStudy/routerStudy1'
+// import router1 from '@/views/product/routerStudy/router1'
+// import router2 from '@/views/product/routerStudy/router2'
+// 路由懒加载写法
+const routerStudy1 = () => import('@/views/product/routerStudy/routerStudy1')
+const router1 = () => import('@/views/product/routerStudy/router1')
+const router2 = () => import('@/views/product/routerStudy/router2')
+
+
+
 // 命名视图
 import namedView from '@/views/product/routerStudy/namedView'
 import namedViewChild1 from '@/views/product/routerStudy/namedViewChild1'

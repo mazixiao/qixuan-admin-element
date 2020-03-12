@@ -53,11 +53,13 @@ router.beforeEach((to, from, next) => {
     //   path: '/overview/user'
     // })
   };
+
+    // 让页面回到顶部
+  //  document.documentElement.scrollTop = 0;
+
   next(
     true
   );
-
-  
 
 });
 
@@ -65,7 +67,18 @@ router.beforeEach((to, from, next) => {
 router.afterEach((to, from) => {
   // console.log(to.path, "to.path to.path");
   // console.log(from.path, "from from");
-})
+});
+
+
+
+// router.scrollBehavior((to, from, savedPosition) => {
+//   return 200
+// })
+
+
+
+
+
 
 
 

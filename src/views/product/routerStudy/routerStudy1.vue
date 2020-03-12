@@ -160,6 +160,7 @@ import router2 from "./router2";
 // 辅助函数（简写）
 import { mapState, mapGetters, mapMutations, mapActions } from "vuex";
 
+
 export default {
   name: "routerStudy1",
   components: {
