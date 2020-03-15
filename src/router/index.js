@@ -41,7 +41,8 @@ const routerStudy1 = () => import('@/views/product/routerStudy/routerStudy1')
 const router1 = () => import('@/views/product/routerStudy/router1')
 const router2 = () => import('@/views/product/routerStudy/router2')
 
-
+// es6学习
+const es6Study1 = () => import('@/views/es6Study/study1')
 
 // 命名视图
 import namedView from '@/views/product/routerStudy/namedView'
@@ -284,6 +285,15 @@ export default new Router({
 			],
 		},
 
+		// es6学习
+		{
+			path: '/es6Study/study1',
+			name: 'es6Study1',
+			component: es6Study1,
+			meta: {
+				title: 'es6学习1'
+			},
+		},
 
 		{
 			path: '/mobile/antiFake',

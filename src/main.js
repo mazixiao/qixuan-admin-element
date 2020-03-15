@@ -12,6 +12,9 @@ import store from './store'
 
 Vue.use(ElementUI)
 
+Vue.config.silent = true
+
+
 // 富文本编辑器
 import VueQuillEditor from 'vue-quill-editor'
 import 'quill/dist/quill.core.css'

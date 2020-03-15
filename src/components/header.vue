@@ -208,72 +208,103 @@ export default {
             }
           ]
         },
+
+
         {
           value: "4",
+          label: "ES6",
+          icon: icon5,
+          children: [
+            {
+              value: "4-1-1",
+              label: "学习1",
+              path: "/es6Study/study1"
+            },
+            // {
+            //   value: "6-1-2",
+            //   label: "工厂管理",
+            //   path: "/basics/factoryManage"
+            // },
+          ]
+        },
+
+
+        {
+          value: "5",
           label: "手机页面设置",
           icon: icon4,
           children: [
             {
-              value: "4-1-1",
+              value: "5-1-1",
               label: "防伪页面管理",
               path: "/mobile/antiFake"
             }
             // {
-            //   value: "4-1-2",
+            //   value: "5-1-2",
             //   label: "追溯页面管理"
             // },
             // {
-            //   value: "4-1-3",
+            //   value: "5-1-3",
             //   label: "红包页面管理"
             // },
             // {
-            //   value: "4-1-4",
+            //   value: "5-1-4",
             //   label: "积分商城页面设置"
             // },
             // {
-            //   value: "4-1-5",
+            //   value: "5-1-5",
             //   label: "其他页面管理"
             // }
           ]
         },
         {
-          value: "5",
+          value: "6",
           label: "基础设置",
           icon: icon5,
           children: [
             {
-              value: "5-1-1",
+              value: "6-1-1",
               label: "企业管理",
               path: "/basics/firmManage"
             },
             {
-              value: "5-1-2",
+              value: "6-1-2",
               label: "工厂管理",
               path: "/basics/factoryManage"
             },
             // {
-            //   value: "5-1-3",
+            //   value: "6-1-3",
             //   label: "仓库站点管理"
             // },
             // {
-            //   value: "5-1-4",
+            //   value: "6-1-4",
             //   label: "供应商管理"
             // },
             // {
-            //   value: "5-1-5",
+            //   value: "6-1-5",
             //   label: "物料清单"
             // },
             {
-              value: "5-1-6",
+              value: "6-1-6",
               label: "客户管理",
               path: "/basics/client"
             }
             // {
-            //   value: "5-1-7",
+            //   value: "6-1-7",
             //   label: "产品BOM清单"
             // }
           ]
-        }
+        },
+
+
+
+
+
+
+
+
+
+
         // {
         //   value: "6",
         //   label: "智能营销",
