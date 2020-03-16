@@ -4,7 +4,8 @@
     <commonHeader></commonHeader>
     <h1>ES6学习</h1>
     <hr />
-
+    声明变量的6中方法
+    var function let const import class
 
   </div>
 </template>
@@ -35,7 +36,11 @@ export default {
 
   computed: {},
 
-  created: function() {},
+  created: function() {
+
+
+
+  },
 
   beforeCreate() {},
 
@@ -43,8 +48,16 @@ export default {
 
   beforeMount() {},
   mounted() {
+    
+    var aa = 123;
+    if(true) {
+      console.log(aa);
+      let aa;
+    }
 
- 
+
+
+
   },
   beforeUpdate() {},
   updated() {},
