@@ -205,7 +205,13 @@ export default {
                   path: "/product/routerStudy/namedView"
                 },
               ]
-            }
+            },
+            {
+              value: "3-6",
+              label: "mock学习",
+              path: "/product/mock"
+            },
+
           ]
         },
 

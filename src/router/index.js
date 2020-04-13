@@ -30,6 +30,8 @@ import product from '@/views/product/product'
 import productVuex from '@/views/product/productVuex'
 import study1 from '@/views/product/study1'
 import study2 from '@/views/product/study2'
+// mock.js学习
+import mock from '@/views/product/mock'
 
 
 // 路由学习
@@ -213,6 +215,14 @@ export default new Router({
 					},
 				},
 			],
+		},
+		{
+			path: '/product/mock',
+			name: 'mock',
+			component: mock,
+			meta: {
+				title: 'mock学习'
+			},
 		},
 
 

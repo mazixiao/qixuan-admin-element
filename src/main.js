@@ -10,6 +10,9 @@ import router from './router'
 //引入store(vuex)
 import store from './store'
 
+import './assets/js/mock'//此部分引入的是我们所编写的mockjs文档
+
+
 Vue.use(ElementUI)
 
 Vue.config.silent = true
