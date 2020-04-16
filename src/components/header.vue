@@ -1,14 +1,30 @@
 <style lang="sass">
-  @import '../assets/scss/common.scss';
+@import '../assets/scss/common.scss';
 </style>
 
 <template>
   <div class="header">
-    <el-scrollbar style="height: 100%;overflow-x:hidden">
-      <div class="logo-wrap">
+    <!-- <el-scrollbar wrap-class="scrollbar-wrapper">
+      <el-menu
+        :default-active="activeMenu"
+        :collapse="isCollapse"
+        :background-color="variables.menuBg"
+        :text-color="variables.menuText"
+        :unique-opened="false"
+        :active-text-color="variables.menuActiveText"
+        :collapse-transition="false"
+        mode="vertical"
+      >
+        <sidebar-item v-for="route in routes" :key="route.path" :item="route" :base-path="route.path" />
+      </el-menu>
+    </el-scrollbar>-->
+
+    <el-scrollbar wrap-class="scrollbar-wrapper">
+      <div class="logo-wrap" @click="collapseStatus">
         <img class="logo" src="../assets/img/logo.png" alt />
         <span>码+服务云平台</span>
       </div>
+
       <!-- :default-active="$route.path" -->
       <el-menu
         router
@@ -17,6 +33,7 @@
         mode="vertical"
         :unique-opened="true"
         :default-openeds="openeds"
+        :collapse="isCollapse"
       >
         <!-- 一级 -->
         <template v-for="item in menu" :select="item.label">
@@ -203,18 +220,16 @@ export default {
                   value: "3-5-2",
                   label: "命名视图学习",
                   path: "/product/routerStudy/namedView"
-                },
+                }
               ]
             },
             {
               value: "3-6",
               label: "mock学习",
               path: "/product/mock"
-            },
-
+            }
           ]
         },
-
 
         {
           value: "4",
@@ -225,7 +240,7 @@ export default {
               value: "4-1-1",
               label: "学习1",
               path: "/es6Study/study1"
-            },
+            }
             // {
             //   value: "6-1-2",
             //   label: "工厂管理",
@@ -233,7 +248,6 @@ export default {
             // },
           ]
         },
-
 
         {
           value: "5",
@@ -300,16 +314,7 @@ export default {
             //   label: "产品BOM清单"
             // }
           ]
-        },
-
-
-
-
-
-
-
-
-
+        }
 
         // {
         //   value: "6",
@@ -412,7 +417,9 @@ export default {
         //     }
         //   ]
         // }
-      ]
+      ],
+      collapseBtnClick: true,
+      isCollapse: false
     };
   },
   mounted() {
@@ -420,6 +427,11 @@ export default {
     // console.log(this.num)
   },
   methods: {
+    collapseStatus() {
+      this.collapseBtnClick = this.isCollapse;
+      this.isCollapse = !this.isCollapse;
+    },
+
     handleSelect(key, keyPath) {},
 
     changeCity(v) {
@@ -430,7 +442,10 @@ export default {
         return "/printing/rawCode/rule";
       } else if (this.$route.path == "/printing/rawCode/orderAdd/123") {
         return "/printing/rawCode/orde";
-      } else if (this.$route.path == "/product/routerStudy/routerStudy1/router1" || this.$route.path == "/product/routerStudy/routerStudy1/router2/1111") {
+      } else if (
+        this.$route.path == "/product/routerStudy/routerStudy1/router1" ||
+        this.$route.path == "/product/routerStudy/routerStudy1/router2/1111"
+      ) {
         return "/product/routerStudy/routerStudy1";
       }
       return this.$route.path;
@@ -448,6 +463,13 @@ export default {
 
 
 <style lang="scss">
+.el-scrollbar {
+  height: 100%;
+}
+.el-scrollbar__wrap {
+  overflow-x: hidden;
+}
+
 .header {
   z-index: 10;
   position: fixed;
