@@ -1,6 +1,6 @@
 
 <template>
-  <div class="content">
+  <div :class="['content', {'active': isCollapse}]">
     <commonHeader></commonHeader>
     <el-tabs v-model="activeName" class="common-tab">
       <el-tab-pane label="vue学习2" name="first">
@@ -100,6 +100,13 @@ export default {
       showInput: false
     };
   },
+  computed: {
+    ...mapState(["count", "count1", "isCollapse"]),
+      // isCollapse() {
+      //     return this.$store.state.isCollapse
+      // },
+  },
+
   // 自定义指令
   directives: {
     focus: {
@@ -122,7 +129,6 @@ export default {
 
   // 混入 (mixin)
   mixins: [commonMixin],
-  computed: {},
 
   created: function() {},
 

@@ -1,6 +1,6 @@
 
 <template>
-  <div class="content">
+  <div :class="['content', {'active': isCollapse}]">
     <commonHeader></commonHeader>
     <el-tabs v-model="activeName" class="common-tab">
       <el-tab-pane label="vue学习1" name="first">
@@ -392,6 +392,9 @@ export default {
   // 混入 (mixin)
   mixins:[commonMixin],
   computed: {
+
+    ...mapState(["isCollapse"]),
+
     messageComputed() {
       return this.message
         .split("")

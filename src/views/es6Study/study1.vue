@@ -1,6 +1,6 @@
 
 <template>
-  <div class="content">
+  <div :class="['content', {'active': isCollapse}]">
     <commonHeader></commonHeader>
     <h1>ES6学习</h1>
     <hr />
@@ -34,7 +34,12 @@ export default {
   // 过滤器
   filters: {},
 
-  computed: {},
+  computed: {
+    ...mapState(["count", "count1", "isCollapse"]),
+      // isCollapse() {
+      //     return this.$store.state.isCollapse
+      // },
+  },
 
   created: function() {
 

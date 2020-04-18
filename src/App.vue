@@ -22,4 +22,8 @@ export default {
   padding-left: 220px;
 }
 
+.content.active {
+  padding-left: 100px;
+}
+
 </style>

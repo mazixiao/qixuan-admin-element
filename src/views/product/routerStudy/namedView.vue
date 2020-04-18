@@ -1,6 +1,6 @@
 
 <template>
-  <div class="content">
+  <div :class="['content', {'active': isCollapse}]">
     <commonHeader></commonHeader>
     <h1>命名视图</h1>
     <hr />
@@ -61,12 +61,18 @@ export default {
       activeName: "first"
     };
   },
+  computed: {
+      isCollapse() {
+          return this.$store.state.isCollapse
+      },
+  },
+
   // 自定义指令
   directives: {},
   // 过滤器
   filters: {},
 
-  computed: {},
+
 
   created: function() {},
 

@@ -1,5 +1,5 @@
 <template>
-  <div class="content">
+  <div :class="['content', {'active': isCollapse}]">
     <commonHeader></commonHeader>
     <div class="contents">
       <el-card class="box-card" style="width: 100%">
@@ -90,6 +90,7 @@
 import commonHeader from "../../components/header";
 // 引入中国的信息
 import "echarts/map/js/china.js";
+import { mapState, mapGetters, mapMutations, mapActions } from "vuex";
 export default {
   name: "overviewUser",
   components: {
@@ -98,7 +99,11 @@ export default {
   data() {
     return {};
   },
-
+  computed: {
+      isCollapse() {
+          return this.$store.state.isCollapse
+      },
+  },
   mounted() {
     this.drawLine();
   },

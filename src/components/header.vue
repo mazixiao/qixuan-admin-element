@@ -3,7 +3,7 @@
 </style>
 
 <template>
-  <div class="header">
+  <div :class="['header', {'active': isCollapse}]">
     <!-- <el-scrollbar wrap-class="scrollbar-wrapper">
       <el-menu
         :default-active="activeMenu"
@@ -20,7 +20,9 @@
     </el-scrollbar>-->
 
     <el-scrollbar wrap-class="scrollbar-wrapper">
-      <div class="logo-wrap" @click="collapseStatus">
+      <el-button v-if="!isCollapse" class="switch" type="success" @click="collapseStatus" size="mini">点击收缩</el-button>
+      <el-button v-else class="switch" type="success" @click="collapseStatus" size="mini">点击展开</el-button>
+      <div class="logo-wrap">
         <img class="logo" src="../assets/img/logo.png" alt />
         <span>码+服务云平台</span>
       </div>
@@ -95,6 +97,8 @@ import icon5 from "../assets/img/nav-icon5.png";
 import icon6 from "../assets/img/nav-icon6.png";
 import icon7 from "../assets/img/nav-icon7.png";
 import icon8 from "../assets/img/nav-icon8.png";
+
+import { mapState, mapGetters, mapMutations, mapActions } from "vuex";
 
 export default {
   name: "commonHeader",
@@ -418,9 +422,13 @@ export default {
         //   ]
         // }
       ],
-      collapseBtnClick: true,
-      isCollapse: false
+
     };
+  },
+  computed: {
+      isCollapse() {
+          return this.$store.state.isCollapse
+      },
   },
   mounted() {
     // this.num = this.$rote.params.num,
@@ -428,9 +436,18 @@ export default {
   },
   methods: {
     collapseStatus() {
-      this.collapseBtnClick = this.isCollapse;
-      this.isCollapse = !this.isCollapse;
+      this.$store.commit("collapseStatus");
     },
+
+    // collapseStatus() {
+    //   // this.collapseBtnClick = this.isCollapse;
+    //   this.isCollapse = !this.isCollapse;
+    //   if (this.isCollapse) {
+    //     document.querySelector(".content").style.paddingLeft = "100px";
+    //   } else {
+    //     document.querySelector(".content").style.paddingLeft = "220px";
+    //   }
+    // },
 
     handleSelect(key, keyPath) {},
 
@@ -463,11 +480,18 @@ export default {
 
 
 <style lang="scss">
+// 解决导航栏滚动条问题
 .el-scrollbar {
   height: 100%;
 }
 .el-scrollbar__wrap {
   overflow-x: hidden;
+}
+
+.switch {
+  position: absolute;
+  right: 0;
+  top: 0;
 }
 
 .header {
@@ -484,6 +508,10 @@ export default {
   background-position: 0 bottom;
   background-size: 100% auto;
   background-color: #001e67;
+  transition: all 0.3s;
+  &.active {
+    width: 100px;
+  }
 
   .img-wrap {
     display: inline-block;
@@ -501,7 +529,7 @@ export default {
     text-align: center;
     display: block;
     // background-color: red;
-    padding-top: 20px;
+    padding-top: 50px;
     img {
       width: 82px;
     }

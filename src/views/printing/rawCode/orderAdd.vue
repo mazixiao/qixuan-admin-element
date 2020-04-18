@@ -1,6 +1,6 @@
 
 <template>
-  <div class="content">
+  <div :class="['content', {'active': isCollapse}]">
     <commonHeader></commonHeader>
     <el-tabs v-model="activeName" class="common-tab">
       <el-tab-pane label="新增生码订单" name="first">
@@ -165,7 +165,7 @@
 
 <script>
 import commonHeader from "../../../components/header";
-
+import { mapState, mapGetters, mapMutations, mapActions } from "vuex";
 export default {
   name: "printingRawCodeOrdeAdd",
   components: {
@@ -220,7 +220,11 @@ export default {
       multipleSelection: []
     };
   },
-  created() {},
+  computed: {
+      isCollapse() {
+          return this.$store.state.isCollapse
+      },
+  },
 
   methods: {
     // 选择框逻辑

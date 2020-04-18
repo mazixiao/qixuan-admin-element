@@ -2,7 +2,7 @@
 
  
 <template>
-  <div class="content">
+  <div :class="['content', {'active': isCollapse}]">
     <commonHeader></commonHeader>
     <div class="contents">
       <el-card class="box-card" style="width: 100%">
@@ -92,7 +92,8 @@
 <script>
 import commonHeader from "../components/header";
 // 引入中国的信息
-import 'echarts/map/js/china.js';
+import "echarts/map/js/china.js";
+import { mapState, mapGetters, mapMutations, mapActions } from "vuex";
 export default {
   name: "index",
   components: {
@@ -102,13 +103,20 @@ export default {
     return {};
   },
 
+  computed: {
+    ...mapState(["count", "count1", "isCollapse"])
+    // isCollapse() {
+    //     return this.$store.state.isCollapse
+    // },
+  },
+
   mounted() {
     this.drawLine();
   },
   methods: {
-randomData() {
-    return Math.round(Math.random() * 1000);
-},
+    randomData() {
+      return Math.round(Math.random() * 1000);
+    },
 
     drawLine() {
       // 基于准备好的dom，初始化echarts实例
@@ -348,139 +356,137 @@ randomData() {
           }
         ]
       }),
-      myChart5.setOption({
-        tooltip: {
-          trigger: "axis",
-          axisPointer: {
-            type: "shadow"
-          }
-        },
-        grid: {
-          left: "3%",
-          right: "4%",
-          bottom: "3%",
-          containLabel: true
-        },
-        xAxis: {
-          type: "value",
-          boundaryGap: [0, 0.01]
-        },
-        yAxis: {
-          type: "category",
-          data: [
-            "武汉",
-            "苏州",
-            "杭州",
-            "江阴",
-            "广州",
-            "惠州",
-            "深圳",
-            "北京",
-            "成都",
-            "上海"
-          ]
-        },
-        series: [
-          {
-            type: "bar",
+        myChart5.setOption({
+          tooltip: {
+            trigger: "axis",
+            axisPointer: {
+              type: "shadow"
+            }
+          },
+          grid: {
+            left: "3%",
+            right: "4%",
+            bottom: "3%",
+            containLabel: true
+          },
+          xAxis: {
+            type: "value",
+            boundaryGap: [0, 0.01]
+          },
+          yAxis: {
+            type: "category",
             data: [
-              1510,
-              1520,
-              1530,
-              1540,
-              1550,
-              1560,
-              1570,
-              1580,
-              1590,
-              1600
-            ],
-            itemStyle: {
-              normal: {
-                color: "#fe926e",
-                label: {
-                  show: true, //开启显示
-                  position: "right", //在上方显示
-                  textStyle: {
-                    //数值样式
-                    color: "#333",
-                    fontSize: 12
-                  },
-                  formatter: function(obj) {
-                    return obj.data;
+              "武汉",
+              "苏州",
+              "杭州",
+              "江阴",
+              "广州",
+              "惠州",
+              "深圳",
+              "北京",
+              "成都",
+              "上海"
+            ]
+          },
+          series: [
+            {
+              type: "bar",
+              data: [
+                1510,
+                1520,
+                1530,
+                1540,
+                1550,
+                1560,
+                1570,
+                1580,
+                1590,
+                1600
+              ],
+              itemStyle: {
+                normal: {
+                  color: "#fe926e",
+                  label: {
+                    show: true, //开启显示
+                    position: "right", //在上方显示
+                    textStyle: {
+                      //数值样式
+                      color: "#333",
+                      fontSize: 12
+                    },
+                    formatter: function(obj) {
+                      return obj.data;
+                    }
                   }
                 }
               }
             }
-          }
-        ]
-      });
-      myChart6.setOption(
-      {
-        title : {
-          subtext: '查询次数'
+          ]
+        });
+      myChart6.setOption({
+        title: {
+          subtext: "查询次数"
         },
-        tooltip : {
-            trigger: 'item'
+        tooltip: {
+          trigger: "item"
         },
         dataRange: {
-            orient: 'horizontal',
-            min: 0,
-            max: 55000,
-            // 文本，默认为数值文本
-            text:['高','低'],           
-            splitNumber:0
+          orient: "horizontal",
+          min: 0,
+          max: 55000,
+          // 文本，默认为数值文本
+          text: ["高", "低"],
+          splitNumber: 0
         },
-        series : [
+        series: [
           {
-            name: '2011全国GDP分布',
-            type: 'map',
-            mapType: 'china',
+            name: "2011全国GDP分布",
+            type: "map",
+            mapType: "china",
             mapLocation: {
-                x: 'center'
+              x: "center"
             },
-            selectedMode : 'multiple',
-            itemStyle:{
-                normal:{label:{show:true}},
-                emphasis:{label:{show:true}}
+            selectedMode: "multiple",
+            itemStyle: {
+              normal: { label: { show: true } },
+              emphasis: { label: { show: true } }
             },
-            data:[
-                {name:'西藏', value:605.83},
-                {name:'青海', value:1670.44},
-                {name:'宁夏', value:2102.21},
-                {name:'海南', value:2522.66},
-                {name:'甘肃', value:5020.37},
-                {name:'贵州', value:5701.84},
-                {name:'新疆', value:6610.05},
-                {name:'云南', value:8893.12},
-                {name:'重庆', value:10011.37},
-                {name:'吉林', value:10568.83},
-                {name:'山西', value:11237.55},
-                {name:'天津', value:11307.28},
-                {name:'江西', value:11702.82},
-                {name:'广西', value:11720.87},
-                {name:'陕西', value:12512.3},
-                {name:'黑龙江', value:12582},
-                {name:'内蒙古', value:14359.88},
-                {name:'安徽', value:15300.65},
-                {name:'北京', value:16251.93, selected:true},
-                {name:'福建', value:17560.18},
-                {name:'上海', value:19195.69, selected:true},
-                {name:'湖北', value:19632.26},
-                {name:'湖南', value:19669.56},
-                {name:'四川', value:21026.68},
-                {name:'辽宁', value:22226.7},
-                {name:'河北', value:24515.76},
-                {name:'河南', value:26931.03},
-                {name:'浙江', value:32318.85},
-                {name:'山东', value:45361.85},
-                {name:'江苏', value:49110.27},
-                {name:'广东', value:53210.28, selected:true}
+            data: [
+              { name: "西藏", value: 605.83 },
+              { name: "青海", value: 1670.44 },
+              { name: "宁夏", value: 2102.21 },
+              { name: "海南", value: 2522.66 },
+              { name: "甘肃", value: 5020.37 },
+              { name: "贵州", value: 5701.84 },
+              { name: "新疆", value: 6610.05 },
+              { name: "云南", value: 8893.12 },
+              { name: "重庆", value: 10011.37 },
+              { name: "吉林", value: 10568.83 },
+              { name: "山西", value: 11237.55 },
+              { name: "天津", value: 11307.28 },
+              { name: "江西", value: 11702.82 },
+              { name: "广西", value: 11720.87 },
+              { name: "陕西", value: 12512.3 },
+              { name: "黑龙江", value: 12582 },
+              { name: "内蒙古", value: 14359.88 },
+              { name: "安徽", value: 15300.65 },
+              { name: "北京", value: 16251.93, selected: true },
+              { name: "福建", value: 17560.18 },
+              { name: "上海", value: 19195.69, selected: true },
+              { name: "湖北", value: 19632.26 },
+              { name: "湖南", value: 19669.56 },
+              { name: "四川", value: 21026.68 },
+              { name: "辽宁", value: 22226.7 },
+              { name: "河北", value: 24515.76 },
+              { name: "河南", value: 26931.03 },
+              { name: "浙江", value: 32318.85 },
+              { name: "山东", value: 45361.85 },
+              { name: "江苏", value: 49110.27 },
+              { name: "广东", value: 53210.28, selected: true }
             ]
           }
         ]
-      }
-      )
+      });
     }
   },
 

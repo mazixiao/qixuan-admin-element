@@ -1,6 +1,6 @@
 
 <template>
-  <div class="content">
+  <div :class="['content', {'active': isCollapse}]">
     <commonHeader>
       <h5 style="background: red">插槽带过来的内容</h5>
     </commonHeader>
@@ -143,8 +143,14 @@ export default {
     // }),
 
     // 上面注释的简写(2种方式)
-    ...mapState(["count", "count1"])
+    ...mapState(["count", "count1", "isCollapse"]),
+      // isCollapse() {
+      //     return this.$store.state.isCollapse
+      // },
+
   },
+
+
 
   created: function() {},
 

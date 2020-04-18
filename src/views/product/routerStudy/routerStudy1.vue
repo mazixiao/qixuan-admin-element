@@ -1,6 +1,6 @@
 
 <template>
-  <div class="content">
+  <div :class="['content', {'active': isCollapse}]">
     <commonHeader></commonHeader>
     <el-tabs v-model="activeName" class="common-tab">
       <el-tab-pane label="路由学习1" name="first">
@@ -197,6 +197,12 @@ export default {
       selectArr: []
     };
   },
+  computed: {
+      isCollapse() {
+          return this.$store.state.isCollapse
+      },
+  },
+
   // 自定义指令
   directives: {},
   // 过滤器
@@ -240,7 +246,6 @@ export default {
     
   },
 
-  computed: {},
 
   created: function() {},
 

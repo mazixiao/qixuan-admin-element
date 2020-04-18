@@ -20,6 +20,10 @@ const store = new Vuex.Store({
         text1: "我是使用vuex传过来的静态值",
         showGreen: false,
         number: 10,
+
+        // 是否缩放导航宽度(默认缩放)
+        isCollapse: false
+
     },
     // 类似vue的computed(计算属性)
     // getter 的返回值会根据它的依赖被缓存起来，且只有当它的依赖值发生了改变才会被重新计算。
@@ -65,13 +69,23 @@ const store = new Vuex.Store({
             state.count4 = state.count4 - n.num;
         },
         addNum(state) {
-            state.count++;
+            state.count++; 
             state.showGreen = !state.showGreen;
         },
         subNum(state) {
             state.count--;
             state.showGreen = !state.showGreen;
         },
+        collapseStatus(state) {
+            // this.collapseBtnClick = this.isCollapse;
+            state.isCollapse = !state.isCollapse;
+            // if (state.isCollapse) {
+            //   document.querySelector(".content").style.paddingLeft = "100px";
+            // } else {
+            //   document.querySelector(".content").style.paddingLeft = "220px";
+            // }
+          },
+
     },
     // Action 类似于 mutation，不同在于：
     // Action 提交的是 mutation，而不是直接变更状态。

@@ -1,6 +1,6 @@
 
 <template>
-  <div class="content">
+  <div :class="['content', {'active': isCollapse}]">
     <commonHeader></commonHeader>
 
 
@@ -33,12 +33,19 @@ export default {
       value1: "ad"
     };
   },
+  computed: {
+    ...mapState(["count", "count1", "isCollapse"]),
+      // isCollapse() {
+      //     return this.$store.state.isCollapse
+      // },
+  },
+
   // 自定义指令
   directives: {},
   // 过滤器
   filters: {},
 
-  computed: {},
+
 
   created: function() {},
 

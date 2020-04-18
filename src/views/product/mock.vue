@@ -1,6 +1,6 @@
 
 <template>
-  <div class="content">
+  <div :class="['content', {'active': isCollapse}]">
     <commonHeader></commonHeader>
     <el-tabs v-model="activeName" class="common-tab">
       <el-tab-pane label="mock模拟数据学习" name="first">
@@ -13,7 +13,7 @@
 
 <script>
 import commonHeader from "../../components/header";
-
+import { mapState, mapGetters, mapMutations, mapActions } from "vuex";
 export default {
   name: "mock",
   components: {
@@ -26,7 +26,11 @@ export default {
       ajaxDate: []
     };
   },
-  computed: {},
+  computed: {
+      isCollapse() {
+          return this.$store.state.isCollapse
+      },
+  },
 
   created: function() {},
 

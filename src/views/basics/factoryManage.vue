@@ -1,6 +1,6 @@
 
 <template>
-  <div class="content">
+  <div :class="['content', {'active': isCollapse}]">
     <commonHeader></commonHeader>
 
     <el-tabs v-model="activeName" @tab-click="handleClick" class="common-tab">
@@ -207,6 +207,7 @@
 import commonHeader from "../../components/header";
 
 import city from "../../../static/json/map.json";
+import { mapState, mapGetters, mapMutations, mapActions } from "vuex";
 export default {
   name: "basicsFactoryManage",
   components: {
@@ -379,7 +380,11 @@ export default {
     };
   },
 
-  computed: {},
+  computed: {
+      isCollapse() {
+          return this.$store.state.isCollapse
+      },
+  },
 
   created() {
     // this.show();

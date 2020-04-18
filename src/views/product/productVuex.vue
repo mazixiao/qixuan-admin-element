@@ -1,6 +1,6 @@
 
 <template>
-  <div class="content">
+  <div :class="['content', {'active': isCollapse}]">
     <commonHeader></commonHeader>
     <el-tabs v-model="activeName" class="common-tab">
       <el-tab-pane label="生产管理" name="first">
@@ -75,7 +75,7 @@ export default {
     // }),
 
     // 写法3, 上面注释的简写(2种方式)
-    ...mapState(["count1",  "count2", "count3", "count4", "showGreen", "number"]),
+    ...mapState(["count1",  "count2", "count3", "count4", "showGreen", "number", "isCollapse"]),
     ...mapGetters(["getStateCount", "getStateCount1"])
   },
 

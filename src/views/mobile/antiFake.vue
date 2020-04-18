@@ -1,6 +1,6 @@
 
 <template>
-  <div class="content">
+  <div :class="['content', {'active': isCollapse}]">
     <commonHeader></commonHeader>
 
     <el-tabs v-model="activeName" @tab-click="handleClick" class="common-tab">
@@ -177,6 +177,8 @@
   
   <script>
 import commonHeader from "../../components/header";
+// 辅助函数（简写）
+import { mapState, mapGetters, mapMutations, mapActions } from "vuex";
 export default {
   name: "mobileAntiFake",
   components: {
@@ -223,8 +225,16 @@ export default {
   computed: {
     editor() {
       return this.$refs.myQuillEditor.quill;
-    }
+    },
+    ...mapState(["count", "count1", "isCollapse"]),
+      // isCollapse() {
+      //     return this.$store.state.isCollapse
+      // },
+
   },
+
+
+
 
   created() {},
 

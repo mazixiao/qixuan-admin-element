@@ -1,6 +1,6 @@
 
 <template>
-  <div class="content">
+  <div :class="['content', {'active': isCollapse}]">
     <commonHeader></commonHeader>
 
     <el-tabs v-model="activeName" class="common-tab">
@@ -129,7 +129,7 @@
 
 <script>
 import commonHeader from "../../../components/header";
-
+import { mapState, mapGetters, mapMutations, mapActions } from "vuex";
 export default {
   name: "printingRawCodeOrde",
   components: {
@@ -293,6 +293,12 @@ export default {
       ]
     };
   },
+  computed: {
+      isCollapse() {
+          return this.$store.state.isCollapse
+      },
+  },
+
   created() {
 
 
