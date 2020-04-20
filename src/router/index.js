@@ -34,6 +34,8 @@ import study2 from '@/views/product/study2'
 import mock from '@/views/product/mock'
 
 
+
+
 // 路由学习
 // import routerStudy1 from '@/views/product/routerStudy/routerStudy1'
 // import router1 from '@/views/product/routerStudy/router1'

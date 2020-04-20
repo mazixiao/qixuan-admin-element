@@ -4,6 +4,7 @@
 
 <template>
   <div :class="['header', {'active': isCollapse}]">
+    <crumbs></crumbs>
     <!-- <el-scrollbar wrap-class="scrollbar-wrapper">
       <el-menu
         :default-active="activeMenu"
@@ -20,7 +21,13 @@
     </el-scrollbar>-->
 
     <el-scrollbar wrap-class="scrollbar-wrapper">
-      <el-button v-if="!isCollapse" class="switch" type="success" @click="collapseStatus" size="mini">点击收缩</el-button>
+      <el-button
+        v-if="!isCollapse"
+        class="switch"
+        type="success"
+        @click="collapseStatus"
+        size="mini"
+      >点击收缩</el-button>
       <el-button v-else class="switch" type="success" @click="collapseStatus" size="mini">点击展开</el-button>
       <div class="logo-wrap">
         <img class="logo" src="../assets/img/logo.png" alt />
@@ -99,9 +106,12 @@ import icon7 from "../assets/img/nav-icon7.png";
 import icon8 from "../assets/img/nav-icon8.png";
 
 import { mapState, mapGetters, mapMutations, mapActions } from "vuex";
-
+import crumbs from "./crumbs";
 export default {
   name: "commonHeader",
+  components: {
+    crumbs
+  },
   props: {
     title99: {
       type: String,
@@ -421,14 +431,13 @@ export default {
         //     }
         //   ]
         // }
-      ],
-
+      ]
     };
   },
   computed: {
-      isCollapse() {
-          return this.$store.state.isCollapse
-      },
+    isCollapse() {
+      return this.$store.state.isCollapse;
+    }
   },
   mounted() {
     // this.num = this.$rote.params.num,
@@ -483,6 +492,7 @@ export default {
 // 解决导航栏滚动条问题
 .el-scrollbar {
   height: 100%;
+  z-index: 10;
 }
 .el-scrollbar__wrap {
   overflow-x: hidden;

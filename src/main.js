@@ -12,6 +12,12 @@ import store from './store'
 
 import './assets/js/mock'//此部分引入的是我们所编写的mockjs文档
 
+// vue使用nprogress页面加载进度条
+import NProgress from 'nprogress'
+import 'nprogress/nprogress.css'
+// 简单配置
+NProgress.inc(0.2)
+NProgress.configure({ easing: 'ease', speed: 500, showSpinner: false })
 
 Vue.use(ElementUI)
 
@@ -62,15 +68,28 @@ router.beforeEach((to, from, next) => {
 
     // 让页面回到顶部
   //  document.documentElement.scrollTop = 0;
-
+	NProgress.start()
   next(
     true
   );
 
 });
 
+
+// router.beforeEach((to, from, next) => {
+// 	NProgress.start()
+// 	next()
+//   })
+  
+//   router.afterEach(() => {
+// 	NProgress.done()
+//   })
+
+
 // 全局后置钩子
 router.afterEach((to, from) => {
+
+  NProgress.done()
   // console.log(to.path, "to.path to.path");
   // console.log(from.path, "from from");
 });

@@ -89,7 +89,6 @@ export default {
 }
 
 hr,
-div,
 p {
   margin: 10px 0;
 }
