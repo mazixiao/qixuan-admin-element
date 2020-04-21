@@ -61,9 +61,9 @@ router.beforeEach((to, from, next) => {
 
   // 默认加载想要的页面
   if (index == 1) {
-    // next({
-    //   path: '/overview/user'
-    // })
+    next({
+      path: '/overview/user'
+    })
   };
 
     // 让页面回到顶部

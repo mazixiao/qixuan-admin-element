@@ -76,11 +76,20 @@ export default new Router({
 		{
 			path: '/',
 			name: 'index',
+			redirect: '/overview/user',
 			component: index,
 			meta: {
 				title: '首页'
 			},
 		},
+		{
+			path: '/overview/user',
+			name: 'overviewUser',
+			component: overviewUser,
+			meta: {
+				title: '防伪数据分析'
+			},
+		},		
 		{
 			path: '/overview/orderForm',
 			name: 'overviewOrderForm',
@@ -98,14 +107,6 @@ export default new Router({
 				)
 				
 			}
-		},
-		{
-			path: '/overview/user',
-			name: 'overviewUser',
-			component: overviewUser,
-			meta: {
-				title: '防伪数据分析'
-			},
 		},
 		{
 			path: '/printing/rawCode/rule',
