@@ -5,19 +5,11 @@
 <template>
   <div :class="['commonCrumbs', 'content', {'active': isCollapse}]">
     <div class="commonCrumbs-con">
-      <!-- <el-breadcrumb separator="/">
-        <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-        <el-breadcrumb-item>
-          <a href="/">活动管理</a>
-        </el-breadcrumb-item>
-        <el-breadcrumb-item>活动列表</el-breadcrumb-item>
-        <el-breadcrumb-item>活动详情</el-breadcrumb-item>
-      </el-breadcrumb>-->
       <el-breadcrumb class="app-breadcrumb" separator="/">
         <transition-group name="breadcrumb">
           <el-breadcrumb-item v-for="(item,index) in levelList" :key="item.path">
             <span
-              v-if="item.redirect==='noRedirect'||index==levelList.length-1"
+              v-if="item.redirect==='/overview/user'||index==levelList.length-1"
               class="no-redirect"
             >{{ item.meta.title }}</span>
             <a v-else @click.prevent="handleLink(item)">{{ item.meta.title }}</a>
@@ -30,8 +22,13 @@
 
 
 <script>
+
+
+
 import { mapState, mapGetters, mapMutations, mapActions } from "vuex";
-import pathToRegexp from "path-to-regexp";
+// import pathToRegexp from "path-to-regexp"(会有报错);
+// https://blog.csdn.net/weixin_43090627/article/details/103614354
+import * as pathToRegexp from 'path-to-regexp'
 export default {
   name: "crumbs",
   components: {},
@@ -81,7 +78,7 @@ export default {
       const first = matched[0];
 
       if (!this.isDashboard(first)) {
-        matched = [{ path: "/dashboard", meta: { title: "Dashboard" } }].concat(
+        matched = [{ path: "/overview/user", meta: { title: "首页" } }].concat(
           matched
         );
       }
@@ -96,7 +93,7 @@ export default {
         return false;
       }
       return (
-        name.trim().toLocaleLowerCase() === "Dashboard".toLocaleLowerCase()
+        name.trim().toLocaleLowerCase() === "/overview/user".toLocaleLowerCase()
       );
     },
     pathCompile(path) {

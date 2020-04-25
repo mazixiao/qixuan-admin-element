@@ -1,4 +1,5 @@
 <template>
+<transition name="fade-transform" mode="out-in">
   <div :class="['content', {'active': isCollapse}]">
     <commonHeader></commonHeader>
     <div class="contents">
@@ -84,7 +85,11 @@
       </div>
     </div>
   </div>
+  </transition>
 </template>
+
+
+
 
 <script>
 import commonHeader from "../../components/header";

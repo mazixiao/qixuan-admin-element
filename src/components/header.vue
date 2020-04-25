@@ -489,14 +489,17 @@ export default {
 
 
 <style lang="scss">
-// 解决导航栏滚动条问题
+.header {
 .el-scrollbar {
   height: 100%;
   z-index: 10;
+  .el-scrollbar__wrap {
+    overflow-x: hidden;
+  }
 }
-.el-scrollbar__wrap {
-  overflow-x: hidden;
 }
+
+
 
 .switch {
   position: absolute;
