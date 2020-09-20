@@ -18,19 +18,19 @@
       </li>
     </ul>
 
-    <transition name="fade">
+    <transition name="fade-transform" mode="out-in">
       <router-view></router-view>
     </transition>
 
-    <transition name="fade">
+    <transition name="fade-transform" mode="out-in">
       <router-view name="namedViewChild1"></router-view>
     </transition>
 
-    <transition name="fade">
+    <transition name="fade-transform" mode="out-in">
       <router-view name="namedViewChild2"></router-view>
     </transition>
 
-    <transition name="fade">
+    <transition name="fade-transform" mode="out-in">
       <router-view name="namedViewChild3"></router-view>
     </transition>
   </div>

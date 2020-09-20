@@ -79,6 +79,7 @@
           max-height="none"
           :header-cell-style="{background:'#eef1f6',color:'#606266'}"
           :data="tableDataEnd"
+          highlight-current-row
         >
           <el-table-column prop="data1" label="订单号" width="160"></el-table-column>
           <el-table-column prop="data2" label="生码日期" width="110"></el-table-column>

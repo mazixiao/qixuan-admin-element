@@ -1,7 +1,8 @@
 <template>
-<transition name="fade-transform" mode="out-in">
+
   <div :class="['content', {'active': isCollapse}]">
     <commonHeader></commonHeader>
+    <transition name="fade-transform" mode="out-in">
     <div class="contents">
       <el-card class="box-card" style="width: 100%">
         <div slot="header" class="clearfix">
@@ -84,8 +85,9 @@
         </el-card>
       </div>
     </div>
+      </transition>
   </div>
-  </transition>
+
 </template>
 
 

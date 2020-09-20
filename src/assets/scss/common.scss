@@ -52,12 +52,12 @@ a, a:focus, a:active, a:visited, a:focus-within {
 
 .fade-transform-enter {
   opacity: 0;
-  transform: translateX(-30px);
+  transform: translateX(-300px);
 }
 
 .fade-transform-leave-to {
   opacity: 0;
-  transform: translateX(30px);
+  transform: translateX(300px);
 }
 
 
