@@ -99,7 +99,7 @@ export default {
 
 <style scoped lang="scss">
 .content {
-  padding-bottom: 200px;
+  padding-bottom: 210px;
   margin-left: 50px;
 }
 
